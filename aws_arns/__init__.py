@@ -15,5 +15,5 @@ __github_username__ = "MacHu-GWU"
 
 try:
     from .model import Arn
-except ImportError as e:
+except ImportError as e:  # pragma: no cover
     print(e)

@@ -1,5 +1,5 @@
 
-.. image:: https://readthedocs.org/projects/aws_arns/badge/?version=latest
+.. .. image:: https://readthedocs.org/projects/aws_arns/badge/?version=latest
     :target: https://aws_arns.readthedocs.io/index.html
     :alt: Documentation Status
 
@@ -23,14 +23,13 @@
 
 ------
 
-
-.. image:: https://img.shields.io/badge/Link-Document-blue.svg
+.. .. image:: https://img.shields.io/badge/Link-Document-blue.svg
     :target: https://aws_arns.readthedocs.io/index.html
 
-.. image:: https://img.shields.io/badge/Link-API-blue.svg
+.. .. image:: https://img.shields.io/badge/Link-API-blue.svg
     :target: https://aws_arns.readthedocs.io/py-modindex.html
 
-.. image:: https://img.shields.io/badge/Link-Source_Code-blue.svg
+.. .. image:: https://img.shields.io/badge/Link-Source_Code-blue.svg
     :target: https://aws_arns.readthedocs.io/py-modindex.html
 
 .. image:: https://img.shields.io/badge/Link-Install-blue.svg
@@ -51,8 +50,9 @@
 
 Welcome to ``aws_arns`` Documentation
 ==============================================================================
+Amazon Resource Names (ARNs) utilities for Python.
 
-Documentation for ``aws_arns``.
+See `usage examples <https://github.com/MacHu-GWU/aws_arns-project/blob/main/examples.ipynb>`_.
 
 
 .. _install:

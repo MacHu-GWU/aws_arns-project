@@ -14,6 +14,6 @@ __author_email__ = "husanhe@gmail.com"
 __github_username__ = "MacHu-GWU"
 
 try:
-    from .arn import Arn
+    from .model import Arn
 except ImportError as e:
     print(e)

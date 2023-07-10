@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import os
 import pytest
 import itertools
 from aws_arns.model import Arn
@@ -77,5 +76,6 @@ def test_error():
 
 
 if __name__ == "__main__":
-    basename = os.path.basename(__file__)
-    pytest.main([basename, "-s", "--tb=native"])
+    from aws_arns.tests.helper import run_cov_test
+
+    run_cov_test(__file__, "aws_arns.model", preview=False)

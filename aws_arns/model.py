@@ -25,14 +25,20 @@ class Arn:
     """
     Amazon Resource Names (ARNs) data model. is a unique identifier for AWS resources.
 
+    ARN format::
+
+        arn:partition:service:region:account-id:resource-id
+        arn:partition:service:region:account-id:resource-type/resource-id
+        arn:partition:service:region:account-id:resource-type:resource-id
+
     Reference:
 
     - Amazon Resource Names (ARNs): https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     """
     partition: str = dataclasses.field()
     service: str = dataclasses.field()
-    region: str = dataclasses.field()
-    account_id: str = dataclasses.field()
+    region: T.Optional[str] = dataclasses.field()
+    account_id: T.Optional[str] = dataclasses.field()
     resource_id: str = dataclasses.field()
     resource_type: T.Optional[str] = dataclasses.field(default=None)
     sep: T.Optional[str] = dataclasses.field(default=None)

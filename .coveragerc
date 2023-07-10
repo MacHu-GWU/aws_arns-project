@@ -2,10 +2,11 @@
 # for more info: https://coverage.readthedocs.io/en/latest/config.html
 [run]
 omit =
-    aws_arns/_version.py
     aws_arns/docs/*
     aws_arns/tests/*
+    aws_arns/vendor/*
     aws_arns/compat.py
+    aws_arns/_version.py
 
 [report]
 # Regexes for lines to exclude from consideration

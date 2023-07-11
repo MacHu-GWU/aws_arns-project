@@ -139,6 +139,8 @@ class TestRegional:
             resource_type="function",
             sep=":",
         )
+        assert lbd_func.aws_region == "us-east-1"
+        assert lbd_func.aws_account_id == "111122223333"
         arn = "arn:aws:lambda:us-east-1:111122223333:function:my-func"
         assert lbd_func.to_arn() == arn
 

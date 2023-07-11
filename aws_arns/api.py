@@ -13,3 +13,8 @@ from .srv.iam import IamUser
 from .srv.iam import IamRole
 from .srv.iam import IamPolicy
 from .srv.iam import IamInstanceProfile
+from .srv.batch import BatchComputeEnvironment
+from .srv.batch import BatchJobQueue
+from .srv.batch import BatchJobDefinition
+from .srv.batch import BatchJob
+from .srv.batch import BatchSchedulingPolicy

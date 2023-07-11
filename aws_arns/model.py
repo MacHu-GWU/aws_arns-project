@@ -111,6 +111,14 @@ class Arn:
             resource = self.resource_id
         return f"arn:{self.partition}:{self.service}:{_handle_none(self.region)}:{_handle_none(self.account_id)}:{resource}"
 
+    @property
+    def aws_account_id(self) -> T.Optional[str]:
+        return self.account_id
+
+    @property
+    def aws_region(self) -> T.Optional[str]:
+        return self.region
+
 
 @dataclasses.dataclass
 class CrossAccountGlobal(Arn):

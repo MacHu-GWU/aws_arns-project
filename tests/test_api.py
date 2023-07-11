@@ -26,6 +26,9 @@ def test():
     _ = api.A2IHumanReviewWorkflow
     _ = api.A2IHumanLoop
     _ = api.A2IWorkerTaskTemplate
+    _ = api.CloudFormationStack
+    _ = api.CloudFormationChangeSet
+    _ = api.CloudFormationStackSet
 
 
 if __name__ == "__main__":

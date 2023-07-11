@@ -21,3 +21,6 @@ from .srv.batch import BatchSchedulingPolicy
 from .srv.sagemaker_a2i import A2IHumanReviewWorkflow
 from .srv.sagemaker_a2i import A2IHumanLoop
 from .srv.sagemaker_a2i import A2IWorkerTaskTemplate
+from .srv.cloudformation import CloudFormationStack
+from .srv.cloudformation import CloudFormationChangeSet
+from .srv.cloudformation import CloudFormationStackSet

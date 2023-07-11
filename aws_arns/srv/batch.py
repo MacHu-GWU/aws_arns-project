@@ -6,7 +6,7 @@ from ..model import SlashSeparatedRegional
 
 
 @dataclasses.dataclass
-class _Batch(SlashSeparatedRegional):
+class Batch(SlashSeparatedRegional):
     @property
     def name(self) -> str:
         return self.resource_id
@@ -19,7 +19,7 @@ class _Batch(SlashSeparatedRegional):
         name: str,
         resource_type: str,
     ):
-        return super(_Batch, cls).new(
+        return super(Batch, cls).new(
             partition="aws",
             service="batch",
             region=aws_region,
@@ -30,7 +30,7 @@ class _Batch(SlashSeparatedRegional):
 
 
 @dataclasses.dataclass
-class BatchComputeEnvironment(_Batch):
+class BatchComputeEnvironment(Batch):
     @property
     def batch_compute_environment_name(self) -> str:
         return self.resource_id
@@ -51,7 +51,7 @@ class BatchComputeEnvironment(_Batch):
 
 
 @dataclasses.dataclass
-class BatchJobQueue(_Batch):
+class BatchJobQueue(Batch):
     @property
     def batch_job_queue_name(self) -> str:
         return self.resource_id
@@ -72,7 +72,7 @@ class BatchJobQueue(_Batch):
 
 
 @dataclasses.dataclass
-class BatchJobDefinition(_Batch):
+class BatchJobDefinition(Batch):
     @property
     def batch_job_definition_fullname(self) -> str:
         return self.resource_id
@@ -102,7 +102,7 @@ class BatchJobDefinition(_Batch):
 
 
 @dataclasses.dataclass
-class BatchJob(_Batch):
+class BatchJob(Batch):
     @property
     def batch_job_id(self) -> str:
         return self.resource_id
@@ -123,7 +123,7 @@ class BatchJob(_Batch):
 
 
 @dataclasses.dataclass
-class BatchSchedulingPolicy(_Batch):
+class BatchSchedulingPolicy(Batch):
     @property
     def batch_scheduling_policy_name(self) -> str:
         return self.resource_id

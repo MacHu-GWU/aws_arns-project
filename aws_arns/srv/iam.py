@@ -5,7 +5,7 @@ from ..model import Global
 
 
 @dataclasses.dataclass
-class _Iam(Global):
+class Iam(Global):
     @classmethod
     def new(
         cls,
@@ -13,7 +13,7 @@ class _Iam(Global):
         resource_type: str,
         name: str,
     ):
-        return super(_Iam, cls).new(
+        return super(Iam, cls).new(
             partition="aws",
             service="iam",
             account_id=aws_account_id,
@@ -28,7 +28,7 @@ class _Iam(Global):
 
 
 @dataclasses.dataclass
-class IamGroup(_Iam):
+class IamGroup(Iam):
     @property
     def iam_group_name(self) -> str:
         return self.resource_id
@@ -47,7 +47,7 @@ class IamGroup(_Iam):
 
 
 @dataclasses.dataclass
-class IamUser(_Iam):
+class IamUser(Iam):
     @property
     def iam_user_name(self) -> str:
         return self.resource_id
@@ -66,7 +66,7 @@ class IamUser(_Iam):
 
 
 @dataclasses.dataclass
-class IamRole(_Iam):
+class IamRole(Iam):
     @property
     def iam_role_name(self) -> str:
         return self.resource_id
@@ -88,7 +88,7 @@ class IamRole(_Iam):
 
 
 @dataclasses.dataclass
-class IamPolicy(_Iam):
+class IamPolicy(Iam):
     @property
     def iam_policy_name(self) -> str:
         return self.resource_id
@@ -107,7 +107,7 @@ class IamPolicy(_Iam):
 
 
 @dataclasses.dataclass
-class IamInstanceProfile(_Iam):
+class IamInstanceProfile(Iam):
     @property
     def iam_instance_profile_name(self) -> str:
         return self.resource_id

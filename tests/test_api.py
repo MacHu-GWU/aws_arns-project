@@ -23,6 +23,9 @@ def test():
     _ = api.BatchJobDefinition
     _ = api.BatchJob
     _ = api.BatchSchedulingPolicy
+    _ = api.A2IHumanReviewWorkflow
+    _ = api.A2IHumanLoop
+    _ = api.A2IWorkerTaskTemplate
 
 
 if __name__ == "__main__":

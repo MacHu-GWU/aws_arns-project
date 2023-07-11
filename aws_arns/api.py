@@ -18,3 +18,6 @@ from .srv.batch import BatchJobQueue
 from .srv.batch import BatchJobDefinition
 from .srv.batch import BatchJob
 from .srv.batch import BatchSchedulingPolicy
+from .srv.sagemaker_a2i import A2IHumanReviewWorkflow
+from .srv.sagemaker_a2i import A2IHumanLoop
+from .srv.sagemaker_a2i import A2IWorkerTaskTemplate

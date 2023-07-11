@@ -96,7 +96,17 @@ class TestCrossAccountGlobal:
             service="s3",
             resource_id="my-bucket",
         )
-        assert s3_bucket.to_arn() == "arn:aws:s3:::my-bucket"
+        arn = "arn:aws:s3:::my-bucket"
+        assert s3_bucket.to_arn() == arn
+
+        s3_bucket_1 = CrossAccountGlobal.from_arn(arn)
+        for thing in [s3_bucket, s3_bucket_1]:
+            assert thing.service == "s3"
+            assert thing.region == None
+            assert thing.account_id == None
+            assert thing.resource_type == None
+            assert thing.resource_id == "my-bucket"
+            assert thing.sep == None
 
 
 class TestGlobal:
@@ -106,7 +116,17 @@ class TestGlobal:
             resource_id="my-role",
             account_id="111122223333",
         )
-        assert iam_role.to_arn() == "arn:aws:iam::111122223333:my-role"
+        arn = "arn:aws:iam::111122223333:my-role"
+        assert iam_role.to_arn() == arn
+
+        iam_role_1 = Global.from_arn(arn)
+        for thing in [iam_role, iam_role_1]:
+            assert thing.service == "iam"
+            assert thing.region == None
+            assert thing.account_id == "111122223333"
+            assert thing.resource_type == None
+            assert thing.resource_id == "my-role"
+            assert thing.sep == None
 
 
 class TestRegional:
@@ -122,6 +142,15 @@ class TestRegional:
         arn = "arn:aws:lambda:us-east-1:111122223333:function:my-func"
         assert lbd_func.to_arn() == arn
 
+        lbd_func_1 = Regional.from_arn(arn)
+        for thing in [lbd_func, lbd_func_1]:
+            assert thing.service == "lambda"
+            assert thing.region == "us-east-1"
+            assert thing.account_id == "111122223333"
+            assert thing.resource_type == "function"
+            assert thing.resource_id == "my-func"
+            assert thing.sep == ":"
+
 
 class TestResourceIdOnlyRegional:
     def test(self):
@@ -133,6 +162,15 @@ class TestResourceIdOnlyRegional:
         )
         arn = "arn:aws:sns:us-east-1:111122223333:my-topic"
         assert sns_topic.to_arn() == arn
+
+        sns_topic_1 = ResourceIdOnlyRegional.from_arn(arn)
+        for thing in [sns_topic, sns_topic_1]:
+            assert thing.service == "sns"
+            assert thing.region == "us-east-1"
+            assert thing.account_id == "111122223333"
+            assert thing.resource_type == None
+            assert thing.resource_id == "my-topic"
+            assert thing.sep == None
 
 
 class TestColonSeparatedRegional:
@@ -147,6 +185,15 @@ class TestColonSeparatedRegional:
         arn = "arn:aws:lambda:us-east-1:111122223333:function:my-func"
         assert lbd_func.to_arn() == arn
 
+        lbd_func_1 = ColonSeparatedRegional.from_arn(arn)
+        for thing in [lbd_func, lbd_func_1]:
+            assert thing.service == "lambda"
+            assert thing.region == "us-east-1"
+            assert thing.account_id == "111122223333"
+            assert thing.resource_type == "function"
+            assert thing.resource_id == "my-func"
+            assert thing.sep == ":"
+
 
 class TestSlashSeparatedRegional:
     def test(self):
@@ -159,6 +206,15 @@ class TestSlashSeparatedRegional:
         )
         arn = "arn:aws:cloudformation:us-east-1:111122223333:stack/my-stack"
         assert cf_stack.to_arn() == arn
+
+        cf_stack_1 = SlashSeparatedRegional.from_arn(arn)
+        for thing in [cf_stack, cf_stack_1]:
+            assert thing.service == "cloudformation"
+            assert thing.region == "us-east-1"
+            assert thing.account_id == "111122223333"
+            assert thing.resource_type == "stack"
+            assert thing.resource_id == "my-stack"
+            assert thing.sep == "/"
 
 
 if __name__ == "__main__":

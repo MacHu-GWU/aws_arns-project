@@ -27,21 +27,49 @@ class Arn:
 
     ARN format::
 
-        arn:partition:service:region:account-id:resource-id
-        arn:partition:service:region:account-id:resource-type/resource-id
-        arn:partition:service:region:account-id:resource-type:resource-id
+        - format: arn:partition:service:region:account-id:resource-id
+        - example: arn:aws:sqs:us-east-1:111122223333:my-queue
+        - format: arn:partition:service:region:account-id:resource-type/resource-id
+        - example: arn:aws:iam::111122223333:role/aws-service-role/batch.amazonaws.com/AWSServiceRoleForBatch
+        - format: arn:partition:service:region:account-id:resource-type:resource-id
+        - example: arn:aws:batch:us-east-1:111122223333:job-definition/my-job-def:1
 
     Reference:
 
     - Amazon Resource Names (ARNs): https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     """
+
     partition: str = dataclasses.field()
     service: str = dataclasses.field()
     region: T.Optional[str] = dataclasses.field()
     account_id: T.Optional[str] = dataclasses.field()
+    resource_type: T.Optional[str] = dataclasses.field()
     resource_id: str = dataclasses.field()
-    resource_type: T.Optional[str] = dataclasses.field(default=None)
-    sep: T.Optional[str] = dataclasses.field(default=None)
+    sep: T.Optional[str] = dataclasses.field()
+
+    @classmethod
+    def new(
+        cls,
+        service: str,
+        resource_id: str,
+        partition: str = "aws",
+        region: T.Optional[str] = None,
+        account_id: T.Optional[str] = None,
+        resource_type: T.Optional[str] = None,
+        sep: T.Optional[str] = None,
+    ):
+        """
+        new 这个构造器的目的是为了方便创建一个 Arn 对象.
+        """
+        return cls(
+            service=service,
+            resource_id=resource_id,
+            partition=partition,
+            region=region,
+            account_id=account_id,
+            resource_type=resource_type,
+            sep=sep,
+        )
 
     @classmethod
     def from_arn(cls, arn: str) -> "Arn":
@@ -82,3 +110,179 @@ class Arn:
         else:
             resource = self.resource_id
         return f"arn:{self.partition}:{self.service}:{_handle_none(self.region)}:{_handle_none(self.account_id)}:{resource}"
+
+
+@dataclasses.dataclass
+class CrossAccountGlobal(Arn):
+    """
+    No account, no region. Example:
+
+    - AWS S3
+    """
+
+    @classmethod
+    def new(
+        cls,
+        service: str,
+        resource_id: str,
+        partition: str = "aws",
+        resource_type: T.Optional[str] = None,
+        sep: T.Optional[str] = None,
+    ):
+        return super(CrossAccountGlobal, cls).new(
+            partition=partition,
+            service=service,
+            region=None,
+            account_id=None,
+            resource_id=resource_id,
+            resource_type=resource_type,
+            sep=sep,
+        )
+
+
+@dataclasses.dataclass
+class Global(Arn):
+    """
+    No region. Example:
+
+    - AWS IAM
+    - AWS Route53
+    """
+
+    @classmethod
+    def new(
+        cls,
+        service: str,
+        resource_id: str,
+        account_id: str,
+        partition: str = "aws",
+        resource_type: T.Optional[str] = None,
+        sep: T.Optional[str] = None,
+    ):
+        return super(Global, cls).new(
+            partition=partition,
+            service=service,
+            region=None,
+            account_id=account_id,
+            resource_id=resource_id,
+            resource_type=resource_type,
+            sep=sep,
+        )
+
+
+@dataclasses.dataclass
+class Regional(Arn):
+    """
+    Normal regional resources. Example:
+
+    - AWS SQS
+    - AWS Lambda
+    """
+
+    @classmethod
+    def new(
+        cls,
+        service: str,
+        resource_id: str,
+        region: str,
+        account_id: str,
+        partition: str = "aws",
+        resource_type: T.Optional[str] = None,
+        sep: T.Optional[str] = None,
+    ):
+        return super(Regional, cls).new(
+            partition=partition,
+            service=service,
+            region=region,
+            account_id=account_id,
+            resource_id=resource_id,
+            resource_type=resource_type,
+            sep=sep,
+        )
+
+
+@dataclasses.dataclass
+class ResourceIdOnlyRegional(Arn):
+    """
+    Only one resource type in this service. Example:
+
+    - AWS SQS
+    - AWS SNS
+    """
+
+    @classmethod
+    def new(
+        cls,
+        service: str,
+        resource_id: str,
+        region: str,
+        account_id: str,
+        partition: str = "aws",
+    ):
+        return super(ResourceIdOnlyRegional, cls).new(
+            partition=partition,
+            service=service,
+            region=region,
+            account_id=account_id,
+            resource_id=resource_id,
+            resource_type=None,
+            sep=None,
+        )
+
+
+@dataclasses.dataclass
+class ColonSeparatedRegional(Arn):
+    """
+    Example:
+
+    - AWS Lambda
+    """
+
+    @classmethod
+    def new(
+        cls,
+        service: str,
+        resource_id: str,
+        region: str,
+        account_id: str,
+        partition: str = "aws",
+        resource_type: T.Optional[str] = None,
+    ):
+        return super(ColonSeparatedRegional, cls).new(
+            partition=partition,
+            service=service,
+            region=region,
+            account_id=account_id,
+            resource_id=resource_id,
+            resource_type=resource_type,
+            sep=":",
+        )
+
+
+@dataclasses.dataclass
+class SlashSeparatedRegional(Arn):
+    """
+    Example:
+
+    - AWS CloudFormation
+    """
+
+    @classmethod
+    def new(
+        cls,
+        service: str,
+        resource_id: str,
+        region: str,
+        account_id: str,
+        partition: str = "aws",
+        resource_type: T.Optional[str] = None,
+    ):
+        return super(SlashSeparatedRegional, cls).new(
+            partition=partition,
+            service=service,
+            region=region,
+            account_id=account_id,
+            resource_id=resource_id,
+            resource_type=resource_type,
+            sep="/",
+        )

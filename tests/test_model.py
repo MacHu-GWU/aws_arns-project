@@ -2,7 +2,15 @@
 
 import pytest
 import itertools
-from aws_arns.model import Arn
+from aws_arns.model import (
+    Arn,
+    CrossAccountGlobal,
+    Global,
+    Regional,
+    ResourceIdOnlyRegional,
+    ColonSeparatedRegional,
+    SlashSeparatedRegional,
+)
 
 cloudformation = [
     "arn:aws:cloudformation:us-east-1:111122223333:stack/stack-name/8e6db190-bd6a-11ed-b80d-12cc1b6777a1",
@@ -32,6 +40,12 @@ ec2 = [
     "arn:aws:ec2:us-east-1:111122223333:instance/*",
 ]
 
+lambda_func = [
+    "arn:aws:lambda:us-east-1:111122223333:function:my-func",
+    "arn:aws:lambda:us-east-1:111122223333:function:my-func:LIVE",
+    "arn:aws:lambda:us-east-1:111122223333:function:my-func:1",
+]
+
 apigateway = [
     "arn:aws:apigateway:us-east-1::7540694639748281fa84fabba58e57c0:/test/mydemoresource/*",
 ]
@@ -56,6 +70,7 @@ arns = list(
         macie,
         s3,
         ec2,
+        lambda_func,
         apigateway,
         sns,
         secretmanager,
@@ -73,6 +88,77 @@ def test_from_and_to():
 def test_error():
     with pytest.raises(ValueError):
         Arn.from_arn("hello")
+
+
+class TestCrossAccountGlobal:
+    def test(self):
+        s3_bucket = CrossAccountGlobal.new(
+            service="s3",
+            resource_id="my-bucket",
+        )
+        assert s3_bucket.to_arn() == "arn:aws:s3:::my-bucket"
+
+
+class TestGlobal:
+    def test(self):
+        iam_role = Global.new(
+            service="iam",
+            resource_id="my-role",
+            account_id="111122223333",
+        )
+        assert iam_role.to_arn() == "arn:aws:iam::111122223333:my-role"
+
+
+class TestRegional:
+    def test(self):
+        lbd_func = Regional.new(
+            service="lambda",
+            resource_id="my-func",
+            region="us-east-1",
+            account_id="111122223333",
+            resource_type="function",
+            sep=":",
+        )
+        arn = "arn:aws:lambda:us-east-1:111122223333:function:my-func"
+        assert lbd_func.to_arn() == arn
+
+
+class TestResourceIdOnlyRegional:
+    def test(self):
+        sns_topic = ResourceIdOnlyRegional.new(
+            service="sns",
+            resource_id="my-topic",
+            region="us-east-1",
+            account_id="111122223333",
+        )
+        arn = "arn:aws:sns:us-east-1:111122223333:my-topic"
+        assert sns_topic.to_arn() == arn
+
+
+class TestColonSeparatedRegional:
+    def test(self):
+        lbd_func = ColonSeparatedRegional.new(
+            service="lambda",
+            resource_id="my-func",
+            region="us-east-1",
+            account_id="111122223333",
+            resource_type="function",
+        )
+        arn = "arn:aws:lambda:us-east-1:111122223333:function:my-func"
+        assert lbd_func.to_arn() == arn
+
+
+class TestSlashSeparatedRegional:
+    def test(self):
+        cf_stack = SlashSeparatedRegional.new(
+            service="cloudformation",
+            resource_id="my-stack",
+            region="us-east-1",
+            account_id="111122223333",
+            resource_type="stack",
+        )
+        arn = "arn:aws:cloudformation:us-east-1:111122223333:stack/my-stack"
+        assert cf_stack.to_arn() == arn
 
 
 if __name__ == "__main__":

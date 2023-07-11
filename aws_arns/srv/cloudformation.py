@@ -2,7 +2,7 @@
 
 import dataclasses
 
-from ..model import ColonSeparatedRegional, SlashSeparatedRegional
+from ..model import SlashSeparatedRegional
 
 
 @dataclasses.dataclass

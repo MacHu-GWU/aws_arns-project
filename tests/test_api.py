@@ -29,6 +29,8 @@ def test():
     _ = api.CloudFormationStack
     _ = api.CloudFormationChangeSet
     _ = api.CloudFormationStackSet
+    _ = api.CodeBuildProject
+    _ = api.CodeBuildRun
 
 
 if __name__ == "__main__":

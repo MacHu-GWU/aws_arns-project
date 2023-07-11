@@ -24,3 +24,5 @@ from .srv.sagemaker_a2i import A2IWorkerTaskTemplate
 from .srv.cloudformation import CloudFormationStack
 from .srv.cloudformation import CloudFormationChangeSet
 from .srv.cloudformation import CloudFormationStackSet
+from .srv.codebuild import CodeBuildProject
+from .srv.codebuild import CodeBuildRun

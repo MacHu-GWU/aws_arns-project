@@ -1,22 +1,21 @@
 # -*- coding: utf-8 -*-
 
 import dataclasses
-from ..model import Arn
+from ..model import Global
 
 
 @dataclasses.dataclass
-class _Iam(Arn):
+class _Iam(Global):
     @classmethod
-    def _new(
+    def new(
         cls,
         aws_account_id: str,
         resource_type: str,
         name: str,
     ):
-        return cls(
+        return super(_Iam, cls).new(
             partition="aws",
             service="iam",
-            region=None,
             account_id=aws_account_id,
             resource_id=name,
             resource_type=resource_type,
@@ -40,7 +39,7 @@ class IamGroup(_Iam):
         aws_account_id: str,
         name: str,
     ) -> "IamGroup":
-        return cls._new(
+        return super(IamGroup, cls).new(
             aws_account_id=aws_account_id,
             resource_type="group",
             name=name,
@@ -59,7 +58,7 @@ class IamUser(_Iam):
         aws_account_id: str,
         name: str,
     ) -> "IamUser":
-        return cls._new(
+        return super(IamUser, cls).new(
             aws_account_id=aws_account_id,
             resource_type="user",
             name=name,
@@ -78,7 +77,7 @@ class IamRole(_Iam):
         aws_account_id: str,
         name: str,
     ) -> "IamRole":
-        return cls._new(
+        return super(IamRole, cls).new(
             aws_account_id=aws_account_id,
             resource_type="role",
             name=name,
@@ -100,7 +99,7 @@ class IamPolicy(_Iam):
         aws_account_id: str,
         name: str,
     ) -> "IamPolicy":
-        return cls._new(
+        return super(IamPolicy, cls).new(
             aws_account_id=aws_account_id,
             resource_type="policy",
             name=name,
@@ -119,7 +118,7 @@ class IamInstanceProfile(_Iam):
         aws_account_id: str,
         name: str,
     ) -> "IamInstanceProfile":
-        return cls._new(
+        return super(IamInstanceProfile, cls).new(
             aws_account_id=aws_account_id,
             resource_type="instance-profile",
             name=name,

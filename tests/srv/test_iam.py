@@ -15,7 +15,10 @@ def test():
     assert iam_group.region is None
     assert iam_group.iam_group_name == "Admin"
     assert (
-        IamGroup.new(aws_account_id=iam_group.account_id, name=iam_group.iam_group_name)
+        IamGroup.new(
+            aws_account_id=iam_group.account_id,
+            name=iam_group.iam_group_name,
+        )
         == iam_group
     )
 
@@ -24,7 +27,10 @@ def test():
     assert iam_user.region is None
     assert iam_user.iam_user_name == "alice"
     assert (
-        IamUser.new(aws_account_id=iam_user.account_id, name=iam_user.iam_user_name)
+        IamUser.new(
+            aws_account_id=iam_user.account_id,
+            name=iam_user.iam_user_name,
+        )
         == iam_user
     )
 
@@ -38,7 +44,10 @@ def test():
     assert iam_role.is_service_role() is True
     assert iam_role.short_name == "AWSServiceRoleForBatch"
     assert (
-        IamRole.new(aws_account_id=iam_role.account_id, name=iam_role.iam_role_name)
+        IamRole.new(
+            aws_account_id=iam_role.account_id,
+            name=iam_role.iam_role_name,
+        )
         == iam_role
     )
 
@@ -49,7 +58,8 @@ def test():
     assert iam_policy.short_name == "codebuild-policy"
     assert (
         IamPolicy.new(
-            aws_account_id=iam_policy.account_id, name=iam_policy.iam_policy_name
+            aws_account_id=iam_policy.account_id,
+            name=iam_policy.iam_policy_name,
         )
         == iam_policy
     )

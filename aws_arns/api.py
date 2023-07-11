@@ -26,3 +26,5 @@ from .srv.cloudformation import CloudFormationChangeSet
 from .srv.cloudformation import CloudFormationStackSet
 from .srv.codebuild import CodeBuildProject
 from .srv.codebuild import CodeBuildRun
+from .srv.s3 import S3Bucket
+from .srv.s3 import S3Object

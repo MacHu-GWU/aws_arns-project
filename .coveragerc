@@ -5,6 +5,7 @@ omit =
     aws_arns/docs/*
     aws_arns/tests/*
     aws_arns/vendor/*
+    aws_arns/srv/service.py
     aws_arns/compat.py
     aws_arns/_version.py
     aws_arns/paths.py

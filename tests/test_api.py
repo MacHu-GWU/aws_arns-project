@@ -31,6 +31,8 @@ def test():
     _ = api.CloudFormationStackSet
     _ = api.CodeBuildProject
     _ = api.CodeBuildRun
+    _ = api.S3Bucket
+    _ = api.S3Object
 
 
 if __name__ == "__main__":

@@ -65,7 +65,7 @@ def test():
     )
 
     arn = (
-        "arn:aws:iam::807388292768:instance-profile/cloud9/AWSCloud9SSMInstanceProfile"
+        "arn:aws:iam::111122223333:instance-profile/cloud9/AWSCloud9SSMInstanceProfile"
     )
     iam_instance_profile = IamInstanceProfile.from_arn(arn)
     assert iam_instance_profile.region is None

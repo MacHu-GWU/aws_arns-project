@@ -7,6 +7,9 @@ from ..model import SlashSeparatedRegional
 
 @dataclasses.dataclass
 class A2I(SlashSeparatedRegional):
+    """
+    Example: arn:aws:sagemaker:us-east-1:111122223333:flow-definition/my-flow
+    """
     @property
     def name(self) -> str:
         return self.resource_id
@@ -31,6 +34,9 @@ class A2I(SlashSeparatedRegional):
 
 @dataclasses.dataclass
 class A2IHumanReviewWorkflow(A2I):
+    """
+    Example: arn:aws:sagemaker:us-east-1:111122223333:human-loop/a1b2
+    """
     @property
     def a2i_human_review_workflow_name(self) -> str:
         return self.resource_id
@@ -52,6 +58,9 @@ class A2IHumanReviewWorkflow(A2I):
 
 @dataclasses.dataclass
 class A2IHumanLoop(A2I):
+    """
+    Example: arn:aws:sagemaker:us-east-1:111122223333:human-task-ui/my-template
+    """
     @property
     def a2i_human_loop_name(self) -> str:
         return self.resource_id

@@ -31,6 +31,9 @@ class Batch(SlashSeparatedRegional):
 
 @dataclasses.dataclass
 class BatchComputeEnvironment(Batch):
+    """
+    Example: arn:aws:batch:us-east-1:111122223333:compute-environment/my-ce
+    """
     @property
     def batch_compute_environment_name(self) -> str:
         return self.resource_id
@@ -52,6 +55,9 @@ class BatchComputeEnvironment(Batch):
 
 @dataclasses.dataclass
 class BatchJobQueue(Batch):
+    """
+    Example: arn:aws:batch:us-east-1:111122223333:job-queue/my-queue
+    """
     @property
     def batch_job_queue_name(self) -> str:
         return self.resource_id
@@ -73,6 +79,9 @@ class BatchJobQueue(Batch):
 
 @dataclasses.dataclass
 class BatchJobDefinition(Batch):
+    """
+    Example: arn:aws:batch:us-east-1:111122223333:job-definition/my-job-def:1
+    """
     @property
     def batch_job_definition_fullname(self) -> str:
         return self.resource_id
@@ -103,6 +112,9 @@ class BatchJobDefinition(Batch):
 
 @dataclasses.dataclass
 class BatchJob(Batch):
+    """
+    Example: arn:aws:batch:us-east-1:111122223333:job/a974ee84-1da8-40bf-bca9-ef4253fac3c6
+    """
     @property
     def batch_job_id(self) -> str:
         return self.resource_id
@@ -124,6 +136,9 @@ class BatchJob(Batch):
 
 @dataclasses.dataclass
 class BatchSchedulingPolicy(Batch):
+    """
+    Example: arn:aws:batch:us-east-1:111122223333:scheduling-policy/my-policy
+    """
     @property
     def batch_scheduling_policy_name(self) -> str:
         return self.resource_id

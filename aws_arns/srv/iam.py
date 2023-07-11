@@ -29,6 +29,9 @@ class Iam(Global):
 
 @dataclasses.dataclass
 class IamGroup(Iam):
+    """
+    Example: arn:aws:iam::111122223333:group/Admin
+    """
     @property
     def iam_group_name(self) -> str:
         return self.resource_id
@@ -48,6 +51,9 @@ class IamGroup(Iam):
 
 @dataclasses.dataclass
 class IamUser(Iam):
+    """
+    Example: arn:aws:iam::111122223333:user/alice
+    """
     @property
     def iam_user_name(self) -> str:
         return self.resource_id
@@ -67,6 +73,9 @@ class IamUser(Iam):
 
 @dataclasses.dataclass
 class IamRole(Iam):
+    """
+    Example: arn:aws:iam::111122223333:role/aws-service-role/batch.amazonaws.com/AWSServiceRoleForBatch
+    """
     @property
     def iam_role_name(self) -> str:
         return self.resource_id
@@ -89,6 +98,9 @@ class IamRole(Iam):
 
 @dataclasses.dataclass
 class IamPolicy(Iam):
+    """
+    Example: arn:aws:iam::111122223333:policy/service-role/codebuild-policy
+    """
     @property
     def iam_policy_name(self) -> str:
         return self.resource_id
@@ -108,6 +120,9 @@ class IamPolicy(Iam):
 
 @dataclasses.dataclass
 class IamInstanceProfile(Iam):
+    """
+    Example: arn:aws:iam::111122223333:instance-profile/cloud9/AWSCloud9SSMInstanceProfile
+    """
     @property
     def iam_instance_profile_name(self) -> str:
         return self.resource_id

@@ -60,6 +60,9 @@ class CloudFormationStack(CloudFormation):
         stack_name: str,
         short_id: str
     ):
+        """
+        Factory method.
+        """
         return cls(
             account_id=aws_account_id,
             region=aws_region,
@@ -89,6 +92,9 @@ class CloudFormationChangeSet(CloudFormation):
         aws_region: str,
         fullname: str,
     ):
+        """
+        Factory method.
+        """
         return cls(
             account_id=aws_account_id,
             region=aws_region,
@@ -122,6 +128,9 @@ class CloudFormationStackSet(CloudFormation):
         aws_region: str,
         fullname: str,
     ):
+        """
+        Factory method.
+        """
         return cls(
             account_id=aws_account_id,
             region=aws_region,

@@ -190,7 +190,7 @@ class _CrossAccountGlobal(_BaseArn):
 
 
 @dataclasses.dataclass
-class _Global(Arn):
+class _Global(_BaseArn):
     """
     No region. Example:
 

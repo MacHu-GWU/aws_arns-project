@@ -2,15 +2,7 @@
 
 import pytest
 import itertools
-from aws_arns.model import (
-    Arn,
-    _CrossAccountGlobal,
-    _Global,
-    _Regional,
-    ResourceIdOnlyRegional,
-    ColonSeparatedRegional,
-    SlashSeparatedRegional,
-)
+from aws_arns.model import Arn
 
 cloudformation = [
     "arn:aws:cloudformation:us-east-1:111122223333:stack/stack-name/8e6db190-bd6a-11ed-b80d-12cc1b6777a1",
@@ -69,7 +61,12 @@ apigateway = [
 ]
 
 sns = [
-    "arn:aws:sns:*:111122223333:my_topic",
+    "arn:aws:sns:us-east-1:111122223333:my_topic",
+    "arn:aws:sns:us-east-1:111122223333:my_topic:a07e1034-10c0-47a6-83c2-552cfcca42db",
+]
+
+sqs = [
+    "arn:aws:sqs:us-east-1:111122223333:my_queue",
 ]
 
 secretmanager = [
@@ -111,6 +108,7 @@ arns = list(
         lambda_func,
         apigateway,
         sns,
+        sqs,
         secretmanager,
         batch,
         ecs,
@@ -130,6 +128,16 @@ class TestArn:
         assert arn.resource_id == "my-bucket"
         assert arn.sep == None
 
+        arn = Arn.from_arn("arn:aws:s3:::my-bucket/file.txt")
+        print(arn)
+        assert arn.partition == "aws"
+        assert arn.service == "s3"
+        assert arn.region == None
+        assert arn.account_id == None
+        assert arn.resource_type == None
+        assert arn.resource_id == "my-bucket/file.txt"
+        assert arn.sep == None
+
         arn = Arn.from_arn("arn:aws:iam::111122223333:my-role")
         assert arn.partition == "aws"
         assert arn.service == "iam"
@@ -139,13 +147,13 @@ class TestArn:
         assert arn.resource_id == "my-role"
         assert arn.sep == None
 
-        arn = Arn.from_arn("arn:aws:sns:us-east-1:111122223333:my-topic")
+        arn = Arn.from_arn("arn:aws:sns:us-east-1:111122223333:my_topic:a07e1034-10c0-47a6-83c2-552cfcca42db")
         assert arn.partition == "aws"
         assert arn.service == "sns"
         assert arn.region == "us-east-1"
         assert arn.account_id == "111122223333"
         assert arn.resource_type == None
-        assert arn.resource_id == "my-topic"
+        assert arn.resource_id == "my_topic:a07e1034-10c0-47a6-83c2-552cfcca42db"
         assert arn.sep == None
 
         arn = Arn.from_arn("arn:aws:lambda:us-east-1:111122223333:function:my-func")

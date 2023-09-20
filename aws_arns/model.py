@@ -99,11 +99,19 @@ class _BaseArn:
         _, partition, service, region, account_id, resource = arn.split(":", 5)
 
         if "/" in resource:
-            sep = "/"
-            resource_type, resource_id = resource.split("/", 1)
+            if service in ["s3"]:
+                sep = None
+                resource_type, resource_id = None, resource
+            else:
+                sep = "/"
+                resource_type, resource_id = resource.split("/", 1)
         elif ":" in resource:
-            sep = ":"
-            resource_type, resource_id = resource.split(":", 1)
+            if service in ["sns"]:
+                sep = None
+                resource_type, resource_id = None, resource
+            else:
+                sep = ":"
+                resource_type, resource_id = resource.split(":", 1)
         else:
             sep = None
             resource_type, resource_id = None, resource
@@ -209,7 +217,7 @@ class _Global(_BaseArn):
 
 
 @dataclasses.dataclass
-class _Regional(Arn):
+class _Regional(_BaseArn):
     """
     Normal regional resources. Example:
 
@@ -225,30 +233,9 @@ class _Regional(Arn):
         - :class:`SlashSeparatedRegional`
     """
 
-    @classmethod
-    def new(
-        cls,
-        service: str,
-        resource_id: str,
-        region: str,
-        account_id: str,
-        partition: str = "aws",
-        resource_type: T.Optional[str] = None,
-        sep: T.Optional[str] = None,
-    ):
-        return super(_Regional, cls).new(
-            partition=partition,
-            service=service,
-            region=region,
-            account_id=account_id,
-            resource_id=resource_id,
-            resource_type=resource_type,
-            sep=sep,
-        )
-
 
 @dataclasses.dataclass
-class ResourceIdOnlyRegional(Arn):
+class _ResourceIdOnlyRegional(_Regional):
     """
     Only one resource type in this service. Example:
 
@@ -271,29 +258,12 @@ class ResourceIdOnlyRegional(Arn):
             - ${sep}: None
             - ${resource-id}: acu_e5f245a1_test
     """
-
-    @classmethod
-    def new(
-        cls,
-        service: str,
-        resource_id: str,
-        region: str,
-        account_id: str,
-        partition: str = "aws",
-    ):
-        return super(ResourceIdOnlyRegional, cls).new(
-            partition=partition,
-            service=service,
-            region=region,
-            account_id=account_id,
-            resource_id=resource_id,
-            resource_type=None,
-            sep=None,
-        )
+    resource_type: T.Optional[str] = dataclasses.field(default=None)
+    sep: T.Optional[str] = dataclasses.field(default=None)
 
 
 @dataclasses.dataclass
-class ColonSeparatedRegional(Arn):
+class ColonSeparatedRegional(_Regional):
     """
     Example:
 
@@ -334,7 +304,7 @@ class ColonSeparatedRegional(Arn):
 
 
 @dataclasses.dataclass
-class SlashSeparatedRegional(Arn):
+class SlashSeparatedRegional(_Regional):
     """
     Example:
 

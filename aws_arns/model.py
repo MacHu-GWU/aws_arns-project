@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import typing as T
+import enum
 import dataclasses
 
 from . import compat
+from .sentinel import NOTHING
 
 
 def _handle_empty_str(s: str) -> T.Optional[str]:
@@ -20,59 +22,74 @@ def _handle_none(s: T.Optional[str]) -> str:
         return s
 
 
+class AwsPartitionEnum:
+    aws = "aws"
+    aws_us_gov = "aws-us-gov"
+    aws_cn = "aws-cn"
+
+
+class AwsService:
+    awslambda = "lambda"
+    batch = "batch"
+    cloudformation = "cloudformation"
+    codebuild = "codebuild"
+    codecommit = "codecommit"
+    codepipeline = "codepipeline"
+    dynamodb = "dynamodb"
+    ec2 = "ec2"
+    ecr = "ecr"
+    ecs = "ecs"
+    glue = "glue"
+    iam = "iam"
+    logs = "logs"
+    rds = "rds"
+    s3 = "s3"
+    sagemaker = "sagemaker"
+    secretsmanager = "secretsmanager"
+    sns = "sns"
+    sqs = "sqs"
+    ssm = "ssm"
+    states = "states"
+
+
 @dataclasses.dataclass
-class Arn:
+class _BaseArn:
     """
     Amazon Resource Names (ARNs) data model. is a unique identifier for AWS resources.
 
     ARN format::
 
-        - format: arn:partition:service:region:account-id:resource-id
-        - example: arn:aws:sqs:us-east-1:111122223333:my-queue
-        - format: arn:partition:service:region:account-id:resource-type/resource-id
-        - example: arn:aws:iam::111122223333:role/aws-service-role/batch.amazonaws.com/AWSServiceRoleForBatch
-        - format: arn:partition:service:region:account-id:resource-type:resource-id
-        - example: arn:aws:batch:us-east-1:111122223333:job-definition/my-job-def:1
+        - format: arn:${partition}:${service}:${region}:${account-id}:${resource-id}
+            - example: arn:aws:sqs:us-east-1:111122223333:my-queue
+        - format: arn:${partition}:${service}:${region}:${account-id}:${resource-type}${sep}${resource-id}
+            - example sep = "/": arn:aws:iam::111122223333:role/aws-service-role/batch.amazonaws.com/AWSServiceRoleForBatch
+        - format: arn:${partition}:${service}:${region}:${account-id}:${resource-type}${sep}${resource-id}
+            - example sep = ":": arn:aws:batch:us-east-1:111122223333:job-definition/my-job-def:1
 
     Reference:
 
     - Amazon Resource Names (ARNs): https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+
+    .. note::
+
+        Don't initialize this class directly, use the class method :meth:`new` instead.
     """
 
-    partition: str = dataclasses.field()
-    service: str = dataclasses.field()
-    region: T.Optional[str] = dataclasses.field()
-    account_id: T.Optional[str] = dataclasses.field()
-    resource_type: T.Optional[str] = dataclasses.field()
-    resource_id: str = dataclasses.field()
-    sep: T.Optional[str] = dataclasses.field()
+    partition: str = dataclasses.field(default="aws")
+    service: str = dataclasses.field(default=NOTHING)
+    region: T.Optional[str] = dataclasses.field(default=NOTHING)
+    account_id: T.Optional[str] = dataclasses.field(default=NOTHING)
+    resource_type: T.Optional[str] = dataclasses.field(default=NOTHING)
+    sep: T.Optional[str] = dataclasses.field(default=NOTHING)
+    resource_id: str = dataclasses.field(default=NOTHING)
+
+    def __post_init__(self):
+        for k, v in dataclasses.asdict(self).items():
+            if v is NOTHING:
+                raise ValueError(f"arg '{k}' is required")
 
     @classmethod
-    def new(
-        cls,
-        service: str,
-        resource_id: str,
-        partition: str = "aws",
-        region: T.Optional[str] = None,
-        account_id: T.Optional[str] = None,
-        resource_type: T.Optional[str] = None,
-        sep: T.Optional[str] = None,
-    ):
-        """
-        new 这个构造器的目的是为了方便创建一个 Arn 对象.
-        """
-        return cls(
-            service=service,
-            resource_id=resource_id,
-            partition=partition,
-            region=region,
-            account_id=account_id,
-            resource_type=resource_type,
-            sep=sep,
-        )
-
-    @classmethod
-    def from_arn(cls, arn: str) -> "Arn":
+    def from_arn(cls, arn: str):
         """
         parse arn string into Arn object.
         """
@@ -119,72 +136,93 @@ class Arn:
     def aws_region(self) -> T.Optional[str]:
         return self.region
 
+    def with_us_gov_partition(self):
+        self.partition = AwsPartitionEnum.aws_us_gov
+        return self
+
+    def with_cn_partition(self):
+        self.partition = AwsPartitionEnum.aws_cn
+        return self
+
 
 @dataclasses.dataclass
-class CrossAccountGlobal(Arn):
+class Arn(_BaseArn):
+    @classmethod
+    def new(
+        cls,
+        service: str,
+        partition: str,
+        region: T.Optional[str],
+        account_id: T.Optional[str],
+        resource_type: T.Optional[str],
+        sep: T.Optional[str],
+        resource_id: str,
+    ):
+        return cls(
+            service=service,
+            partition=partition,
+            region=region,
+            account_id=account_id,
+            resource_type=resource_type,
+            sep=sep,
+            resource_id=resource_id,
+        )
+
+
+@dataclasses.dataclass
+class _CrossAccountGlobal(_BaseArn):
     """
     No account, no region. Example:
 
     - AWS S3
+        - Bucket: arn:aws:s3:::my-bucket
+            - ${partition}: aws
+            - ${service}: s3
+            - ${region}: None
+            - ${account-id}: None
+            - ${resource-type}: None
+            - ${sep}: None
+            - ${resource-id}: my-bucket
     """
 
-    @classmethod
-    def new(
-        cls,
-        service: str,
-        resource_id: str,
-        partition: str = "aws",
-        resource_type: T.Optional[str] = None,
-        sep: T.Optional[str] = None,
-    ):
-        return super(CrossAccountGlobal, cls).new(
-            partition=partition,
-            service=service,
-            region=None,
-            account_id=None,
-            resource_id=resource_id,
-            resource_type=resource_type,
-            sep=sep,
-        )
+    region: T.Optional[str] = dataclasses.field(default=None)
+    account_id: T.Optional[str] = dataclasses.field(default=None)
 
 
 @dataclasses.dataclass
-class Global(Arn):
+class _Global(Arn):
     """
     No region. Example:
 
-    - AWS IAM
+    - AWS IAM:
+        - Role: arn:aws:iam::807388292768:role/acu_e5f245a1_test
+            - ${partition}: aws
+            - ${service}: iam
+            - ${region}: None
+            - ${account-id}: 807388292768
+            - ${resource-type}: role
+            - ${sep}: "/"
+            - ${resource-id}: acu_e5f245a1_test
     - AWS Route53
     """
-
-    @classmethod
-    def new(
-        cls,
-        service: str,
-        resource_id: str,
-        account_id: str,
-        partition: str = "aws",
-        resource_type: T.Optional[str] = None,
-        sep: T.Optional[str] = None,
-    ):
-        return super(Global, cls).new(
-            partition=partition,
-            service=service,
-            region=None,
-            account_id=account_id,
-            resource_id=resource_id,
-            resource_type=resource_type,
-            sep=sep,
-        )
+    region: T.Optional[str] = dataclasses.field(default=None)
 
 
 @dataclasses.dataclass
-class Regional(Arn):
+class _Regional(Arn):
     """
     Normal regional resources. Example:
 
     - AWS SQS
     - AWS Lambda
+
+    .. warning::
+
+        Don't subclass this class directly, use one of those:
+
+        - :class:`ResourceIdOnlyRegional`
+        - :class:`ColonSeparatedRegional`
+        - :class:`SlashSeparatedRegional`
     """
 
     @classmethod
@@ -198,7 +236,7 @@ class Regional(Arn):
         resource_type: T.Optional[str] = None,
         sep: T.Optional[str] = None,
     ):
-        return super(Regional, cls).new(
+        return super(_Regional, cls).new(
             partition=partition,
             service=service,
             region=region,
@@ -214,8 +252,24 @@ class ResourceIdOnlyRegional(Arn):
     """
     Only one resource type in this service. Example:
 
-    - AWS SQS
-    - AWS SNS
+    - AWS SQS:
+        - queue: arn:aws:sqs:us-east-1:807388292768:acu_e5f245a1_test
+            - ${partition}: aws
+            - ${service}: sqs
+            - ${region}: us-east-1
+            - ${account-id}: 807388292768
+            - ${resource-type}: None
+            - ${sep}: None
+            - ${resource-id}: acu_e5f245a1_test
+    - AWS SNS:
+        - queue: arn:aws:sns:us-east-1:807388292768:acu_e5f245a1_test
+            - ${partition}: aws
+            - ${service}: sns
+            - ${region}: us-east-1
+            - ${account-id}: 807388292768
+            - ${resource-type}: None
+            - ${sep}: None
+            - ${resource-id}: acu_e5f245a1_test
     """
 
     @classmethod
@@ -243,7 +297,19 @@ class ColonSeparatedRegional(Arn):
     """
     Example:
 
-    - AWS Lambda
+    - AWS Lambda:
+        - Function: arn:aws:lambda:us-east-1:807388292768:function:acu_e5f245a1_test
+            - ${partition}: aws
+            - ${service}: lambda
+            - ${region}: us-east-1
+            - ${account-id}: 807388292768
+            - ${resource-type}: function
+            - ${sep}: ":"
+            - ${resource-id}: acu_e5f245a1_test
+        - Version: arn:aws:lambda:us-east-1:807388292768:function:acu_e5f245a1_test:1
+            - ${resource-id}: acu_e5f245a1_test:1
+        - Alias: arn:aws:lambda:us-east-1:807388292768:function:acu_e5f245a1_test:LIVE
+            - ${resource-id}: acu_e5f245a1_test:LIVE
     """
 
     @classmethod
@@ -273,6 +339,17 @@ class SlashSeparatedRegional(Arn):
     Example:
 
     - AWS CloudFormation
+        - Stack: arn:aws:cloudformation:us-east-1:807388292768:stack/CDKToolkit/d8677750-1d2c-11ee-b9bb-0e26849ff9df
+            - ${partition}: aws
+            - ${service}: cloudformation
+            - ${region}: us-east-1
+            - ${account-id}: 807388292768
+            - ${resource-type}: stack
+            - ${sep}: "/"
+            - ${resource-id}: CDKToolkit/d8677750-1d2c-11ee-b9bb-0e26849ff9df
+        - StackSet: arn:aws:cloudformation:us-east-1:807388292768:stackset/acu-ab1049bd-test-self-managed:273c6018-4440-40c5-8869-89c3e4b17f84
+            - ${resource-type}: stackset
+            - ${resource-id}: acu-ab1049bd-test-self-managed:273c6018-4440-40c5-8869-89c3e4b17f84
     """
 
     @classmethod

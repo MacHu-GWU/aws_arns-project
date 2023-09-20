@@ -1,27 +1,33 @@
 # -*- coding: utf-8 -*-
 
+"""
+.. note::
+
+    Let's use this as an example to show how to create a module for specific AWS services.
+
+    First, you need to create an aws service class that the name is the service,
+    and the base class is one of the following:
+
+    - CrossAccountGlobal
+    - Global
+    - Regional
+    - ResourceIdOnlyRegional
+    - ColonSeparatedRegional
+    - SlashSeparatedRegional
+
+    Then all aws resources in this service should be a class that inherits from
+    the service class.
+"""
+
 import typing as T
 import dataclasses
 
-from ..model import CrossAccountGlobal
+from ..model import _CrossAccountGlobal
 
 
 @dataclasses.dataclass
-class S3(CrossAccountGlobal):
-    @classmethod
-    def new(
-        cls,
-        resource_id: str,
-        resource_type: T.Optional[str] = None,
-        sep: T.Optional[str] = None,
-    ):
-        return super(S3, cls).new(
-            service="s3",
-            resource_id=resource_id,
-            partition="aws",
-            resource_type=resource_type,
-            sep=sep,
-        )
+class S3(_CrossAccountGlobal):
+    service: str = dataclasses.field(default="s3")
 
 
 @dataclasses.dataclass
@@ -29,6 +35,8 @@ class S3Bucket(S3):
     """
     Example: arn:aws:s3:::my-bucket
     """
+    resource_type: str = dataclasses.field(default=None)
+    sep: str = dataclasses.field(default=None)
 
     @property
     def bucket_name(self) -> str:
@@ -43,7 +51,7 @@ class S3Bucket(S3):
         cls,
         bucket_name: str,
     ):
-        return super(S3Bucket, cls).new(
+        return cls(
             resource_id=bucket_name,
         )
 
@@ -57,6 +65,7 @@ class S3Object(S3):
     """
     Example: arn:aws:s3:::my-bucket/folder/file.txt
     """
+    sep: str = dataclasses.field(default="/")
 
     @property
     def bucket(self) -> str:
@@ -72,10 +81,9 @@ class S3Object(S3):
 
     @classmethod
     def new(cls, bucket: str, key: str):
-        return super(S3Object, cls).new(
-            resource_id=key,
+        return cls(
             resource_type=bucket,
-            sep="/",
+            resource_id=key,
         )
 
     @classmethod

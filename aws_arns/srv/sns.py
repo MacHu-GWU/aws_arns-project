@@ -22,6 +22,9 @@ class SnsTopic(Sns):
 
     @property
     def topic_name(self) -> str:
+        """
+        SNS topic name
+        """
         return self.resource_id
 
     @classmethod
@@ -31,6 +34,9 @@ class SnsTopic(Sns):
         aws_region: str,
         topic_name: str,
     ):
+        """
+        Factory method.
+        """
         return cls(
             account_id=aws_account_id,
             region=aws_region,
@@ -60,6 +66,9 @@ class SnsSubscription(Sns):
         topic_name: str,
         subscription_id: str,
     ):
+        """
+        Factory method.
+        """
         return cls(
             account_id=aws_account_id,
             region=aws_region,

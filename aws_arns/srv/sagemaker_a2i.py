@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
+"""
+todo: docstring
+"""
+
 import dataclasses
 
-from ..model import SlashSeparatedRegional
+from ..model import _SlashSeparatedRegional
 
 
 @dataclasses.dataclass
-class A2I(SlashSeparatedRegional):
+class A2I(_SlashSeparatedRegional):
     """
     Example: arn:aws:sagemaker:us-east-1:111122223333:flow-definition/my-flow
     """

@@ -7,12 +7,12 @@ def test():
     _ = api.Arn
     _ = api.AWSPartitionEnum
     _ = api.Arn
-    _ = api.CrossAccountGlobal
-    _ = api.Global
-    _ = api.Regional
+    _ = api._CrossAccountGlobal
+    _ = api._Global
+    _ = api._Regional
     _ = api.ResourceIdOnlyRegional
-    _ = api.ColonSeparatedRegional
-    _ = api.SlashSeparatedRegional
+    _ = api._ColonSeparatedRegional
+    _ = api._SlashSeparatedRegional
     _ = api.IamGroup
     _ = api.IamUser
     _ = api.IamRole

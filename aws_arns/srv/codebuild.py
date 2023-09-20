@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
+"""
+todo: docstring
+"""
+
 import dataclasses
 
-from ..model import SlashSeparatedRegional
+from ..model import _SlashSeparatedRegional
 
 
 @dataclasses.dataclass
-class CodeBuild(SlashSeparatedRegional):
+class CodeBuild(_SlashSeparatedRegional):
     @classmethod
     def new(
         cls,

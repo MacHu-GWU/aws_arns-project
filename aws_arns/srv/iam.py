@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+todo: docstring
+"""
+
 import dataclasses
 from ..model import _Global
 

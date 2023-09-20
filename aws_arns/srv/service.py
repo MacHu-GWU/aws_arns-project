@@ -6,18 +6,20 @@ This is for internal use, don't import
 
 import dataclasses
 from ..model import (
-    CrossAccountGlobal,
-    Global,
-    Regional,
+    _CrossAccountGlobal,
+    _Global,
+    _Regional,
     ResourceIdOnlyRegional,
-    ColonSeparatedRegional,
-    SlashSeparatedRegional,
+    _ColonSeparatedRegional,
+    _SlashSeparatedRegional,
 )
 
-
-@dataclasses.dataclass
-class S3(CrossAccountGlobal):
-    pass
+from .batch import Batch
+from .s3 import S3
+from .iam import Iam
+from .cloudformation import CloudFormation
+from .codebuild import CodeBuild
+from .sagemaker_a2i import A2I
 
 
 # --- ResourceIdOnlyRegional
@@ -43,56 +45,53 @@ class CodePipeline(ResourceIdOnlyRegional):
 
 # --- ColonSeparatedRegional
 @dataclasses.dataclass
-class Lambda(ColonSeparatedRegional):
+class Lambda(_ColonSeparatedRegional):
     pass
 
 
 @dataclasses.dataclass
-class Sfn(ColonSeparatedRegional):
+class Sfn(_ColonSeparatedRegional):
     pass
 
 
 @dataclasses.dataclass
-class SecretManager(ColonSeparatedRegional):
+class SecretManager(_ColonSeparatedRegional):
     pass
 
 
 # --- SlashSeparatedRegional
+
+
 @dataclasses.dataclass
-class CloudFormation(SlashSeparatedRegional):
+class CodeBuild(_SlashSeparatedRegional):
     pass
 
 
 @dataclasses.dataclass
-class CodeBuild(SlashSeparatedRegional):
+class ECS(_SlashSeparatedRegional):
     pass
 
 
 @dataclasses.dataclass
-class ECS(SlashSeparatedRegional):
+class Dynamodb(_SlashSeparatedRegional):
     pass
 
 
 @dataclasses.dataclass
-class Dynamodb(SlashSeparatedRegional):
+class Glue(_SlashSeparatedRegional):
     pass
 
 
 @dataclasses.dataclass
-class Glue(SlashSeparatedRegional):
+class KMS(_SlashSeparatedRegional):
     pass
 
 
 @dataclasses.dataclass
-class KMS(SlashSeparatedRegional):
+class SageMaker(_SlashSeparatedRegional):
     pass
 
 
 @dataclasses.dataclass
-class SageMaker(SlashSeparatedRegional):
-    pass
-
-
-@dataclasses.dataclass
-class SSMParameterStore(SlashSeparatedRegional):
+class SSMParameterStore(_SlashSeparatedRegional):
     pass

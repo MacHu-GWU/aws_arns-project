@@ -2,12 +2,12 @@
 
 from .constants import AWSPartitionEnum
 from .model import Arn
-from .model import CrossAccountGlobal
-from .model import Global
-from .model import Regional
+from .model import _CrossAccountGlobal
+from .model import _Global
+from .model import _Regional
 from .model import ResourceIdOnlyRegional
-from .model import ColonSeparatedRegional
-from .model import SlashSeparatedRegional
+from .model import _ColonSeparatedRegional
+from .model import _SlashSeparatedRegional
 from .srv.iam import IamGroup
 from .srv.iam import IamUser
 from .srv.iam import IamRole

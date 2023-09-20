@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
+"""
+todo: docstring
+"""
+
 import dataclasses
 
-from ..model import SlashSeparatedRegional
+from ..model import _SlashSeparatedRegional
 
 
 @dataclasses.dataclass
-class Batch(SlashSeparatedRegional):
+class Batch(_SlashSeparatedRegional):
     @property
     def name(self) -> str:
         return self.resource_id

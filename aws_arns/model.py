@@ -213,6 +213,7 @@ class _Global(_BaseArn):
             - ${resource-id}: acu_e5f245a1_test
     - AWS Route53
     """
+
     region: T.Optional[str] = dataclasses.field(default=None)
 
 
@@ -258,12 +259,13 @@ class _ResourceIdOnlyRegional(_Regional):
             - ${sep}: None
             - ${resource-id}: acu_e5f245a1_test
     """
+
     resource_type: T.Optional[str] = dataclasses.field(default=None)
     sep: T.Optional[str] = dataclasses.field(default=None)
 
 
 @dataclasses.dataclass
-class ColonSeparatedRegional(_Regional):
+class _ColonSeparatedRegional(_Regional):
     """
     Example:
 
@@ -282,29 +284,11 @@ class ColonSeparatedRegional(_Regional):
             - ${resource-id}: acu_e5f245a1_test:LIVE
     """
 
-    @classmethod
-    def new(
-        cls,
-        service: str,
-        resource_id: str,
-        region: str,
-        account_id: str,
-        partition: str = "aws",
-        resource_type: T.Optional[str] = None,
-    ):
-        return super(ColonSeparatedRegional, cls).new(
-            partition=partition,
-            service=service,
-            region=region,
-            account_id=account_id,
-            resource_id=resource_id,
-            resource_type=resource_type,
-            sep=":",
-        )
+    sep: T.Optional[str] = dataclasses.field(default=":")
 
 
 @dataclasses.dataclass
-class SlashSeparatedRegional(_Regional):
+class _SlashSeparatedRegional(_Regional):
     """
     Example:
 
@@ -322,22 +306,4 @@ class SlashSeparatedRegional(_Regional):
             - ${resource-id}: acu-ab1049bd-test-self-managed:273c6018-4440-40c5-8869-89c3e4b17f84
     """
 
-    @classmethod
-    def new(
-        cls,
-        service: str,
-        resource_id: str,
-        region: str,
-        account_id: str,
-        partition: str = "aws",
-        resource_type: T.Optional[str] = None,
-    ):
-        return super(SlashSeparatedRegional, cls).new(
-            partition=partition,
-            service=service,
-            region=region,
-            account_id=account_id,
-            resource_id=resource_id,
-            resource_type=resource_type,
-            sep="/",
-        )
+    sep: T.Optional[str] = dataclasses.field(default="/")

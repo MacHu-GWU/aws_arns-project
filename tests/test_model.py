@@ -109,6 +109,12 @@ codecommit = [
     "arn:aws:codebuild:us-east-1:111122223333:build/test:08805851-8a0a-4968-9d08-c7cc0623db7b",
     "arn:aws:codepipeline:us-east-1:111122223333:test",
 ]
+
+ssm = [
+    "arn:aws:ssm:us-east-1:111122223333:parameter/my_param",
+    "arn:aws:ssm:us-east-1:111122223333:parameter/path/to/my_param",
+]
+
 arns = list(
     itertools.chain(
         cloudformation,
@@ -126,6 +132,8 @@ arns = list(
         batch,
         ecs,
         glue,
+        codecommit,
+        ssm,
     )
 )
 

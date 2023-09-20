@@ -99,13 +99,21 @@ class _BaseArn:
         _, partition, service, region, account_id, resource = arn.split(":", 5)
 
         if "/" in resource:
+            # "arn:aws:s3:::my-bucket/file.txt"
             if service in ["s3"]:
                 sep = None
                 resource_type, resource_id = None, resource
+            # arn:aws:ssm:us-east-1:807388292768:parameter/path/to/my_param
+            elif service in ["ssm"]:
+                sep = "/"
+                resource_type, resource_id = resource.split("/", 1)
+                if resource.count("/") > 1:
+                    resource_id = f"/{resource_id}"
             else:
                 sep = "/"
                 resource_type, resource_id = resource.split("/", 1)
         elif ":" in resource:
+            # arn:aws:sns:us-east-1:111122223333:my_topic:a07e1034-10c0-47a6-83c2-552cfcca42db
             if service in ["sns"]:
                 sep = None
                 resource_type, resource_id = None, resource
@@ -131,7 +139,10 @@ class _BaseArn:
         convert Arn object into arn string.
         """
         if self.sep:
-            resource = f"{self.resource_type}{self.sep}{self.resource_id}"
+            if self.sep == "/" and self.resource_id.startswith("/"):
+                resource = f"{self.resource_type}{self.resource_id}"
+            else:
+                resource = f"{self.resource_type}{self.sep}{self.resource_id}"
         else:
             resource = self.resource_id
         return f"arn:{self.partition}:{self.service}:{_handle_none(self.region)}:{_handle_none(self.account_id)}:{resource}"

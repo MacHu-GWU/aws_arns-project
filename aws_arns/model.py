@@ -121,9 +121,9 @@ class _BaseArn:
             service=service,
             region=_handle_empty_str(region),
             account_id=_handle_empty_str(account_id),
-            resource_id=resource_id,
             resource_type=resource_type,
             sep=sep,
+            resource_id=resource_id,
         )
 
     def to_arn(self) -> str:

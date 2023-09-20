@@ -60,6 +60,7 @@ lambda_func = [
     "arn:aws:lambda:us-east-1:111122223333:function:my-func",
     "arn:aws:lambda:us-east-1:111122223333:function:my-func:LIVE",
     "arn:aws:lambda:us-east-1:111122223333:function:my-func:1",
+    "arn:aws:lambda:us-east-1:111122223333:layer:my-layer:1",
 ]
 
 apigateway = [

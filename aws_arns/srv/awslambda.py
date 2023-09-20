@@ -12,39 +12,119 @@ from ..model import _ColonSeparatedRegional
 
 @dataclasses.dataclass
 class AWSLambda(_ColonSeparatedRegional):
+    service: str = dataclasses.field(default="lambda")
+
+
+@dataclasses.dataclass
+class LambdaFunction(AWSLambda):
+    """
+    Example:
+
+    - arn:aws:lambda:us-east-1:111122223333:function:my-func
+    - arn:aws:lambda:us-east-1:111122223333:function:my-func:LIVE
+    - arn:aws:lambda:us-east-1:111122223333:function:my-func:1
+    """
+
+    resource_type: str = dataclasses.field(default="function")
+
+    @property
+    def name(self) -> str:
+        return self.resource_id.split(":", 1)[0]
+
+    @property
+    def function_name(self) -> str:
+        return self.name
+
+    @property
+    def version(self) -> T.Optional[str]:
+        words = self.resource_id.split(":", 1)
+        if len(words) == 2:
+            token = words[1]
+            if token == "$LATEST":
+                return token
+            elif token.isdigit():
+                return token
+            else:
+                raise ValueError(f"Invalid version: {token}")
+        else:
+            return None
+
+    @property
+    def alias(self) -> T.Optional[str]:
+        words = self.resource_id.split(":", 1)
+        if len(words) == 2:
+            token = words[1]
+            if token == "$LATEST":
+                raise ValueError("Cannot specify alias for $LATEST")
+            elif token.isdigit():
+                raise ValueError(f"Invalid version: {token}")
+            else:
+                return token
+        else:
+            return None
+
     @classmethod
     def new(
         cls,
         aws_account_id: str,
         aws_region: str,
-        resource_id: str,
-        resource_type: str,
+        name: str,
+        version: T.Optional[T.Union[str, int]] = None,
+        alias: T.Optional[str] = None,
     ):
-        return super(AWSLambda, cls).new(
-            partition="aws",
-            service="batch",
-            region=aws_region,
+        """
+        Factory method.
+        """
+        if version is not None and alias is not None:
+            raise ValueError("Cannot specify both version and alias")
+
+        if version is not None:
+            resource_id = f"{name}:{version}"
+        elif alias is not None:
+            resource_id = f"{name}:{alias}"
+        else:
+            resource_id = name
+
+        return cls(
             account_id=aws_account_id,
-            resource_id=name,
-            resource_type=resource_type,
+            region=aws_region,
+            resource_id=resource_id,
         )
 
 
-# @dataclasses.dataclass
-# class LambdaFunction(AWSLambda):
-#     """
-#     Example: arn:aws:lambda:us-east-1:111122223333:function:my_func
-#     """
-#
-#     @property
-#     def function_name(self) -> str:
-#         return self.resource_id
-#
-#     @classmethod
-#     def new(
-#         cls,
-#         bucket_name: str,
-#     ):
-#         return super(S3Bucket, cls).new(
-#             resource_id=bucket_name,
-#         )rn cls.new(uri.split("/")[2])
+@dataclasses.dataclass
+class LambdaLayer(AWSLambda):
+    """
+    Example: arn:aws:lambda:us-east-1:111122223333:layer:my-layer:1
+    """
+
+    resource_type: str = dataclasses.field(default="layer")
+
+    @property
+    def name(self) -> str:
+        return self.resource_id.split(":", 1)[0]
+
+    @property
+    def layer_name(self) -> str:
+        return self.name
+
+    @property
+    def version(self) -> int:
+        return int(self.resource_id.split(":", 1)[1])
+
+    @classmethod
+    def new(
+        cls,
+        aws_account_id: str,
+        aws_region: str,
+        name: str,
+        version: int,
+    ):
+        """
+        Factory method.
+        """
+        return cls(
+            account_id=aws_account_id,
+            region=aws_region,
+            resource_id=f"{name}:{version}",
+        )

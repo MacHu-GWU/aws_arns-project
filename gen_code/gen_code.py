@@ -47,7 +47,7 @@ def import_all_service_module(
         imported_module = importlib.import_module(f"aws_arns.srv.{module_name}")
         for k, v in imported_module.__dict__.items():
             try:
-                if issubclass(v, _BaseArn):
+                if issubclass(v, _BaseArn) and len(v.__subclasses__()) == 0:
                     if not k.startswith("_"):
                         resource = Resource(
                             module_name=module_name,

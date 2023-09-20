@@ -12,6 +12,8 @@ from .srv.cloudformation import CloudFormationStack
 from .srv.cloudformation import CloudFormationStackSet
 from .srv.codebuild import CodeBuildProject
 from .srv.codebuild import CodeBuildRun
+from .srv.codecommit import CodeCommitRepository
+from .srv.codepipeline import CodePipelinePipeline
 from .srv.iam import IamGroup
 from .srv.iam import IamInstanceProfile
 from .srv.iam import IamPolicy
@@ -22,6 +24,8 @@ from .srv.s3 import S3Object
 from .srv.sagemaker_a2i import A2IHumanLoop
 from .srv.sagemaker_a2i import A2IHumanReviewWorkflow
 from .srv.sagemaker_a2i import A2IWorkerTaskTemplate
+from .srv.secretmanager import SecretManagerSecret
 from .srv.sns import SnsSubscription
 from .srv.sns import SnsTopic
 from .srv.sqs import SqsQueue
+from .srv.ssm import SSMParameter

@@ -149,6 +149,12 @@ class TestArn:
         assert arn.resource_id == "my-bucket"
         assert arn.sep == None
 
+        arn.with_cn_partition()
+        assert arn.partition == "aws-cn"
+
+        arn.with_us_gov_partition()
+        assert arn.partition == "aws-us-gov"
+
         arn = Arn.from_arn("arn:aws:s3:::my-bucket/file.txt")
         assert arn.partition == "aws"
         assert arn.service == "s3"

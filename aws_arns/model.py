@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import typing as T
-import enum
 import dataclasses
 
-from . import compat
 from .sentinel import NOTHING
+from .constants import AwsPartitionEnum
 
 
 def _handle_empty_str(s: str) -> T.Optional[str]:
@@ -20,12 +19,6 @@ def _handle_none(s: T.Optional[str]) -> str:
         return ""
     else:
         return s
-
-
-class AwsPartitionEnum:
-    aws = "aws"
-    aws_us_gov = "aws-us-gov"
-    aws_cn = "aws-cn"
 
 
 class AwsService:
@@ -88,6 +81,33 @@ class _BaseArn:
             if v is NOTHING:
                 raise ValueError(f"arg '{k}' is required")
 
+    @staticmethod
+    def _parse_slash_delimited_resource(service: str, resource: str):
+        # "arn:aws:s3:::my-bucket/file.txt"
+        if service in ["s3"]:
+            sep = None
+            resource_type, resource_id = None, resource
+        # arn:aws:ssm:us-east-1:807388292768:parameter/path/to/my_param
+        elif service in ["ssm"]:
+            sep = "/"
+            resource_type, resource_id = resource.split("/", 1)
+            if resource.count("/") > 1:
+                resource_id = f"/{resource_id}"
+        else:
+            sep = "/"
+            resource_type, resource_id = resource.split("/", 1)
+        return sep, resource_type, resource_id
+
+    @staticmethod
+    def _parse_colon_delimited_resource(service: str, resource: str):
+        if service in ["sns"]:
+            sep = None
+            resource_type, resource_id = None, resource
+        else:
+            sep = ":"
+            resource_type, resource_id = resource.split(":", 1)
+        return sep, resource_type, resource_id
+
     @classmethod
     def from_arn(cls, arn: str):
         """
@@ -98,28 +118,31 @@ class _BaseArn:
 
         _, partition, service, region, account_id, resource = arn.split(":", 5)
 
-        if "/" in resource:
-            # "arn:aws:s3:::my-bucket/file.txt"
-            if service in ["s3"]:
-                sep = None
-                resource_type, resource_id = None, resource
-            # arn:aws:ssm:us-east-1:807388292768:parameter/path/to/my_param
-            elif service in ["ssm"]:
-                sep = "/"
-                resource_type, resource_id = resource.split("/", 1)
-                if resource.count("/") > 1:
-                    resource_id = f"/{resource_id}"
+        if "/" in resource and ":" in resource:
+            if resource.index("/") < resource.index(":"):
+                (
+                    sep,
+                    resource_type,
+                    resource_id,
+                ) = cls._parse_slash_delimited_resource(service, resource)
             else:
-                sep = "/"
-                resource_type, resource_id = resource.split("/", 1)
+                (
+                    sep,
+                    resource_type,
+                    resource_id,
+                ) = cls._parse_colon_delimited_resource(service, resource)
+        elif "/" in resource:
+            (
+                sep,
+                resource_type,
+                resource_id,
+            ) = cls._parse_slash_delimited_resource(service, resource)
         elif ":" in resource:
-            # arn:aws:sns:us-east-1:111122223333:my_topic:a07e1034-10c0-47a6-83c2-552cfcca42db
-            if service in ["sns"]:
-                sep = None
-                resource_type, resource_id = None, resource
-            else:
-                sep = ":"
-                resource_type, resource_id = resource.split(":", 1)
+            (
+                sep,
+                resource_type,
+                resource_id,
+            ) = cls._parse_colon_delimited_resource(service, resource)
         else:
             sep = None
             resource_type, resource_id = None, resource
@@ -156,11 +179,11 @@ class _BaseArn:
         return self.region
 
     def with_us_gov_partition(self):
-        self.partition = AwsPartitionEnum.aws_us_gov
+        self.partition = AwsPartitionEnum.aws_us_gov.value
         return self
 
     def with_cn_partition(self):
-        self.partition = AwsPartitionEnum.aws_cn
+        self.partition = AwsPartitionEnum.aws_cn.value
         return self
 
 

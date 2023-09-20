@@ -28,6 +28,8 @@ from ..model import _CrossAccountGlobal
 @dataclasses.dataclass
 class S3(_CrossAccountGlobal):
     service: str = dataclasses.field(default="s3")
+    resource_type: str = dataclasses.field(default=None)
+    sep: str = dataclasses.field(default=None)
 
 
 @dataclasses.dataclass
@@ -35,9 +37,6 @@ class S3Bucket(S3):
     """
     Example: arn:aws:s3:::my-bucket
     """
-    resource_type: str = dataclasses.field(default=None)
-    sep: str = dataclasses.field(default=None)
-
     @property
     def bucket_name(self) -> str:
         return self.resource_id
@@ -65,15 +64,13 @@ class S3Object(S3):
     """
     Example: arn:aws:s3:::my-bucket/folder/file.txt
     """
-    sep: str = dataclasses.field(default="/")
-
     @property
     def bucket(self) -> str:
-        return self.resource_type
+        return self.resource_id.split("/", 1)[0]
 
     @property
     def key(self) -> str:
-        return self.resource_id
+        return self.resource_id.split("/", 1)[1]
 
     @property
     def uri(self) -> str:
@@ -82,8 +79,7 @@ class S3Object(S3):
     @classmethod
     def new(cls, bucket: str, key: str):
         return cls(
-            resource_type=bucket,
-            resource_id=key,
+            resource_id=f"{bucket}/{key}",
         )
 
     @classmethod

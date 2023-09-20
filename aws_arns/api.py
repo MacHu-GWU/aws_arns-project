@@ -6,6 +6,6 @@ Usage example::
     import aws_arns.api as aws_arns
 """
 
-from .constants import AWSPartitionEnum
+from .constants import AwsPartitionEnum
 from .model import Arn
 from . import resource as res

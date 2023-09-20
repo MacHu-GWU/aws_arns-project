@@ -81,9 +81,9 @@ secretmanager = [
 ]
 
 batch = [
-    "arn:aws:batch:us-east-1:111122223333:compute-environment/acu_e5f245a1_test",
-    "arn:aws:batch:us-east-1:111122223333:job-queue/acu_e5f245a1_test",
-    "arn:aws:batch:us-east-1:111122223333:job-definition/acu_e5f245a1_test:1",
+    "arn:aws:batch:us-east-1:111122223333:compute-environment/test",
+    "arn:aws:batch:us-east-1:111122223333:job-queue/test",
+    "arn:aws:batch:us-east-1:111122223333:job-definition/test:1",
     "arn:aws:batch:us-east-1:111122223333:job/b2957570-6bae-47b1-a2d8-af4f3030fc36",
 ]
 
@@ -103,6 +103,12 @@ glue = [
     "arn:aws:glue:us-east-1:111122223333:mlTransform/tfm-1234567890",
 ]
 
+codecommit = [
+    "arn:aws:codecommit:us-east-1:111122223333:test",
+    "arn:aws:codebuild:us-east-1:111122223333:project/test",
+    "arn:aws:codebuild:us-east-1:111122223333:build/test:08805851-8a0a-4968-9d08-c7cc0623db7b",
+    "arn:aws:codepipeline:us-east-1:111122223333:test",
+]
 arns = list(
     itertools.chain(
         cloudformation,

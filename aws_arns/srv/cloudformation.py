@@ -63,7 +63,7 @@ class CloudFormationStack(CloudFormation):
         return cls(
             account_id=aws_account_id,
             region=aws_region,
-            resource_type=f"{stack_name}:{short_id}",
+            resource_id=f"{stack_name}/{short_id}",
         )
 
 
@@ -76,6 +76,10 @@ class CloudFormationChangeSet(CloudFormation):
 
     @property
     def changeset_fullname(self) -> str:
+        """
+        The "my-change-set/a1b2c3d4" part of
+        arn:aws:cloudformation:us-east-1:111122223333:changeSet/my-change-set/a1b2c3d4
+        """
         return self.resource_id
 
     @classmethod
@@ -85,11 +89,10 @@ class CloudFormationChangeSet(CloudFormation):
         aws_region: str,
         fullname: str,
     ):
-        return super(CloudFormationChangeSet, cls).new(
-            aws_region=aws_region,
-            aws_account_id=aws_account_id,
-            fullname=fullname,
-            resource_type="changeSet",
+        return cls(
+            account_id=aws_account_id,
+            region=aws_region,
+            resource_id=fullname,
         )
 
 
@@ -119,9 +122,8 @@ class CloudFormationStackSet(CloudFormation):
         aws_region: str,
         fullname: str,
     ):
-        return super(CloudFormationStackSet, cls).new(
-            aws_region=aws_region,
-            aws_account_id=aws_account_id,
-            fullname=fullname,
-            resource_type="stackset",
+        return cls(
+            account_id=aws_account_id,
+            region=aws_region,
+            resource_id=fullname,
         )

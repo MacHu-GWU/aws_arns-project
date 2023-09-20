@@ -5,9 +5,9 @@ import itertools
 from aws_arns.model import Arn
 
 cloudformation = [
-    "arn:aws:cloudformation:us-east-1:111122223333:stack/stack-name/8e6db190-bd6a-11ed-b80d-12cc1b6777a1",
-    "arn:aws:cloudformation:us-east-1:111122223333:changeSet/stack-name-2023-03-08-04-42-38-564/5be009b1-f057-44b0-a5e3-cd9bf4a24b9e",
-    "arn:aws:cloudformation:us-east-1:111122223333:stackset/stack-name:08af3d48-ec8e-45ad-b109-363d27fcf851",
+    "arn:aws:cloudformation:us-east-1:111122223333:stack/my-stack/1a2b3c",
+    "arn:aws:cloudformation:us-east-1:111122223333:changeSet/my-stack-name-2000-01-01/1a2b3c",
+    "arn:aws:cloudformation:us-east-1:111122223333:stackset/my-stack-set:1a2b3c",
 ]
 
 kinesis = [
@@ -129,7 +129,6 @@ class TestArn:
         assert arn.sep == None
 
         arn = Arn.from_arn("arn:aws:s3:::my-bucket/file.txt")
-        print(arn)
         assert arn.partition == "aws"
         assert arn.service == "s3"
         assert arn.region == None
@@ -175,6 +174,18 @@ class TestArn:
         assert arn.resource_type == "stack"
         assert arn.resource_id == "my-stack/1a2b3c"
         assert arn.sep == "/"
+
+        arn = Arn.from_arn(
+            "arn:aws:cloudformation:us-east-1:111122223333:stackset/my-stack-set:1a2b3c",
+        )
+        assert arn.partition == "aws"
+        assert arn.service == "cloudformation"
+        assert arn.region == "us-east-1"
+        assert arn.account_id == "111122223333"
+        assert arn.resource_type == "stackset"
+        assert arn.resource_id == "my-stack-set:1a2b3c"
+        assert arn.sep == "/"
+
 
     def test_from_and_to(self):
         for arn_str in arns:

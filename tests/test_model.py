@@ -4,6 +4,12 @@ import pytest
 import itertools
 from aws_arns.model import Arn
 
+a2i = [
+    "arn:aws:sagemaker:us-east-1:111122223333:flow-definition/my_flow",
+    "arn:aws:sagemaker:us-east-1:111122223333:human-loop/1a2b3c",
+    "arn:aws:sagemaker:us-east-1:111122223333:human-task-ui/my-ui",
+]
+
 cloudformation = [
     "arn:aws:cloudformation:us-east-1:111122223333:stack/my-stack/1a2b3c",
     "arn:aws:cloudformation:us-east-1:111122223333:changeSet/my-stack-name-2000-01-01/1a2b3c",

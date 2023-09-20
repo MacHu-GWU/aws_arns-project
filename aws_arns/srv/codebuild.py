@@ -11,22 +11,7 @@ from ..model import _SlashSeparatedRegional
 
 @dataclasses.dataclass
 class CodeBuild(_SlashSeparatedRegional):
-    @classmethod
-    def new(
-        cls,
-        aws_account_id: str,
-        aws_region: str,
-        fullname: str,
-        resource_type: str,
-    ):
-        return super(CodeBuild, cls).new(
-            partition="aws",
-            service="codebuild",
-            region=aws_region,
-            account_id=aws_account_id,
-            resource_id=fullname,
-            resource_type=resource_type,
-        )
+    service: str = dataclasses.field(default="codebuild")
 
 
 @dataclasses.dataclass
@@ -34,6 +19,8 @@ class CodeBuildProject(CodeBuild):
     """
     Example: arn:aws:codebuild:us-east-1:111122223333:project/my-project
     """
+
+    resource_type: str = dataclasses.field(default="project")
 
     @property
     def codebuild_project_name(self) -> str:
@@ -46,11 +33,13 @@ class CodeBuildProject(CodeBuild):
         aws_region: str,
         name: str,
     ):
-        return super(CodeBuildProject, cls).new(
-            aws_region=aws_region,
-            aws_account_id=aws_account_id,
-            fullname=name,
-            resource_type="project",
+        """
+        Factory method.
+        """
+        return cls(
+            account_id=aws_account_id,
+            region=aws_region,
+            resource_id=name,
         )
 
 
@@ -59,6 +48,8 @@ class CodeBuildRun(CodeBuild):
     """
     Example: arn:aws:codebuild:us-east-1:111122223333:build/my-project:a1b2c3d4
     """
+
+    resource_type: str = dataclasses.field(default="build")
 
     @property
     def codebuild_run_fullname(self) -> str:
@@ -79,9 +70,11 @@ class CodeBuildRun(CodeBuild):
         aws_region: str,
         fullname: str,
     ):
-        return super(CodeBuildRun, cls).new(
-            aws_region=aws_region,
-            aws_account_id=aws_account_id,
-            fullname=fullname,
-            resource_type="build",
+        """
+        Factory method.
+        """
+        return cls(
+            account_id=aws_account_id,
+            region=aws_region,
+            resource_id=fullname,
         )

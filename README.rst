@@ -53,7 +53,7 @@
 
 Welcome to ``aws_arns`` Documentation
 ==============================================================================
-Amazon Resource Names (ARNs) utilities for Python.
+Amazon Resource Names (ARNs) Python library.
 
 See `usage examples <https://github.com/MacHu-GWU/aws_arns-project/blob/main/examples.ipynb>`_.
 

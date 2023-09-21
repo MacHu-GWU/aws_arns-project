@@ -195,6 +195,9 @@ class _BaseArn:
 
 @dataclasses.dataclass
 class Arn(_BaseArn):
+    """
+    todo: docstring
+    """
     @classmethod
     def new(
         cls,
@@ -206,6 +209,9 @@ class Arn(_BaseArn):
         sep: T.Optional[str],
         resource_id: str,
     ):  # pragma: no cover
+        """
+        Factory method.
+        """
         return cls(
             service=service,
             partition=partition,

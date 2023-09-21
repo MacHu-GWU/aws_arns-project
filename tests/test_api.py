@@ -51,6 +51,12 @@ def test():
     _ = api.res.VpcEndpoint
     _ = api.res.VpcPeeringConnection
     _ = api.res.VpcPrivateGateway
+    _ = api.res.EcrRepository
+    _ = api.res.EcsCluster
+    _ = api.res.EcsContainerInstance
+    _ = api.res.EcsService
+    _ = api.res.EcsTaskDefinition
+    _ = api.res.EcsTaskRun
     _ = api.res.GlueCrawler
     _ = api.res.GlueDatabase
     _ = api.res.GlueJob
@@ -62,6 +68,8 @@ def test():
     _ = api.res.IamPolicy
     _ = api.res.IamRole
     _ = api.res.IamUser
+    _ = api.res.CloudWatchLogGroup
+    _ = api.res.CloudWatchLogGroupStream
     _ = api.res.RdsDBCluster
     _ = api.res.RdsDBClusterParameterGroup
     _ = api.res.RdsDBClusterSnapshot

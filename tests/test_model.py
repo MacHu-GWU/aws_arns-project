@@ -110,8 +110,10 @@ batch = [
 ]
 
 ecs = [
-    "arn:aws:ecs:us-east-1:111122223333:cluster/AWSBatch-test-a1b2c3d4-a1b2-a1b2-a1b2-a1b2c3d4a1b2",
-    "arn:aws:ecs:us-east-1:111122223333:task-definition/test:1",
+    "arn:aws:ecs:us-east-1:111122223333:cluster/my-cluster-1",
+    "arn:aws:ecs:us-east-1:111122223333:task-definition/my-task:1",
+    "arn:aws:ecs:us-east-1:111122223333:container-instance/my-cluster/container_instance_UUID",
+    "arn:aws:ecs:us-east-1:111122223333:service/service_name",
 ]
 
 glue = [
@@ -156,6 +158,10 @@ dynamodb = [
     "arn:aws:dynamodb:us-east-1:111122223333:table/my_table/import/my_import_name",
 ]
 
+ecr = [
+    "arn:aws:ecr:us-east-1:123456789012:repository/my-repo",
+]
+
 arns = list(
     itertools.chain(
         cloudformation,
@@ -176,6 +182,8 @@ arns = list(
         codecommit,
         ssm,
         sfn,
+        dynamodb,
+        ecr,
     )
 )
 

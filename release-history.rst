@@ -15,6 +15,29 @@ Backlog (TODO)
 **Miscellaneous**
 
 
+1.1.1 (TODO)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- Add the follow curated AWS Resource ARN to public API
+    - ``aws_arns.res.DynamodbTable``
+    - ``aws_arns.res.DynamodbGlobalTable``
+    - ``aws_arns.res.DynamodbTableIndex``
+    - ``aws_arns.res.DynamodbTableStream``
+    - ``aws_arns.res.DynamodbTableBackup``
+    - ``aws_arns.res.DynamodbTableExport``
+    - ``aws_arns.res.DynamodbTableImport``
+
+from .srv.ecr import EcrRepository
+from .srv.ecs import EcsCluster
+from .srv.ecs import EcsContainerInstance
+from .srv.ecs import EcsService
+from .srv.ecs import EcsTaskDefinition
+from .srv.ecs import EcsTaskRun
+from .srv.logs import CloudWatchLogGroup
+from .srv.logs import CloudWatchLogGroupStream
+
+
 1.0.1 (2023-09-21)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**

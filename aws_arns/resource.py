@@ -45,6 +45,12 @@ from .srv.ec2 import VpcCustomGateway
 from .srv.ec2 import VpcEndpoint
 from .srv.ec2 import VpcPeeringConnection
 from .srv.ec2 import VpcPrivateGateway
+from .srv.ecr import EcrRepository
+from .srv.ecs import EcsCluster
+from .srv.ecs import EcsContainerInstance
+from .srv.ecs import EcsService
+from .srv.ecs import EcsTaskDefinition
+from .srv.ecs import EcsTaskRun
 from .srv.glue import GlueCrawler
 from .srv.glue import GlueDatabase
 from .srv.glue import GlueJob
@@ -56,6 +62,8 @@ from .srv.iam import IamInstanceProfile
 from .srv.iam import IamPolicy
 from .srv.iam import IamRole
 from .srv.iam import IamUser
+from .srv.logs import CloudWatchLogGroup
+from .srv.logs import CloudWatchLogGroupStream
 from .srv.rds import RdsDBCluster
 from .srv.rds import RdsDBClusterParameterGroup
 from .srv.rds import RdsDBClusterSnapshot

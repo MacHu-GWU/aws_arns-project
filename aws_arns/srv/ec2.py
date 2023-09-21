@@ -11,6 +11,9 @@ from ..model import _SlashSeparatedRegional
 
 @dataclasses.dataclass
 class Ec2(_SlashSeparatedRegional):
+    """
+    todo: docstring
+    """
     service: str = dataclasses.field(default="ec2")
 
 
@@ -62,6 +65,9 @@ class _Ec2Common(Ec2):
 
 @dataclasses.dataclass
 class Ec2Instance(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:instance/i-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="instance")
 
     _id_prefix = "i"
@@ -73,6 +79,9 @@ class Ec2Instance(_Ec2Common):
 
 @dataclasses.dataclass
 class Ec2KeyPair(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:key-pair/key-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="key-pair")
 
     _id_prefix = "key"
@@ -84,6 +93,9 @@ class Ec2KeyPair(_Ec2Common):
 
 @dataclasses.dataclass
 class EbsVolume(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:volume/vol-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="volume")
 
     _id_prefix = "vol"
@@ -95,6 +107,9 @@ class EbsVolume(_Ec2Common):
 
 @dataclasses.dataclass
 class EbsSnapshot(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:snapshot/snap-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="snapshot")
 
     _id_prefix = "snap"
@@ -106,6 +121,9 @@ class EbsSnapshot(_Ec2Common):
 
 @dataclasses.dataclass
 class Ec2NetworkInterface(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:network-interface/eni-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="network-interface")
 
     _id_prefix = "eni"
@@ -117,6 +135,9 @@ class Ec2NetworkInterface(_Ec2Common):
 
 @dataclasses.dataclass
 class Vpc(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:vpc/vpc-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="vpc")
 
     _id_prefix = "vpc"
@@ -128,6 +149,9 @@ class Vpc(_Ec2Common):
 
 @dataclasses.dataclass
 class Subnet(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:subnet/subnet-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="subnet")
 
     _id_prefix = "subnet"
@@ -139,6 +163,9 @@ class Subnet(_Ec2Common):
 
 @dataclasses.dataclass
 class RouteTable(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:route-table/rtb-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="route-table")
 
     _id_prefix = "rtb"
@@ -150,6 +177,9 @@ class RouteTable(_Ec2Common):
 
 @dataclasses.dataclass
 class InternetGateway(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:internet-gateway/igw-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="internet-gateway")
 
     _id_prefix = "igw"
@@ -161,6 +191,9 @@ class InternetGateway(_Ec2Common):
 
 @dataclasses.dataclass
 class NatGateway(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:natgateway/nat-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="natgateway")
 
     _id_prefix = "nat"
@@ -172,6 +205,9 @@ class NatGateway(_Ec2Common):
 
 @dataclasses.dataclass
 class DHCPOptionSet(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:dhcp-options/dopt-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="dhcp-options")
 
     _id_prefix = "dopt"
@@ -183,6 +219,9 @@ class DHCPOptionSet(_Ec2Common):
 
 @dataclasses.dataclass
 class VpcPeeringConnection(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:vpc-peering-connection/pcx-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="vpc-peering-connection")
 
     _id_prefix = "pcx"
@@ -194,6 +233,9 @@ class VpcPeeringConnection(_Ec2Common):
 
 @dataclasses.dataclass
 class NetworkACL(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:network-acl/acl-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="network-acl")
 
     _id_prefix = "acl"
@@ -205,6 +247,9 @@ class NetworkACL(_Ec2Common):
 
 @dataclasses.dataclass
 class SecurityGroup(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:security-group/sg-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="security-group")
 
     _id_prefix = "sg"
@@ -216,6 +261,9 @@ class SecurityGroup(_Ec2Common):
 
 @dataclasses.dataclass
 class SecurityGroupRule(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:security-group-rule/sgr-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="security-group-rule")
 
     _id_prefix = "sgr"
@@ -227,6 +275,9 @@ class SecurityGroupRule(_Ec2Common):
 
 @dataclasses.dataclass
 class VpcEndpoint(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:vpc-endpoint/vpce-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="vpc-endpoint")
 
     _id_prefix = "vpce"
@@ -238,6 +289,9 @@ class VpcEndpoint(_Ec2Common):
 
 @dataclasses.dataclass
 class ElasticIpAllocation(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:ipv4pool-ec2/eipalloc-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="ipv4pool-ec2")
 
     _id_prefix = "eipalloc"
@@ -249,6 +303,9 @@ class ElasticIpAllocation(_Ec2Common):
 
 @dataclasses.dataclass
 class VpcCustomGateway(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:customer-gateway/cgw-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="customer-gateway")
 
     _id_prefix = "cgw"
@@ -260,6 +317,9 @@ class VpcCustomGateway(_Ec2Common):
 
 @dataclasses.dataclass
 class VpcPrivateGateway(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:vpn-gateway/vgw-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="vpn-gateway")
 
     _id_prefix = "vgw"
@@ -271,6 +331,9 @@ class VpcPrivateGateway(_Ec2Common):
 
 @dataclasses.dataclass
 class SiteToSiteVPNConnection(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:vpn-connection/vpn-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="vpn-connection")
 
     _id_prefix = "vpn"
@@ -282,6 +345,9 @@ class SiteToSiteVPNConnection(_Ec2Common):
 
 @dataclasses.dataclass
 class ClientVPNEndpoint(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:client-vpn-endpoint/cvpn-endpoint-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="client-vpn-endpoint")
 
     _id_prefix = "cvpn-endpoint"
@@ -293,6 +359,9 @@ class ClientVPNEndpoint(_Ec2Common):
 
 @dataclasses.dataclass
 class TransitGateway(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:transit-gateway/tgw-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="transit-gateway")
 
     _id_prefix = "tgw"
@@ -304,17 +373,9 @@ class TransitGateway(_Ec2Common):
 
 @dataclasses.dataclass
 class TransitGatewayAttachment(_Ec2Common):
-    resource_type: str = dataclasses.field(default="transit-gateway-attachment")
-
-    _id_prefix = "tgw-attach"
-
-    @property
-    def transit_gateway_attachment_id(self) -> str:  # pragma: no cover
-        return self.resource_id
-
-
-@dataclasses.dataclass
-class TransitGatewayAttachment(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1:123456789012:transit-gateway-attachment/tgw-attach-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="transit-gateway-attachment")
 
     _id_prefix = "tgw-attach"
@@ -326,6 +387,9 @@ class TransitGatewayAttachment(_Ec2Common):
 
 @dataclasses.dataclass
 class Ec2Image(_Ec2Common):
+    """
+    Example: arn:aws:ec2:us-east-1::image/ami-1234567890abcdef0
+    """
     resource_type: str = dataclasses.field(default="image")
 
     _id_prefix = "ami"

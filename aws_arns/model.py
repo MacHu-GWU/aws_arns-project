@@ -84,6 +84,7 @@ class _BaseArn:
 
     def __post_init__(self):
         for k, v in dataclasses.asdict(self).items():
+            # print([k, v])
             if isinstance(v, _Nothing):
                 raise ValueError(f"arg '{k}' is required")
 

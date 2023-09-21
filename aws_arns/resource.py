@@ -14,6 +14,13 @@ from .srv.codebuild import CodeBuildProject
 from .srv.codebuild import CodeBuildRun
 from .srv.codecommit import CodeCommitRepository
 from .srv.codepipeline import CodePipelinePipeline
+from .srv.dynamodb import DynamodbGlobalTable
+from .srv.dynamodb import DynamodbTable
+from .srv.dynamodb import DynamodbTableBackup
+from .srv.dynamodb import DynamodbTableExport
+from .srv.dynamodb import DynamodbTableImport
+from .srv.dynamodb import DynamodbTableIndex
+from .srv.dynamodb import DynamodbTableStream
 from .srv.ec2 import ClientVPNEndpoint
 from .srv.ec2 import DHCPOptionSet
 from .srv.ec2 import EbsSnapshot

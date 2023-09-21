@@ -11,6 +11,9 @@ from ..model import _SlashSeparatedRegional
 
 @dataclasses.dataclass
 class Glue(_SlashSeparatedRegional):
+    """
+    todo: docstring
+    """
     service: str = dataclasses.field(default="glue")
 
 
@@ -39,6 +42,9 @@ class _GlueCommon(Glue):
 
 @dataclasses.dataclass
 class GlueDatabase(Glue):
+    """
+    Example: arn:aws:glue:us-east-1:111122223333:database/db1
+    """
     resource_type: str = dataclasses.field(default="database")
 
     @property
@@ -64,6 +70,9 @@ class GlueDatabase(Glue):
 
 @dataclasses.dataclass
 class GlueTable(Glue):
+    """
+    Example: arn:aws:glue:us-east-1:111122223333:table/db1/tbl
+    """
     resource_type: str = dataclasses.field(default="table")
 
     @property
@@ -94,6 +103,9 @@ class GlueTable(Glue):
 
 @dataclasses.dataclass
 class GlueCrawler(_GlueCommon):
+    """
+    Example: arn:aws:glue:us-east-1:111122223333:crawler/mycrawler
+    """
     resource_type: str = dataclasses.field(default="crawler")
 
     @property
@@ -103,6 +115,9 @@ class GlueCrawler(_GlueCommon):
 
 @dataclasses.dataclass
 class GlueJob(_GlueCommon):
+    """
+    Example: arn:aws:glue:us-east-1:111122223333:job/testjob
+    """
     resource_type: str = dataclasses.field(default="job")
 
     @property
@@ -112,6 +127,9 @@ class GlueJob(_GlueCommon):
 
 @dataclasses.dataclass
 class GlueTrigger(_GlueCommon):
+    """
+    Example: arn:aws:glue:us-east-1:111122223333:trigger/sampletrigger
+    """
     resource_type: str = dataclasses.field(default="trigger")
 
     @property
@@ -121,6 +139,9 @@ class GlueTrigger(_GlueCommon):
 
 @dataclasses.dataclass
 class GlueMLTransform(_GlueCommon):
+    """
+    Example: arn:aws:glue:us-east-1:111122223333:mlTransform/tfm-1234567890
+    """
     resource_type: str = dataclasses.field(default="mlTransform")
 
     @property

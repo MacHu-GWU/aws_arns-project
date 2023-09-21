@@ -67,14 +67,14 @@ rds = [
     "arn:aws:rds:us-east-1:111122223333:cluster:my-aurora-cluster-1",
     "arn:aws:rds:us-east-1:111122223333:es:my-subscription",
     "arn:aws:rds:us-east-1:111122223333:og:my-og",
-    "arn:aws:rds:us-east-2:123456789012:pg:my-param-enable-logs",
+    "arn:aws:rds:us-east-1:123456789012:pg:my-param-enable-logs",
     "arn:aws:rds:us-east-1:111122223333:cluster-pg:my-cluster-param-timezone",
     "arn:aws:rds:us-east-1:111122223333:ri:my-reserved-postgresql",
     "arn:aws:rds:us-east-1:111122223333:secgrp:my-public",
     "arn:aws:rds:us-east-1:111122223333:snapshot:rds:my-mysql-db-2020-01-01-00-00",
-    "arn:aws:rds:us-east-2:111122223333:cluster-snapshot:rds:my-aurora-cluster-2020-01-01-00-00",
-    "arn:aws:rds:us-east-2:111122223333:snapshot:my-mysql-db-snap",
-    "arn:aws:rds:us-east-2:111122223333:cluster-snapshot:my-aurora-cluster-snap",
+    "arn:aws:rds:us-east-1:111122223333:cluster-snapshot:rds:my-aurora-cluster-2020-01-01-00-00",
+    "arn:aws:rds:us-east-1:111122223333:snapshot:my-mysql-db-snap",
+    "arn:aws:rds:us-east-1:111122223333:cluster-snapshot:my-aurora-cluster-snap",
     "arn:aws:rds:us-east-1:111122223333:subgrp:my-subnet-10",
 ]
 
@@ -144,6 +144,16 @@ sfn = [
     "arn:aws:states:us-east-1:807388292768:stateMachine:standard_test:LIVE",
     "arn:aws:states:us-east-1:111122223333:execution:standard_test:1d858cf6-613f-4576-b94f-e0d654c23843",
     "arn:aws:states:us-east-1:111122223333:express:express_test:e935dec6-e748-4977-a2f2-32eeb83d81da:b2f7726e-9b98-4a49-a6c4-9cf23a61f180"
+]
+
+dynamodb = [
+    "arn:aws:dynamodb:us-east-1:111122223333:table/my_table",
+    "arn:aws:dynamodb::111122223333:global-table/my_global_table_name",
+    "arn:aws:dynamodb:us-east-1:111122223333:table/my_table/index/my_index",
+    "arn:aws:dynamodb:us-east-1:111122223333:table/my_table/stream/my_stream_label",
+    "arn:aws:dynamodb:us-east-1:111122223333:table/my_table/backup/my_backup_name",
+    "arn:aws:dynamodb:us-east-1:111122223333:table/my_table/export/my_export_name",
+    "arn:aws:dynamodb:us-east-1:111122223333:table/my_table/import/my_import_name",
 ]
 
 arns = list(

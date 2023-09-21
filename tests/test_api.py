@@ -20,6 +20,13 @@ def test():
     _ = api.res.CodeBuildRun
     _ = api.res.CodeCommitRepository
     _ = api.res.CodePipelinePipeline
+    _ = api.res.DynamodbGlobalTable
+    _ = api.res.DynamodbTable
+    _ = api.res.DynamodbTableBackup
+    _ = api.res.DynamodbTableExport
+    _ = api.res.DynamodbTableImport
+    _ = api.res.DynamodbTableIndex
+    _ = api.res.DynamodbTableStream
     _ = api.res.ClientVPNEndpoint
     _ = api.res.DHCPOptionSet
     _ = api.res.EbsSnapshot

@@ -43,6 +43,17 @@ from .srv.iam import IamInstanceProfile
 from .srv.iam import IamPolicy
 from .srv.iam import IamRole
 from .srv.iam import IamUser
+from .srv.rds import RdsDBCluster
+from .srv.rds import RdsDBClusterParameterGroup
+from .srv.rds import RdsDBClusterSnapshot
+from .srv.rds import RdsDBInstance
+from .srv.rds import RdsDBInstanceSnapshot
+from .srv.rds import RdsDBOptionGroup
+from .srv.rds import RdsDBParameterGroup
+from .srv.rds import RdsDBSecurityGroup
+from .srv.rds import RdsDBSubnetGroup
+from .srv.rds import RdsEventSubscription
+from .srv.rds import RdsReservedDBInstance
 from .srv.s3 import S3Bucket
 from .srv.s3 import S3Object
 from .srv.sagemaker_a2i import A2IHumanLoop

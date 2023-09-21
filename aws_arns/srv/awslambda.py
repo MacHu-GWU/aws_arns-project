@@ -40,7 +40,7 @@ class LambdaFunction(AwsLambda):
         words = self.resource_id.split(":", 1)
         if len(words) == 2:
             token = words[1]
-            if token == "$LATEST":
+            if token == "$LATEST":  # pragma: no cover
                 return token
             elif token.isdigit():
                 return token
@@ -54,7 +54,7 @@ class LambdaFunction(AwsLambda):
         words = self.resource_id.split(":", 1)
         if len(words) == 2:
             token = words[1]
-            if token == "$LATEST":
+            if token == "$LATEST":  # pragma: no cover
                 raise ValueError("Cannot specify alias for $LATEST")
             elif token.isdigit():
                 raise ValueError(f"Invalid version: {token}")

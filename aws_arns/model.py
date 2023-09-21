@@ -3,7 +3,6 @@
 import typing as T
 import dataclasses
 
-from .sentinel import NOTHING
 from .constants import AwsPartitionEnum
 
 
@@ -45,6 +44,13 @@ class AwsService:
     states = "states"
 
 
+class _Nothing:
+    pass
+
+
+NOTHING = _Nothing()
+
+
 @dataclasses.dataclass
 class _BaseArn:
     """
@@ -78,7 +84,7 @@ class _BaseArn:
 
     def __post_init__(self):
         for k, v in dataclasses.asdict(self).items():
-            if v is NOTHING:
+            if isinstance(v, _Nothing):
                 raise ValueError(f"arg '{k}' is required")
 
     @staticmethod
@@ -199,7 +205,7 @@ class Arn(_BaseArn):
         resource_type: T.Optional[str],
         sep: T.Optional[str],
         resource_id: str,
-    ):
+    ):  # pragma: no cover
         return cls(
             service=service,
             partition=partition,

@@ -11,38 +11,32 @@ from ..model import _ColonSeparatedRegional
 
 
 @dataclasses.dataclass
-class AwsLambda(_ColonSeparatedRegional):
-    service: str = dataclasses.field(default="lambda")
+class StepFunction(_ColonSeparatedRegional):
+    service: str = dataclasses.field(default="states")
 
 
 @dataclasses.dataclass
-class LambdaFunction(AwsLambda):
+class SfnStateMachine(StepFunction):
     """
     Example:
 
-    - arn:aws:lambda:us-east-1:111122223333:function:my-func
-    - arn:aws:lambda:us-east-1:111122223333:function:my-func:LIVE
-    - arn:aws:lambda:us-east-1:111122223333:function:my-func:1
+    - arn:aws:states:us-east-1:111122223333:stateMachine:standard_test
+    - arn:aws:states:us-east-1:807388292768:stateMachine:standard_test:1
+    - arn:aws:states:us-east-1:807388292768:stateMachine:standard_test:LIVE
     """
 
-    resource_type: str = dataclasses.field(default="function")
+    resource_type: str = dataclasses.field(default="stateMachine")
 
     @property
     def name(self) -> str:
-        return self.resource_id.split(":", 1)[0]
-
-    @property
-    def function_name(self) -> str:
-        return self.name
+        return self.resource_id.split(":")[0]
 
     @property
     def version(self) -> T.Optional[str]:
         words = self.resource_id.split(":", 1)
         if len(words) == 2:
             token = words[1]
-            if token == "$LATEST":
-                return token
-            elif token.isdigit():
+            if token.isdigit():
                 return token
             else:
                 raise ValueError(f"Invalid version: {token}")
@@ -54,9 +48,7 @@ class LambdaFunction(AwsLambda):
         words = self.resource_id.split(":", 1)
         if len(words) == 2:
             token = words[1]
-            if token == "$LATEST":
-                raise ValueError("Cannot specify alias for $LATEST")
-            elif token.isdigit():
+            if token.isdigit():
                 raise ValueError(f"Invalid version: {token}")
             else:
                 return token
@@ -93,32 +85,29 @@ class LambdaFunction(AwsLambda):
 
 
 @dataclasses.dataclass
-class LambdaLayer(AwsLambda):
+class SfnStateMachineExecution(StepFunction):
     """
-    Example: arn:aws:lambda:us-east-1:111122223333:layer:my-layer:1
-    """
+    Example:
 
-    resource_type: str = dataclasses.field(default="layer")
+    - arn:aws:states:us-east-1:111122223333:execution:standard_test:1d858cf6-613f-4576-b94f-e0d654c23843
+    - arn:aws:states:us-east-1:111122223333:express:express_test:e935dec6-e748-4977-a2f2-32eeb83d81da:b2f7726e-9b98-4a49-a6c4-9cf23a61f180
+    """
 
     @property
-    def name(self) -> str:
+    def state_machine_name(self) -> str:
         return self.resource_id.split(":", 1)[0]
 
     @property
-    def layer_name(self) -> str:
-        return self.name
-
-    @property
-    def version(self) -> int:
-        return int(self.resource_id.split(":", 1)[1])
+    def exec_id(self) -> str:
+        return self.resource_id.split(":", 1)[1]
 
     @classmethod
-    def new(
+    def new_standard(
         cls,
         aws_account_id: str,
         aws_region: str,
-        name: str,
-        version: int,
+        state_machine_name: str,
+        exec_id: int,
     ):
         """
         Factory method.
@@ -126,5 +115,24 @@ class LambdaLayer(AwsLambda):
         return cls(
             account_id=aws_account_id,
             region=aws_region,
-            resource_id=f"{name}:{version}",
+            resource_type="execution",
+            resource_id=f"{state_machine_name}:{exec_id}",
+        )
+
+    @classmethod
+    def new_express(
+        cls,
+        aws_account_id: str,
+        aws_region: str,
+        state_machine_name: str,
+        exec_id: int,
+    ):
+        """
+        Factory method.
+        """
+        return cls(
+            account_id=aws_account_id,
+            region=aws_region,
+            resource_type="express",
+            resource_id=f"{state_machine_name}:{exec_id}",
         )

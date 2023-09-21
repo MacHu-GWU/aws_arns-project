@@ -20,6 +20,30 @@ def test():
     _ = api.res.CodeBuildRun
     _ = api.res.CodeCommitRepository
     _ = api.res.CodePipelinePipeline
+    _ = api.res.ClientVPNEndpoint
+    _ = api.res.DHCPOptionSet
+    _ = api.res.EbsSnapshot
+    _ = api.res.EbsVolume
+    _ = api.res.Ec2Image
+    _ = api.res.Ec2Instance
+    _ = api.res.Ec2KeyPair
+    _ = api.res.Ec2NetworkInterface
+    _ = api.res.ElasticIpAllocation
+    _ = api.res.InternetGateway
+    _ = api.res.NatGateway
+    _ = api.res.NetworkACL
+    _ = api.res.RouteTable
+    _ = api.res.SecurityGroup
+    _ = api.res.SecurityGroupRule
+    _ = api.res.SiteToSiteVPNConnection
+    _ = api.res.Subnet
+    _ = api.res.TransitGateway
+    _ = api.res.TransitGatewayAttachment
+    _ = api.res.Vpc
+    _ = api.res.VpcCustomGateway
+    _ = api.res.VpcEndpoint
+    _ = api.res.VpcPeeringConnection
+    _ = api.res.VpcPrivateGateway
     _ = api.res.IamGroup
     _ = api.res.IamInstanceProfile
     _ = api.res.IamPolicy
@@ -35,6 +59,8 @@ def test():
     _ = api.res.SnsTopic
     _ = api.res.SqsQueue
     _ = api.res.SSMParameter
+    _ = api.res.SfnStateMachine
+    _ = api.res.SfnStateMachineExecution
 
 
 if __name__ == "__main__":

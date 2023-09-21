@@ -135,6 +135,15 @@ ssm = [
     "arn:aws:ssm:us-east-1:111122223333:parameter/path/to/my_param",
 ]
 
+sfn = [
+    "arn:aws:states:us-east-1:111122223333:stateMachine:standard_test",
+    "arn:aws:states:us-east-1:111122223333:stateMachine:express_test",
+    "arn:aws:states:us-east-1:807388292768:stateMachine:standard_test:1",
+    "arn:aws:states:us-east-1:807388292768:stateMachine:standard_test:LIVE",
+    "arn:aws:states:us-east-1:111122223333:execution:standard_test:1d858cf6-613f-4576-b94f-e0d654c23843",
+    "arn:aws:states:us-east-1:111122223333:express:express_test:e935dec6-e748-4977-a2f2-32eeb83d81da:b2f7726e-9b98-4a49-a6c4-9cf23a61f180"
+]
+
 arns = list(
     itertools.chain(
         cloudformation,
@@ -154,6 +163,7 @@ arns = list(
         glue,
         codecommit,
         ssm,
+        sfn,
     )
 )
 

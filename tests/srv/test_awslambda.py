@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 import pytest
 
 from aws_arns.srv.awslambda import (
@@ -72,7 +73,6 @@ def test():
         )
         == lbd_layer
     )
-
 
 
 if __name__ == "__main__":

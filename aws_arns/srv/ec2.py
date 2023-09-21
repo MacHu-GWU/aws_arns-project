@@ -16,7 +16,9 @@ class Ec2(_SlashSeparatedRegional):
 
 @dataclasses.dataclass
 class _Ec2Common(Ec2):
-    """ """
+    """
+    todo: docstring
+    """
 
     @classmethod
     def new(

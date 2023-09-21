@@ -44,6 +44,12 @@ def test():
     _ = api.res.VpcEndpoint
     _ = api.res.VpcPeeringConnection
     _ = api.res.VpcPrivateGateway
+    _ = api.res.GlueCrawler
+    _ = api.res.GlueDatabase
+    _ = api.res.GlueJob
+    _ = api.res.GlueMLTransform
+    _ = api.res.GlueTable
+    _ = api.res.GlueTrigger
     _ = api.res.IamGroup
     _ = api.res.IamInstanceProfile
     _ = api.res.IamPolicy

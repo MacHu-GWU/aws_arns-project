@@ -72,3 +72,9 @@ path_resource_py_tpl = dir_here / "resource.py.tpl"
 
 template = Template(path_resource_py_tpl.read_text())
 path_resource_py.write_text(template.render(resource_list=resource_list))
+
+path_test_api_py = dir_project_root / "tests" / "test_api.py"
+path_test_api_py_tpl = dir_here / "test_api.py.tpl"
+
+template = Template(path_test_api_py_tpl.read_text())
+path_test_api_py.write_text(template.render(resource_list=resource_list))

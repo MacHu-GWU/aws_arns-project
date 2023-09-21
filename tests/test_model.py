@@ -117,7 +117,7 @@ ecs = [
 glue = [
     "arn:aws:glue:us-east-1:111122223333:catalog",
     "arn:aws:glue:us-east-1:111122223333:database/db1",
-    "arn:aws:glue:us-east-1:111122223333:table/db1/tbl1",
+    "arn:aws:glue:us-east-1:111122223333:table/db1/tbl",
     "arn:aws:glue:us-east-1:111122223333:crawler/mycrawler",
     "arn:aws:glue:us-east-1:111122223333:job/testjob",
     "arn:aws:glue:us-east-1:111122223333:trigger/sampletrigger",

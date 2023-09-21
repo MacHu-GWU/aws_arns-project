@@ -16,7 +16,9 @@ class Rds(_ColonSeparatedRegional):
 
 @dataclasses.dataclass
 class _RdsCommon(Rds):
-    """ """
+    """
+    todo: docstring
+    """
 
     @classmethod
     def new(

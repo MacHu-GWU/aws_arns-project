@@ -38,6 +38,12 @@ from .srv.ec2 import VpcCustomGateway
 from .srv.ec2 import VpcEndpoint
 from .srv.ec2 import VpcPeeringConnection
 from .srv.ec2 import VpcPrivateGateway
+from .srv.glue import GlueCrawler
+from .srv.glue import GlueDatabase
+from .srv.glue import GlueJob
+from .srv.glue import GlueMLTransform
+from .srv.glue import GlueTable
+from .srv.glue import GlueTrigger
 from .srv.iam import IamGroup
 from .srv.iam import IamInstanceProfile
 from .srv.iam import IamPolicy

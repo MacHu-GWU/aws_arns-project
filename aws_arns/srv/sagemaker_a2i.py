@@ -1,15 +1,22 @@
 # -*- coding: utf-8 -*-
 
+"""
+todo: docstring
+"""
+
 import dataclasses
 
-from ..model import SlashSeparatedRegional
+from ..model import _SlashSeparatedRegional
 
 
 @dataclasses.dataclass
-class A2I(SlashSeparatedRegional):
+class A2I(_SlashSeparatedRegional):
     """
     Example: arn:aws:sagemaker:us-east-1:111122223333:flow-definition/my-flow
     """
+
+    service: str = dataclasses.field(default="sagemaker")
+
     @property
     def name(self) -> str:
         return self.resource_id
@@ -20,82 +27,51 @@ class A2I(SlashSeparatedRegional):
         aws_account_id: str,
         aws_region: str,
         name: str,
-        resource_type: str,
     ):
-        return super(A2I, cls).new(
-            partition="aws",
-            service="sagemaker",
-            region=aws_region,
+        """
+        Factory method.
+        """
+        return cls(
             account_id=aws_account_id,
+            region=aws_region,
             resource_id=name,
-            resource_type=resource_type,
         )
 
 
 @dataclasses.dataclass
 class A2IHumanReviewWorkflow(A2I):
     """
-    Example: arn:aws:sagemaker:us-east-1:111122223333:human-loop/a1b2
+    Example: arn:aws:sagemaker:us-east-1:111122223333:flow-definition/my_flow
     """
+
+    resource_type: str = dataclasses.field(default="flow-definition")
+
     @property
     def a2i_human_review_workflow_name(self) -> str:
         return self.resource_id
-
-    @classmethod
-    def new(
-        cls,
-        aws_account_id: str,
-        aws_region: str,
-        name: str,
-    ):
-        return super(A2IHumanReviewWorkflow, cls).new(
-            aws_region=aws_region,
-            aws_account_id=aws_account_id,
-            name=name,
-            resource_type="flow-definition",
-        )
 
 
 @dataclasses.dataclass
 class A2IHumanLoop(A2I):
     """
-    Example: arn:aws:sagemaker:us-east-1:111122223333:human-task-ui/my-template
+    Example: arn:aws:sagemaker:us-east-1:111122223333:human-loop/1a2b3c
     """
+
+    resource_type: str = dataclasses.field(default="human-loop")
+
     @property
     def a2i_human_loop_name(self) -> str:
         return self.resource_id
 
-    @classmethod
-    def new(
-        cls,
-        aws_account_id: str,
-        aws_region: str,
-        name: str,
-    ):
-        return super(A2IHumanLoop, cls).new(
-            aws_region=aws_region,
-            aws_account_id=aws_account_id,
-            name=name,
-            resource_type="human-loop",
-        )
-
 
 @dataclasses.dataclass
 class A2IWorkerTaskTemplate(A2I):
+    """
+    Example: arn:aws:sagemaker:us-east-1:111122223333:human-task-ui/my-ui
+    """
+
+    resource_type: str = dataclasses.field(default="human-task-ui")
+
     @property
     def a2i_worker_task_template_name(self) -> str:
         return self.resource_id
-
-    @classmethod
-    def new(
-        cls,
-        aws_account_id: str,
-        aws_region: str,
-        name: str,
-    ):
-        return super(A2IWorkerTaskTemplate, cls).new(
-            aws_region=aws_region,
-            aws_account_id=aws_account_id,
-            name=name,
-            resource_type="human-task-ui",
-        )

@@ -10,12 +10,8 @@ def test():
     arn = "arn:aws:s3:::my-bucket"
     bucket = S3Bucket.from_arn(arn)
     assert bucket.bucket_name == "my-bucket"
-    assert (
-        S3Bucket.new(
-            bucket_name=bucket.bucket_name,
-        )
-        == bucket
-    )
+    assert S3Bucket.new(bucket_name=bucket.bucket_name) == bucket
+
     uri = "s3://my-bucket"
     assert bucket.uri == uri
     assert S3Bucket.from_uri(uri) == bucket
@@ -24,17 +20,10 @@ def test():
     object = S3Object.from_arn(arn)
     assert object.bucket == "my-bucket"
     assert object.key == "folder/file.txt"
-    assert (
-        S3Object.new(
-            bucket=object.bucket,
-            key=object.key,
-        )
-        == object
-    )
+    assert S3Object.new(bucket=object.bucket, key=object.key) == object
     uri = "s3://my-bucket/folder/file.txt"
     assert object.uri == uri
     assert S3Object.from_uri(uri) == object
-
 
 
 if __name__ == "__main__":

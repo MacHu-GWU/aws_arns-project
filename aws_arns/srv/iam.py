@@ -1,26 +1,17 @@
 # -*- coding: utf-8 -*-
 
+"""
+todo: docstring
+"""
+
 import dataclasses
-from ..model import Global
+from ..model import _Global
 
 
 @dataclasses.dataclass
-class Iam(Global):
-    @classmethod
-    def new(
-        cls,
-        aws_account_id: str,
-        resource_type: str,
-        name: str,
-    ):
-        return super(Iam, cls).new(
-            partition="aws",
-            service="iam",
-            account_id=aws_account_id,
-            resource_id=name,
-            resource_type=resource_type,
-            sep="/",
-        )
+class Iam(_Global):
+    service: str = dataclasses.field(default="iam")
+    sep: str = dataclasses.field(default="/")
 
     @property
     def short_name(self) -> str:
@@ -32,6 +23,9 @@ class IamGroup(Iam):
     """
     Example: arn:aws:iam::111122223333:group/Admin
     """
+
+    resource_type: str = dataclasses.field(default="group")
+
     @property
     def iam_group_name(self) -> str:
         return self.resource_id
@@ -41,11 +35,10 @@ class IamGroup(Iam):
         cls,
         aws_account_id: str,
         name: str,
-    ) -> "IamGroup":
-        return super(IamGroup, cls).new(
-            aws_account_id=aws_account_id,
-            resource_type="group",
-            name=name,
+    ):
+        return cls(
+            account_id=aws_account_id,
+            resource_id=name,
         )
 
 
@@ -54,6 +47,9 @@ class IamUser(Iam):
     """
     Example: arn:aws:iam::111122223333:user/alice
     """
+
+    resource_type: str = dataclasses.field(default="user")
+
     @property
     def iam_user_name(self) -> str:
         return self.resource_id
@@ -64,10 +60,9 @@ class IamUser(Iam):
         aws_account_id: str,
         name: str,
     ) -> "IamUser":
-        return super(IamUser, cls).new(
-            aws_account_id=aws_account_id,
-            resource_type="user",
-            name=name,
+        return cls(
+            account_id=aws_account_id,
+            resource_id=name,
         )
 
 
@@ -76,6 +71,9 @@ class IamRole(Iam):
     """
     Example: arn:aws:iam::111122223333:role/aws-service-role/batch.amazonaws.com/AWSServiceRoleForBatch
     """
+
+    resource_type: str = dataclasses.field(default="role")
+
     @property
     def iam_role_name(self) -> str:
         return self.resource_id
@@ -86,10 +84,9 @@ class IamRole(Iam):
         aws_account_id: str,
         name: str,
     ) -> "IamRole":
-        return super(IamRole, cls).new(
-            aws_account_id=aws_account_id,
-            resource_type="role",
-            name=name,
+        return cls(
+            account_id=aws_account_id,
+            resource_id=name,
         )
 
     def is_service_role(self) -> bool:
@@ -101,6 +98,9 @@ class IamPolicy(Iam):
     """
     Example: arn:aws:iam::111122223333:policy/service-role/codebuild-policy
     """
+
+    resource_type: str = dataclasses.field(default="policy")
+
     @property
     def iam_policy_name(self) -> str:
         return self.resource_id
@@ -111,10 +111,9 @@ class IamPolicy(Iam):
         aws_account_id: str,
         name: str,
     ) -> "IamPolicy":
-        return super(IamPolicy, cls).new(
-            aws_account_id=aws_account_id,
-            resource_type="policy",
-            name=name,
+        return cls(
+            account_id=aws_account_id,
+            resource_id=name,
         )
 
 
@@ -123,6 +122,9 @@ class IamInstanceProfile(Iam):
     """
     Example: arn:aws:iam::111122223333:instance-profile/cloud9/AWSCloud9SSMInstanceProfile
     """
+
+    resource_type: str = dataclasses.field(default="instance-profile")
+
     @property
     def iam_instance_profile_name(self) -> str:
         return self.resource_id
@@ -133,8 +135,7 @@ class IamInstanceProfile(Iam):
         aws_account_id: str,
         name: str,
     ) -> "IamInstanceProfile":
-        return super(IamInstanceProfile, cls).new(
-            aws_account_id=aws_account_id,
-            resource_type="instance-profile",
-            name=name,
+        return cls(
+            account_id=aws_account_id,
+            resource_id=name,
         )

@@ -67,12 +67,14 @@ rds = [
     "arn:aws:rds:us-east-1:111122223333:cluster:my-aurora-cluster-1",
     "arn:aws:rds:us-east-1:111122223333:es:my-subscription",
     "arn:aws:rds:us-east-1:111122223333:og:my-og",
+    "arn:aws:rds:us-east-2:123456789012:pg:my-param-enable-logs",
     "arn:aws:rds:us-east-1:111122223333:cluster-pg:my-cluster-param-timezone",
     "arn:aws:rds:us-east-1:111122223333:ri:my-reserved-postgresql",
     "arn:aws:rds:us-east-1:111122223333:secgrp:my-public",
     "arn:aws:rds:us-east-1:111122223333:snapshot:rds:my-mysql-db-2020-01-01-00-00",
-    "arn:aws:rds:us-east-1:111122223333:snapshot:my-mysql-db-snap",
-    "arn:aws:rds:us-east-1:111122223333:cluster-snapshot:my-aurora-cluster-snap",
+    "arn:aws:rds:us-east-2:111122223333:cluster-snapshot:rds:my-aurora-cluster-2020-01-01-00-00",
+    "arn:aws:rds:us-east-2:111122223333:snapshot:my-mysql-db-snap",
+    "arn:aws:rds:us-east-2:111122223333:cluster-snapshot:my-aurora-cluster-snap",
     "arn:aws:rds:us-east-1:111122223333:subgrp:my-subnet-10",
 ]
 
@@ -252,6 +254,9 @@ class TestArn:
     def test_error(self):
         with pytest.raises(ValueError):
             Arn.from_arn("hello")
+
+        with pytest.raises(ValueError):
+            Arn()
 
 
 if __name__ == "__main__":

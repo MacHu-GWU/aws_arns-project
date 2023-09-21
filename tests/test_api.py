@@ -49,6 +49,17 @@ def test():
     _ = api.res.IamPolicy
     _ = api.res.IamRole
     _ = api.res.IamUser
+    _ = api.res.RdsDBCluster
+    _ = api.res.RdsDBClusterParameterGroup
+    _ = api.res.RdsDBClusterSnapshot
+    _ = api.res.RdsDBInstance
+    _ = api.res.RdsDBInstanceSnapshot
+    _ = api.res.RdsDBOptionGroup
+    _ = api.res.RdsDBParameterGroup
+    _ = api.res.RdsDBSecurityGroup
+    _ = api.res.RdsDBSubnetGroup
+    _ = api.res.RdsEventSubscription
+    _ = api.res.RdsReservedDBInstance
     _ = api.res.S3Bucket
     _ = api.res.S3Object
     _ = api.res.A2IHumanLoop

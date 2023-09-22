@@ -15,11 +15,16 @@ Backlog (TODO)
 **Miscellaneous**
 
 
-1.1.2 (2023-09-21)
+1.2.1 (2023-09-22)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+- add the ``aws_arns.res.parse_arn`` function, which can, if possible, parse the ARN string into the corresponding AWS Resource Arn object (iam role, s3 bucket, etc.). Otherwise, it returns the ``aws_arns.Arn`` object.
+- add the ``aws_arns.is_arn_instance`` function to test if an object is an Arn object.
+
 **Minor Improvements**
 
 - add the missing ``aws_arns.res.CodeBuildBatchRun``.
+- break down the ``aws_arns.res.SfnStateMachineExecution`` (this class is removed) into ``SfnStandardStateMachineExecution`` and ``SfnExpressStateMachineExecution``
 
 
 1.1.1 (2023-09-21)

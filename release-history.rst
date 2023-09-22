@@ -15,9 +15,11 @@ Backlog (TODO)
 **Miscellaneous**
 
 
-1.2.2 (TODO)
+1.3.1 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
+
+- Add ``to_console_url()`` method to all AWS Resource ARN classes. It does not work for all resources.
 
 **Minor Improvements**
 
@@ -29,17 +31,13 @@ Backlog (TODO)
 - Add ``aws_arns.res.EcsTaskRun.cluster_name`` property method.
 - Add ``aws_arns.res.EcsTaskRun.short_id`` property method.
 
-**Bugfixes**
-
-**Miscellaneous**
-
 
 1.2.1 (2023-09-22)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
 - Add the ``aws_arns.res.parse_arn`` function, which can, if possible, parse the ARN string into the corresponding AWS Resource Arn object (iam role, s3 bucket, etc.). Otherwise, it returns the ``aws_arns.Arn`` object.
-- Add the ``aws_arns.is_arn_instance`` function to test if an object is an Arn object.
+- Add the ``aws_arns.is_arn_instance()`` function to test if an object is an Arn object.
 - Add the follow curated AWS Resource ARN to public API
     - ``aws_arns.res.ApiGatewayV1Authorizer``
     - ``aws_arns.res.ApiGatewayV1Deployment``
@@ -53,6 +51,8 @@ Backlog (TODO)
     - ``aws_arns.res.ApiGatewayV2Model``
     - ``aws_arns.res.ApiGatewayV2Route``
     - ``aws_arns.res.ApiGatewayV2Stage``
+    - ``aws_arns.res.KmsAlias``
+    - ``aws_arns.res.KmsKey``
 
 **Minor Improvements**
 

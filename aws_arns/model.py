@@ -193,6 +193,16 @@ class BaseArn:
         self.partition = AwsPartitionEnum.aws_cn.value
         return self
 
+    def to_console_url(self) -> str: # pragma: no cover
+        """
+        AWS console has a magic url that can be used to open a resource in the console.
+        However, this is undocumented, and only support a few services.
+        """
+        if self.aws_region:
+            return f"https://{self.aws_region}.console.{self.partition}.amazon.com/go/view?arn={self.to_arn()}"
+        else:
+            return f"https://console.{self.partition}.amazon.com/go/view?arn={self.to_arn()}"
+
 
 def is_arn_instance(obj: T.Any) -> bool:
     """

@@ -50,7 +50,7 @@ class CloudWatchLogGroup(CloudWatchLogs):
 @dataclasses.dataclass
 class CloudWatchLogGroupStream(CloudWatchLogs):
     """
-    Example: arn:aws:logs:us-east-1:111122223333:log-group:/aws/lambda/my-func:*
+    Example: arn:aws:logs:us-east-1:111122223333:log-group:my-log-group*:log-stream:my-log-stream*
     """
 
     resource_type: str = dataclasses.field(default="log-group")

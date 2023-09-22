@@ -45,17 +45,42 @@ class CodeBuildProject(CodeBuild):
 
 @dataclasses.dataclass
 class _CodeBuildRunCommon(CodeBuild):
+    """
+    arn:aws:codebuild:us-east-1:111122223333:build/my-project:a1b2c3d4
+    arn:aws:codebuild:us-east-1:111122223333:build-batch/my-project:a1b2c3d4
+    """
     @property
     def codebuild_run_fullname(self) -> str:
+        """
+        The "my-project:a1b2c3d4" part of:
+
+        - arn:aws:codebuild:us-east-1:111122223333:build/my-project:a1b2c3d4
+        - arn:aws:codebuild:us-east-1:111122223333:build-batch/my-project:a1b2c3d4
+        """
         return self.resource_id
 
     @property
     def codebuild_project_name(self) -> str:
+        """
+        The "my-project" part of:
+
+        - arn:aws:codebuild:us-east-1:111122223333:build/my-project:a1b2c3d4
+        - arn:aws:codebuild:us-east-1:111122223333:build-batch/my-project:a1b2c3d4
+        """
         return self.resource_id.split(":")[0]
 
     @property
     def codebuild_run_id(self) -> str:
+        """
+        The "a1b2c3d4" part of:
+
+        - arn:aws:codebuild:us-east-1:111122223333:build/my-project:a1b2c3d4
+        - arn:aws:codebuild:us-east-1:111122223333:build-batch/my-project:a1b2c3d4
+        """
         return self.resource_id.split(":")[-1]
+
+    def is_batch_build(self) -> bool:
+        return self.resource_type == "build-batch"
 
     @classmethod
     def new(

@@ -5,7 +5,7 @@ import importlib
 import dataclasses
 from pathlib import Path
 
-from aws_arns.model import _BaseArn
+from aws_arns.model import BaseArn
 from jinja2 import Template
 
 dir_here = Path(__file__).absolute().parent
@@ -46,7 +46,7 @@ def import_all_service_module(
         imported_module = importlib.import_module(f"aws_arns.srv.{module_name}")
         for k, v in imported_module.__dict__.items():
             try:
-                if issubclass(v, _BaseArn) and len(v.__subclasses__()) == 0:
+                if issubclass(v, BaseArn) and len(v.__subclasses__()) == 0:
                     if not k.startswith("_"):
                         resource = Resource(
                             module_name=module_name,

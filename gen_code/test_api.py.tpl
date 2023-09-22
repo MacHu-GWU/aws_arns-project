@@ -5,6 +5,9 @@ def test():
     from aws_arns import api
 
     _ = api.Arn
+    _ = api.BaseArn
+    _ = api.is_arn_instance
+    _ = api.parse_arn
     _ = api.AwsPartitionEnum
     {%- for resource in resource_list %}
     _ = api.res.{{ resource.class_name }}

@@ -5,6 +5,9 @@ def test():
     from aws_arns import api
 
     _ = api.Arn
+    _ = api.BaseArn
+    _ = api.is_arn_instance
+    _ = api.parse_arn
     _ = api.AwsPartitionEnum
     _ = api.res.LambdaFunction
     _ = api.res.LambdaLayer
@@ -156,8 +159,9 @@ def test():
     _ = api.res.SnsTopic
     _ = api.res.SqsQueue
     _ = api.res.SSMParameter
+    _ = api.res.SfnExpressStateMachineExecution
+    _ = api.res.SfnStandardStateMachineExecution
     _ = api.res.SfnStateMachine
-    _ = api.res.SfnStateMachineExecution
 
 
 if __name__ == "__main__":

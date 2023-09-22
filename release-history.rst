@@ -15,6 +15,23 @@ Backlog (TODO)
 **Miscellaneous**
 
 
+1.2.2 (TODO)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+**Minor Improvements**
+
+- Fix doc string.
+- Add ``aws_arns.res.CodeBuildRun.is_batch_build()`` method.
+- Add ``aws_arns.res.CodeBuildBatchRun.is_batch_build()`` method.
+- Add ``aws_arns.res.EcrRepository.uri`` property method.
+- Add ``aws_arns.res.EcrRepository.from_uri(...)`` class method.
+
+**Bugfixes**
+
+**Miscellaneous**
+
+
 1.2.1 (2023-09-22)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**

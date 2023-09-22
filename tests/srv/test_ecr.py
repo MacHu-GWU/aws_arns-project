@@ -8,7 +8,10 @@ from aws_arns.srv.ecr import (
 def test():
     arn = "arn:aws:ecr:us-east-1:123456789012:repository/my-repo"
     repo = EcrRepository.from_arn(arn)
+    uri = repo.uri
+
     assert repo.repo_name == "my-repo"
+    assert EcrRepository.from_uri(uri) == repo
     assert (
         EcrRepository.new(
             aws_region=repo.region,

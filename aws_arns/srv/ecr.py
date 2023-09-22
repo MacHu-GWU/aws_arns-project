@@ -45,3 +45,22 @@ class EcrRepository(Ecr):
             region=aws_region,
             resource_id=repo_name,
         )
+
+    @property
+    def uri(self) -> str:
+        return f"{self.aws_account_id}.dkr.ecr.{self.aws_region}.amazonaws.com/{self.repo_name}"
+
+    @classmethod
+    def from_uri(cls, uri: str):
+        """
+        Factory method.
+        """
+        domain, name = uri.split("/", 1)
+        parts = domain.split(".")
+        aws_account_id = parts[0]
+        aws_region = parts[3]
+        return cls.new(
+            aws_account_id=aws_account_id,
+            aws_region=aws_region,
+            repo_name=name,
+        )

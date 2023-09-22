@@ -51,9 +51,9 @@
     :target: https://pypi.org/pypi/aws_arns#files
 
 
-Welcome to ``aws_arns`` Documentation
+☁️ Welcome to ``aws_arns`` Documentation
 ==============================================================================
-Amazon Resource Names (ARNs) Python library.
+Amazon Resource Names (ARNs) Python library. It parses / constructs ARN in Python, and provide more human intuitive interface to access AWS Resource attributes like aws service name, aws account id, aws region, resource type, resource id, resource name, short name, long name, etc ...
 
 See `usage examples <https://github.com/MacHu-GWU/aws_arns-project/blob/main/examples.ipynb>`_.
 

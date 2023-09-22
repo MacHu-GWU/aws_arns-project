@@ -175,10 +175,26 @@ class EcsTaskRun(Ecs):
     @property
     def run_id(self) -> str:  # pragma: no cover
         """
-        The "a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE" part of
-        arn:aws:ecs:us-east-1:123456789012:task/a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE
+        The "my_cluster/a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE" part of
+        arn:aws:ecs:us-east-1:123456789012:task/my_cluster/a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE
         """
         return self.resource_id
+
+    @property
+    def cluster_name(self) -> str:  # pragma: no cover
+        """
+        The "my_cluster" part of
+        arn:aws:ecs:us-east-1:123456789012:task/my_cluster/a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE
+        """
+        return self.resource_id.split("/", 1)[0]
+
+    @property
+    def short_id(self) -> str:  # pragma: no cover
+        """
+        The "a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE" part of
+        arn:aws:ecs:us-east-1:123456789012:task/my_cluster/a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE
+        """
+        return self.resource_id.split("/", 1)[1]
 
     @classmethod
     def new(

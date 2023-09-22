@@ -26,6 +26,8 @@ Backlog (TODO)
 - Add ``aws_arns.res.CodeBuildBatchRun.is_batch_build()`` method.
 - Add ``aws_arns.res.EcrRepository.uri`` property method.
 - Add ``aws_arns.res.EcrRepository.from_uri(...)`` class method.
+- Add ``aws_arns.res.EcsTaskRun.cluster_name`` property method.
+- Add ``aws_arns.res.EcsTaskRun.short_id`` property method.
 
 **Bugfixes**
 

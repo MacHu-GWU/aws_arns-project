@@ -62,9 +62,11 @@ def test():
         == service
     )
 
-    arn = "arn:aws:ecs:us-east-1:123456789012:task/a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE"
+    arn = "arn:aws:ecs:us-east-1:123456789012:task/my_cluster/a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE"
     task_run = EcsTaskRun.from_arn(arn)
-    assert task_run.run_id == "a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE"
+    assert task_run.run_id == "my_cluster/a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE"
+    assert task_run.cluster_name == "my_cluster"
+    assert task_run.short_id == "a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE"
     assert (
         EcsTaskRun.new(
             aws_region=task_run.region,

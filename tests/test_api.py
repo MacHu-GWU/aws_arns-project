@@ -72,6 +72,8 @@ def test():
     _ = api.res.IamPolicy
     _ = api.res.IamRole
     _ = api.res.IamUser
+    _ = api.res.KmsAlias
+    _ = api.res.KmsKey
     _ = api.res.CloudWatchLogGroup
     _ = api.res.CloudWatchLogGroupStream
     _ = api.res.OpenSearchDomain

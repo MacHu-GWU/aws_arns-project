@@ -63,6 +63,8 @@ from .srv.iam import IamInstanceProfile
 from .srv.iam import IamPolicy
 from .srv.iam import IamRole
 from .srv.iam import IamUser
+from .srv.kms import KmsAlias
+from .srv.kms import KmsKey
 from .srv.logs import CloudWatchLogGroup
 from .srv.logs import CloudWatchLogGroupStream
 from .srv.opensearch import OpenSearchDomain

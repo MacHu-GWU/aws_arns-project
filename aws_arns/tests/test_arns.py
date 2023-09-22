@@ -90,6 +90,10 @@ glue = [
 kinesis = [
     "arn:aws:kinesisvideo:us-east-1:111122223333:stream/kinesis-stream-name/111122223333",
 ]
+kms = [
+    "arn:aws:kms:us-east-1:111122223333:key/1a2b3c",
+    "arn:aws:kms:us-east-1:111122223333:alias/my_key",
+]
 lambda_func = [
     "arn:aws:lambda:us-east-1:111122223333:function:my-func",
     "arn:aws:lambda:us-east-1:111122223333:function:my-func:LIVE",
@@ -229,6 +233,7 @@ arns = list(
         ecs,
         glue,
         kinesis,
+        kms,
         lambda_func,
         macie,
         opensearch,

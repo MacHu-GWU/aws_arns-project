@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import typing as T
+import importlib
 import dataclasses
 from pathlib import Path
-import inspect
-import importlib
-from pathlib import Path
+
 from aws_arns.model import _BaseArn
 from jinja2 import Template
 

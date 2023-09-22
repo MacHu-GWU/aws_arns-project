@@ -27,15 +27,29 @@ Backlog (TODO)
     - ``aws_arns.res.DynamodbTableBackup``
     - ``aws_arns.res.DynamodbTableExport``
     - ``aws_arns.res.DynamodbTableImport``
-
-from .srv.ecr import EcrRepository
-from .srv.ecs import EcsCluster
-from .srv.ecs import EcsContainerInstance
-from .srv.ecs import EcsService
-from .srv.ecs import EcsTaskDefinition
-from .srv.ecs import EcsTaskRun
-from .srv.logs import CloudWatchLogGroup
-from .srv.logs import CloudWatchLogGroupStream
+    - ``aws_arns.res.EcrRepository``
+    - ``aws_arns.res.EcsCluster``
+    - ``aws_arns.res.EcsContainerInstance``
+    - ``aws_arns.res.EcsService``
+    - ``aws_arns.res.EcsTaskDefinition``
+    - ``aws_arns.res.EcsTaskRun``
+    - ``aws_arns.res.CloudWatchLogGroup``
+    - ``aws_arns.res.CloudWatchLogGroupStream``
+    - ``aws_arns.res.RedshiftCluster``
+    - ``aws_arns.res.RedshiftDatabaseName``
+    - ``aws_arns.res.RedshiftDatabaseUserGroup``
+    - ``aws_arns.res.RedshiftParameterGroup``
+    - ``aws_arns.res.RedshiftSecurityGroup``
+    - ``aws_arns.res.RedshiftServerlessManagedVpcEndpoint``
+    - ``aws_arns.res.RedshiftServerlessNamespace``
+    - ``aws_arns.res.RedshiftServerlessSnapshot``
+    - ``aws_arns.res.RedshiftServerlessWorkgroup``
+    - ``aws_arns.res.RedshiftSnapshot``
+    - ``aws_arns.res.RedshiftSnapshotSchedule``
+    - ``aws_arns.res.RedshiftSubnetGroup``
+    - ``aws_arns.res.OpenSearchDomain``
+    - ``aws_arns.res.OpenSearchServerlessCollection``
+    - ``aws_arns.res.OpenSearchServerlessDashboard``
 
 
 1.0.1 (2023-09-21)

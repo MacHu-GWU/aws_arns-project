@@ -15,7 +15,7 @@ Backlog (TODO)
 **Miscellaneous**
 
 
-1.1.1 (TODO)
+1.1.1 (2023-09-21)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -50,6 +50,55 @@ Backlog (TODO)
     - ``aws_arns.res.OpenSearchDomain``
     - ``aws_arns.res.OpenSearchServerlessCollection``
     - ``aws_arns.res.OpenSearchServerlessDashboard``
+    - ``aws_arns.res.SageMakerAction``
+    - ``aws_arns.res.SageMakerAlgorithm``
+    - ``aws_arns.res.SageMakerApp``
+    - ``aws_arns.res.SageMakerAppImageConfig``
+    - ``aws_arns.res.SageMakerAutomlJob``
+    - ``aws_arns.res.SageMakerCodeRepository``
+    - ``aws_arns.res.SageMakerCompilationJob``
+    - ``aws_arns.res.SageMakerContext``
+    - ``aws_arns.res.SageMakerDataQualityJobDefinition``
+    - ``aws_arns.res.SageMakerDevice``
+    - ``aws_arns.res.SageMakerDeviceFleet``
+    - ``aws_arns.res.SageMakerDomain``
+    - ``aws_arns.res.SageMakerEndpoint``
+    - ``aws_arns.res.SageMakerEndpointConfig``
+    - ``aws_arns.res.SageMakerExperiment``
+    - ``aws_arns.res.SageMakerExperimentTrial``
+    - ``aws_arns.res.SageMakerExperimentTrialComponent``
+    - ``aws_arns.res.SageMakerFeatureGroup``
+    - ``aws_arns.res.SageMakerHub``
+    - ``aws_arns.res.SageMakerHubContent``
+    - ``aws_arns.res.SageMakerHyperParameterTuningJob``
+    - ``aws_arns.res.SageMakerImage``
+    - ``aws_arns.res.SageMakerImageVersion``
+    - ``aws_arns.res.SageMakerInferenceExperiment``
+    - ``aws_arns.res.SageMakerInferenceRecommendationsJob``
+    - ``aws_arns.res.SageMakerLabelingJob``
+    - ``aws_arns.res.SageMakerModel``
+    - ``aws_arns.res.SageMakerModelBiasJobDefinition``
+    - ``aws_arns.res.SageMakerModelCard``
+    - ``aws_arns.res.SageMakerModelCardExportJob``
+    - ``aws_arns.res.SageMakerModelExplainabilityJobDefinition``
+    - ``aws_arns.res.SageMakerModelPackage``
+    - ``aws_arns.res.SageMakerModelPackageGroup``
+    - ``aws_arns.res.SageMakerModelQualityJobDefinition``
+    - ``aws_arns.res.SageMakerMonitoringSchedule``
+    - ``aws_arns.res.SageMakerMonitoringScheduleAlert``
+    - ``aws_arns.res.SageMakerNotebookInstance``
+    - ``aws_arns.res.SageMakerPipeline``
+    - ``aws_arns.res.SageMakerPipelineExecution``
+    - ``aws_arns.res.SageMakerProcessingJob``
+    - ``aws_arns.res.SageMakerSharedModel``
+    - ``aws_arns.res.SageMakerSharedModelEvent``
+    - ``aws_arns.res.SageMakerSpace``
+    - ``aws_arns.res.SageMakerStudioLifecycleConfig``
+    - ``aws_arns.res.SageMakerTrainingJob``
+    - ``aws_arns.res.SageMakerTransformJob``
+    - ``aws_arns.res.SageMakerUserProfile``
+    - ``aws_arns.res.SageMakerWorkforce``
+    - ``aws_arns.res.SageMakerWorkteam``
 
 
 1.0.1 (2023-09-21)

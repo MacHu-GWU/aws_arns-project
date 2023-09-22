@@ -145,7 +145,7 @@ sfn = [
     "arn:aws:states:us-east-1:807388292768:stateMachine:standard_test:1",
     "arn:aws:states:us-east-1:807388292768:stateMachine:standard_test:LIVE",
     "arn:aws:states:us-east-1:111122223333:execution:standard_test:1d858cf6-613f-4576-b94f-e0d654c23843",
-    "arn:aws:states:us-east-1:111122223333:express:express_test:e935dec6-e748-4977-a2f2-32eeb83d81da:b2f7726e-9b98-4a49-a6c4-9cf23a61f180"
+    "arn:aws:states:us-east-1:111122223333:express:express_test:e935dec6-e748-4977-a2f2-32eeb83d81da:b2f7726e-9b98-4a49-a6c4-9cf23a61f180",
 ]
 
 dynamodb = [
@@ -160,6 +160,33 @@ dynamodb = [
 
 ecr = [
     "arn:aws:ecr:us-east-1:123456789012:repository/my-repo",
+]
+
+redshift = [
+    "arn:aws:redshift:us-east-1:111122223333:cluster:my_cluster",
+    "arn:aws:redshift:us-east-1:111122223333:dbgroup:my_cluster/my_db_group",
+    "arn:aws:redshift:us-east-1:111122223333:dbname:my_cluster/my_database",
+    "arn:aws:redshift:us-east-1:111122223333:snapshot:my_cluster/my_snapshot",
+    "arn:aws:redshift:us-east-1:111122223333:snapshotschedule:my_snapshot_schedule",
+    "arn:aws:redshift:us-east-1:111122223333:parametergroup:my_parameter_group",
+    "arn:aws:redshift:us-east-1:111122223333:subnetgroup:my_subnet_group",
+    "arn:aws:redshift:us-east-1:111122223333:securitygroup:my_group_name/ec2securitygroup/owner_name/sg-1a2b",
+]
+
+redshift_serverless = [
+    "arn:aws:redshift-serverless:us-east-1:111122223333:namespace/my_namespace",
+    "arn:aws:redshift-serverless:us-east-1:111122223333:workgroup/my_workgroup",
+    "arn:aws:redshift-serverless:us-east-1:111122223333:snapshot/my_snapshot",
+    "arn:aws:redshift-serverless:us-east-1:111122223333:managedvpcendpoint/my_vpc_endpoint",
+]
+
+opensearch = [
+    "arn:aws:es:us-east-1:111122223333:domain/my_domain",
+]
+
+opensearch_serverless = [
+    "arn:aws:aoss:us-east-1:111122223333:collection/collection_id",
+    "arn:aws:aoss:us-east-1:111122223333:dashboards/default",
 ]
 
 arns = list(
@@ -184,6 +211,10 @@ arns = list(
         sfn,
         dynamodb,
         ecr,
+        redshift,
+        redshift_serverless,
+        opensearch,
+        opensearch_serverless,
     )
 )
 
@@ -223,7 +254,9 @@ class TestArn:
         assert arn.resource_id == "my-role"
         assert arn.sep == None
 
-        arn = Arn.from_arn("arn:aws:sns:us-east-1:111122223333:my_topic:a07e1034-10c0-47a6-83c2-552cfcca42db")
+        arn = Arn.from_arn(
+            "arn:aws:sns:us-east-1:111122223333:my_topic:a07e1034-10c0-47a6-83c2-552cfcca42db"
+        )
         assert arn.partition == "aws"
         assert arn.service == "sns"
         assert arn.region == "us-east-1"
@@ -262,7 +295,6 @@ class TestArn:
         assert arn.resource_type == "stackset"
         assert arn.resource_id == "my-stack-set:1a2b3c"
         assert arn.sep == "/"
-
 
     def test_from_and_to(self):
         for arn_str in arns:

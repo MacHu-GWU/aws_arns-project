@@ -150,5 +150,6 @@ from .srv.sns import SnsSubscription
 from .srv.sns import SnsTopic
 from .srv.sqs import SqsQueue
 from .srv.ssm import SSMParameter
+from .srv.stepfunction import SfnExpressStateMachineExecution
+from .srv.stepfunction import SfnStandardStateMachineExecution
 from .srv.stepfunction import SfnStateMachine
-from .srv.stepfunction import SfnStateMachineExecution

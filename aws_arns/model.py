@@ -52,7 +52,7 @@ NOTHING = _Nothing()
 
 
 @dataclasses.dataclass
-class _BaseArn:
+class BaseArn:
     """
     Amazon Resource Names (ARNs) data model. is a unique identifier for AWS resources.
 
@@ -194,8 +194,15 @@ class _BaseArn:
         return self
 
 
+def is_arn_instance(obj: T.Any) -> bool:
+    """
+    Identify if an object is an instance of Arn.
+    """
+    return isinstance(obj, BaseArn)
+
+
 @dataclasses.dataclass
-class Arn(_BaseArn):
+class Arn(BaseArn):
     """
     todo: docstring
     """
@@ -225,7 +232,7 @@ class Arn(_BaseArn):
 
 
 @dataclasses.dataclass
-class _CrossAccountGlobal(_BaseArn):
+class _CrossAccountGlobal(BaseArn):
     """
     No account, no region. Example:
 
@@ -245,7 +252,7 @@ class _CrossAccountGlobal(_BaseArn):
 
 
 @dataclasses.dataclass
-class _Global(_BaseArn):
+class _Global(BaseArn):
     """
     No region. Example:
 
@@ -265,7 +272,7 @@ class _Global(_BaseArn):
 
 
 @dataclasses.dataclass
-class _Regional(_BaseArn):
+class _Regional(BaseArn):
     """
     Normal regional resources. Example:
 

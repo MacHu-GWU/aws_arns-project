@@ -15,6 +15,13 @@ Backlog (TODO)
 **Miscellaneous**
 
 
+1.1.2 (2023-09-21)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Minor Improvements**
+
+- add the missing ``aws_arns.res.CodeBuildBatchRun``.
+
+
 1.1.1 (2023-09-21)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**

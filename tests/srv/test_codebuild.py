@@ -3,6 +3,7 @@
 from aws_arns.srv.codebuild import (
     CodeBuildProject,
     CodeBuildRun,
+    CodeBuildBatchRun,
 )
 
 
@@ -26,6 +27,20 @@ def test():
     assert run.codebuild_run_id == "a1b2c3d4"
     assert (
         CodeBuildRun.new(
+            aws_region=run.region,
+            aws_account_id=run.account_id,
+            fullname=run.codebuild_run_fullname,
+        )
+        == run
+    )
+
+    arn = "arn:aws:codebuild:us-east-1:111122223333:build-batch/my-project:a1b2c3d4"
+    run = CodeBuildBatchRun.from_arn(arn)
+    assert run.codebuild_run_fullname == "my-project:a1b2c3d4"
+    assert run.codebuild_project_name == "my-project"
+    assert run.codebuild_run_id == "a1b2c3d4"
+    assert (
+        CodeBuildBatchRun.new(
             aws_region=run.region,
             aws_account_id=run.account_id,
             fullname=run.codebuild_run_fullname,

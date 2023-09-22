@@ -16,6 +16,7 @@ def test():
     _ = api.res.CloudFormationChangeSet
     _ = api.res.CloudFormationStack
     _ = api.res.CloudFormationStackSet
+    _ = api.res.CodeBuildBatchRun
     _ = api.res.CodeBuildProject
     _ = api.res.CodeBuildRun
     _ = api.res.CodeCommitRepository

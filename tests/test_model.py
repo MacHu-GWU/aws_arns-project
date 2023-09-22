@@ -131,8 +131,10 @@ codecommit = [
     "arn:aws:codecommit:us-east-1:111122223333:test",
     "arn:aws:codebuild:us-east-1:111122223333:project/test",
     "arn:aws:codebuild:us-east-1:111122223333:build/test:08805851-8a0a-4968-9d08-c7cc0623db7b",
+    "arn:aws:codebuild:us-east-1:111122223333:build-batch/test:08805851-8a0a-4968-9d08-c7cc0623db7b",
     "arn:aws:codepipeline:us-east-1:111122223333:test",
 ]
+
 
 ssm = [
     "arn:aws:ssm:us-east-1:111122223333:parameter/my_param",

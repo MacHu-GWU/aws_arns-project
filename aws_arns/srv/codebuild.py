@@ -44,13 +44,7 @@ class CodeBuildProject(CodeBuild):
 
 
 @dataclasses.dataclass
-class CodeBuildRun(CodeBuild):
-    """
-    Example: arn:aws:codebuild:us-east-1:111122223333:build/my-project:a1b2c3d4
-    """
-
-    resource_type: str = dataclasses.field(default="build")
-
+class _CodeBuildRunCommon(CodeBuild):
     @property
     def codebuild_run_fullname(self) -> str:
         return self.resource_id
@@ -78,3 +72,21 @@ class CodeBuildRun(CodeBuild):
             region=aws_region,
             resource_id=fullname,
         )
+
+
+@dataclasses.dataclass
+class CodeBuildRun(_CodeBuildRunCommon):
+    """
+    Example: arn:aws:codebuild:us-east-1:111122223333:build/my-project:a1b2c3d4
+    """
+
+    resource_type: str = dataclasses.field(default="build")
+
+
+@dataclasses.dataclass
+class CodeBuildBatchRun(_CodeBuildRunCommon):
+    """
+    Example: arn:aws:codebuild:us-east-1:111122223333:build-batch/my-project:a1b2c3d4
+    """
+
+    resource_type: str = dataclasses.field(default="build-batch")

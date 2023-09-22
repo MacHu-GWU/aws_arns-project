@@ -85,7 +85,7 @@ class SfnStateMachine(StepFunction):
 
 
 @dataclasses.dataclass
-class SfnStateMachineExecution(StepFunction):
+class _SfnStateMachineExecutionCommon(StepFunction):
     """
     Example:
 
@@ -102,7 +102,7 @@ class SfnStateMachineExecution(StepFunction):
         return self.resource_id.split(":", 1)[1]
 
     @classmethod
-    def new_standard(
+    def new(
         cls,
         aws_account_id: str,
         aws_region: str,
@@ -115,24 +115,24 @@ class SfnStateMachineExecution(StepFunction):
         return cls(
             account_id=aws_account_id,
             region=aws_region,
-            resource_type="execution",
             resource_id=f"{state_machine_name}:{exec_id}",
         )
 
-    @classmethod
-    def new_express(
-        cls,
-        aws_account_id: str,
-        aws_region: str,
-        state_machine_name: str,
-        exec_id: int,
-    ):
-        """
-        Factory method.
-        """
-        return cls(
-            account_id=aws_account_id,
-            region=aws_region,
-            resource_type="express",
-            resource_id=f"{state_machine_name}:{exec_id}",
-        )
+@dataclasses.dataclass
+class SfnStandardStateMachineExecution(_SfnStateMachineExecutionCommon):
+    """
+    Example:
+
+    - arn:aws:states:us-east-1:111122223333:execution:standard_test:1d858cf6-613f-4576-b94f-e0d654c23843
+    """
+    resource_type: str = dataclasses.field(default="execution")
+
+
+@dataclasses.dataclass
+class SfnExpressStateMachineExecution(_SfnStateMachineExecutionCommon):
+    """
+    Example:
+
+    - arn:aws:states:us-east-1:111122223333:express:express_test:e935dec6-e748-4977-a2f2-32eeb83d81da:b2f7726e-9b98-4a49-a6c4-9cf23a61f180
+    """
+    resource_type: str = dataclasses.field(default="express")

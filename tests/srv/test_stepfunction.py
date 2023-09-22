@@ -4,7 +4,8 @@ import pytest
 
 from aws_arns.srv.stepfunction import (
     SfnStateMachine,
-    SfnStateMachineExecution,
+    SfnStandardStateMachineExecution,
+    SfnExpressStateMachineExecution,
 )
 
 
@@ -59,11 +60,11 @@ def test():
     standard_exec_arn = "arn:aws:states:us-east-1:111122223333:execution:standard_test:1d858cf6-613f-4576-b94f-e0d654c23843"
     express_exec_arn = "arn:aws:states:us-east-1:111122223333:express:express_test:e935dec6-e748-4977-a2f2-32eeb83d81da:b2f7726e-9b98-4a49-a6c4-9cf23a61f180"
 
-    exec = SfnStateMachineExecution.from_arn(standard_exec_arn)
+    exec = SfnStandardStateMachineExecution.from_arn(standard_exec_arn)
     assert exec.state_machine_name == "standard_test"
     assert exec.exec_id == "1d858cf6-613f-4576-b94f-e0d654c23843"
     assert (
-        SfnStateMachineExecution.new_standard(
+        SfnStandardStateMachineExecution.new(
             aws_account_id=exec.account_id,
             aws_region=exec.region,
             state_machine_name=exec.state_machine_name,
@@ -72,14 +73,14 @@ def test():
         == exec
     )
 
-    exec = SfnStateMachineExecution.from_arn(express_exec_arn)
+    exec = SfnExpressStateMachineExecution.from_arn(express_exec_arn)
     assert exec.state_machine_name == "express_test"
     assert (
         exec.exec_id
         == "e935dec6-e748-4977-a2f2-32eeb83d81da:b2f7726e-9b98-4a49-a6c4-9cf23a61f180"
     )
     assert (
-        SfnStateMachineExecution.new_express(
+        SfnExpressStateMachineExecution.new(
             aws_account_id=exec.account_id,
             aws_region=exec.region,
             state_machine_name=exec.state_machine_name,

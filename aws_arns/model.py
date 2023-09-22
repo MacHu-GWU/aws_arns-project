@@ -91,7 +91,7 @@ class BaseArn:
     @staticmethod
     def _parse_slash_delimited_resource(service: str, resource: str):
         # "arn:aws:s3:::my-bucket/file.txt"
-        if service in ["s3"]:
+        if service in ["s3", "apigateway"]:
             sep = None
             resource_type, resource_id = None, resource
         # arn:aws:ssm:us-east-1:807388292768:parameter/path/to/my_param

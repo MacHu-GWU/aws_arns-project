@@ -1,5 +1,17 @@
 # -*- coding: utf-8 -*-
 
+from .srv.apigateway import ApiGatewayV1Authorizer
+from .srv.apigateway import ApiGatewayV1Deployment
+from .srv.apigateway import ApiGatewayV1Integration
+from .srv.apigateway import ApiGatewayV1Model
+from .srv.apigateway import ApiGatewayV1Route
+from .srv.apigateway import ApiGatewayV1Stage
+from .srv.apigateway import ApiGatewayV2Authorizer
+from .srv.apigateway import ApiGatewayV2Deployment
+from .srv.apigateway import ApiGatewayV2Integration
+from .srv.apigateway import ApiGatewayV2Model
+from .srv.apigateway import ApiGatewayV2Route
+from .srv.apigateway import ApiGatewayV2Stage
 from .srv.awslambda import LambdaFunction
 from .srv.awslambda import LambdaLayer
 from .srv.batch import BatchComputeEnvironment

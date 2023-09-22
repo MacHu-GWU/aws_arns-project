@@ -18,8 +18,22 @@ Backlog (TODO)
 1.2.1 (2023-09-22)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
-- add the ``aws_arns.res.parse_arn`` function, which can, if possible, parse the ARN string into the corresponding AWS Resource Arn object (iam role, s3 bucket, etc.). Otherwise, it returns the ``aws_arns.Arn`` object.
-- add the ``aws_arns.is_arn_instance`` function to test if an object is an Arn object.
+
+- Add the ``aws_arns.res.parse_arn`` function, which can, if possible, parse the ARN string into the corresponding AWS Resource Arn object (iam role, s3 bucket, etc.). Otherwise, it returns the ``aws_arns.Arn`` object.
+- Add the ``aws_arns.is_arn_instance`` function to test if an object is an Arn object.
+- Add the follow curated AWS Resource ARN to public API
+    - ``aws_arns.res.ApiGatewayV1Authorizer``
+    - ``aws_arns.res.ApiGatewayV1Deployment``
+    - ``aws_arns.res.ApiGatewayV1Integration``
+    - ``aws_arns.res.ApiGatewayV1Model``
+    - ``aws_arns.res.ApiGatewayV1Route``
+    - ``aws_arns.res.ApiGatewayV1Stage``
+    - ``aws_arns.res.ApiGatewayV2Authorizer``
+    - ``aws_arns.res.ApiGatewayV2Deployment``
+    - ``aws_arns.res.ApiGatewayV2Integration``
+    - ``aws_arns.res.ApiGatewayV2Model``
+    - ``aws_arns.res.ApiGatewayV2Route``
+    - ``aws_arns.res.ApiGatewayV2Stage``
 
 **Minor Improvements**
 

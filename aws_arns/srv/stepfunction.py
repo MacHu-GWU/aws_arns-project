@@ -107,7 +107,7 @@ class _SfnStateMachineExecutionCommon(StepFunction):
         aws_account_id: str,
         aws_region: str,
         state_machine_name: str,
-        exec_id: int,
+        exec_id: str,
     ):
         """
         Factory method.

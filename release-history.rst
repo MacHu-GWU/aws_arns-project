@@ -20,16 +20,16 @@ Backlog (TODO)
 **Features and Improvements**
 
 - Add ``to_console_url()`` method to all AWS Resource ARN classes. It does not work for all resources.
-
-**Minor Improvements**
-
-- Fix doc string.
 - Add ``aws_arns.res.CodeBuildRun.is_batch_build()`` method.
 - Add ``aws_arns.res.CodeBuildBatchRun.is_batch_build()`` method.
 - Add ``aws_arns.res.EcrRepository.uri`` property method.
 - Add ``aws_arns.res.EcrRepository.from_uri(...)`` class method.
 - Add ``aws_arns.res.EcsTaskRun.cluster_name`` property method.
 - Add ``aws_arns.res.EcsTaskRun.short_id`` property method.
+
+**Minor Improvements**
+
+- Fix doc string.
 
 **Bugfixes**
 

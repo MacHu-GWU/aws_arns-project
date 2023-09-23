@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+Data model classes for AWS ARNs.
+"""
+
 import typing as T
 import dataclasses
 
@@ -7,6 +11,9 @@ from .constants import AwsPartitionEnum
 
 
 def _handle_empty_str(s: str) -> T.Optional[str]:
+    """
+    This function is used to parse ARN attributes that are optional.
+    """
     if s:
         return s
     else:
@@ -14,6 +21,9 @@ def _handle_empty_str(s: str) -> T.Optional[str]:
 
 
 def _handle_none(s: T.Optional[str]) -> str:
+    """
+    This function is used to serialize ARN attributes that are optional.
+    """
     if s is None:
         return ""
     else:
@@ -21,16 +31,99 @@ def _handle_none(s: T.Optional[str]) -> str:
 
 
 class AwsService:
+    """
+    List of AWS service name for ARN attribute.
+    """
+    access_analyzer = "access-analyzer"
+    account = "account"
+    alexa_for_business = "a4b"
+    managed_service_for_prometheus = "aps"
+    amplify = "amplify"
+    amplify_admin = "amplifybackend"
+    amplify_ui_builder = "amplifyuibuilder"
+    apache_kafka_api_for_msk = "kafka"
+    apigateway = "apigateway"
+    app_mesh = "appmesh"
+    app_runner = "apprunner"
+    app_config = "appconfig"
+    app_fabric = "appfabric"
+    app_flow = "appflow"
+    app_integrations = "app-integrations"
+    app_sync = "appsync"
+    artifact = "artifact"
+    aws_supply_chain = "scn"
+    athena = "athena"
+    audit_manager = "auditmanager"
     awslambda = "lambda"
+    backup = "backup"
+    backup_gateway = "backup-gateway"
     batch = "batch"
+    bedrock = "bedrock"
+    certificate_manager = "acm"
+    chatbot = "chatbot"
+    chime = "chime"
+    clouddirectory = "clouddirectory"
+    cloudmap = "servicediscovery"
+    cloudhsm = "cloudhsm"
+    cloud9 = "cloud9"
+    cloudfront = "cloudfront"
+    cloudsearch = "cloudsearch"
+    cloudshell = "cloudshell"
+    cloudtrail = "cloudtrail"
+    cloudwatch = "cloudwatch"
+    cloudwatch_logs = "logs"
     cloudformation = "cloudformation"
-    codebuild = "codebuild"
+    codeartifact = "codeartifact"
     codecommit = "codecommit"
+    codebuild = "codebuild"
     codepipeline = "codepipeline"
+    codecatalyst = "codecatalyst"
+    codedeploy = "codedeploy"
+    codestar = "codestar"
+    codewhisperer = "codewhisperer"
+    cognito_identity = "cognito-identity"
+    cognito_sync = "cognito-sync"
+    cognito_idp = "cognito-idp"
+    comprehend = "comprehend"
+    comprehend_medical = "comprehendmedical"
+    config = "config"
+    connect = "connect"
+    control_tower = "controltower"
+    cost_and_usage_report = "cur"
+    cost_explorer = "ce"
+    data_exchange = "dataexchange"
+    data_pipeline = "datapipeline"
+    databrew = "databrew"
+    datasync = "datasync"
+    datazone = "datazone"
+    dbqms = "dbqms"
+    deepcomposer = "deepcomposer"
+    deeplens = "deeplens"
+    deepracer = "deepracer"
+    detective = "detective"
+    device_farm = "devicefarm"
+    direct_connect = "directconnect"
+    director_service = "ds"
+    dms = "dms"
+    documentdb_elastic_cluster = "docdb-elastic"
+    disaster_recovery_service = "drs"
     dynamodb = "dynamodb"
+    dynamodb_accelerator = "dax"
     ec2 = "ec2"
+    ec2_auto_scaling = "autoscaling"
+    ec2_image_builder = "imagebuilder"
+    efs = "elasticfilesystem"
     ecr = "ecr"
+    ecr_public = "ecr-public"
     ecs = "ecs"
+    eks = "eks"
+    elastic_beanstalk = "elasticbeanstalk"
+    elastic_transcoder = "elastictranscoder"
+    elastic_cache = "elasticache"
+    elastic_load_balancer = "elasticloadbalancing"
+    emr = "elasticmapreduce"
+    event_bridge = "events"
+    execute_api = "execute-api"
     glue = "glue"
     iam = "iam"
     logs = "logs"
@@ -63,7 +156,7 @@ class BaseArn:
         - format: arn:${partition}:${service}:${region}:${account-id}:${resource-type}${sep}${resource-id}
             - example sep = "/": arn:aws:iam::111122223333:role/aws-service-role/batch.amazonaws.com/AWSServiceRoleForBatch
         - format: arn:${partition}:${service}:${region}:${account-id}:${resource-type}${sep}${resource-id}
-            - example sep = ":": arn:aws:batch:us-east-1:111122223333:job-definition/my-job-def:1
+            - example sep = ":": arn:aws:lambda:us-east-1:111122223333:function:my-func
 
     Reference:
 
@@ -84,7 +177,6 @@ class BaseArn:
 
     def __post_init__(self):
         for k, v in dataclasses.asdict(self).items():
-            # print([k, v])
             if isinstance(v, _Nothing):
                 raise ValueError(f"arg '{k}' is required")
 

@@ -15,7 +15,7 @@ Backlog (TODO)
 **Miscellaneous**
 
 
-1.3.1 (TODO)
+1.3.1 (2023-09-22)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -30,6 +30,10 @@ Backlog (TODO)
 - Add ``aws_arns.res.EcrRepository.from_uri(...)`` class method.
 - Add ``aws_arns.res.EcsTaskRun.cluster_name`` property method.
 - Add ``aws_arns.res.EcsTaskRun.short_id`` property method.
+
+**Bugfixes**
+
+- Fix ``aws_arns.res.Ec2Image.new`` constructor, it should not include ``aws_account_id`` argument.
 
 
 1.2.1 (2023-09-22)

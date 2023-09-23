@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from aws_arns.srv.ec2 import (
-    _Ec2Common,
+    _Ec2CommonRegional,
     Ec2Instance,
     Ec2KeyPair,
     EbsVolume,
@@ -111,10 +111,9 @@ def test():
             TransitGatewayAttachment,
             "arn:aws:ec2:us-east-1:123456789012:transit-gateway-attachment/tgw-attach-1234567890abcdef0",
         ),
-        (Ec2Image, "arn:aws:ec2:us-east-1::image/ami-1234567890abcdef0"),
     ]
     for class_, arn in class_and_arn_pairs:
-        obj: _Ec2Common = class_.from_arn(arn)
+        obj: _Ec2CommonRegional = class_.from_arn(arn)
         assert obj.to_arn() == arn
         assert obj.long_id == f"{obj.id_prefix}-{obj.short_id}"
         assert (
@@ -125,6 +124,16 @@ def test():
             )
             == obj
         )
+
+    image_id = "ami-1234567890abcdef0"
+    image_arn = "arn:aws:ec2:us-east-1::image/ami-1234567890abcdef0"
+    image = Ec2Image.from_arn(image_arn)
+    assert image.ami_id == image_id
+    assert image.to_arn() == image_arn
+    assert Ec2Image.new(
+        image.aws_region,
+        image.ami_id,
+    ) == image
 
 
 if __name__ == "__main__":

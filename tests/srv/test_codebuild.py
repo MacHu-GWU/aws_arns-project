@@ -25,6 +25,7 @@ def test():
     assert run.codebuild_run_fullname == "my-project:a1b2c3d4"
     assert run.codebuild_project_name == "my-project"
     assert run.codebuild_run_id == "a1b2c3d4"
+    assert run.is_batch_build() is False
     assert (
         CodeBuildRun.new(
             aws_region=run.region,
@@ -39,6 +40,7 @@ def test():
     assert run.codebuild_run_fullname == "my-project:a1b2c3d4"
     assert run.codebuild_project_name == "my-project"
     assert run.codebuild_run_id == "a1b2c3d4"
+    assert run.is_batch_build() is True
     assert (
         CodeBuildBatchRun.new(
             aws_region=run.region,

@@ -37,7 +37,7 @@ def test():
             "arn:aws:events:us-east-1:111122223333:event-bus/my-event-bus",
         ),
         (
-            EventBridgeeventSource,
+            EventBridgeEventSource,
             "arn:aws:events:us-east-1:111122223333:event-source/my-event-source",
         ),
         (EventBridgeReplay, "arn:aws:events:us-east-1:111122223333:replay/my-replay"),

@@ -12,6 +12,9 @@ from .srv.apigateway import ApiGatewayV2Integration
 from .srv.apigateway import ApiGatewayV2Model
 from .srv.apigateway import ApiGatewayV2Route
 from .srv.apigateway import ApiGatewayV2Stage
+from .srv.athena import AthenaCapacityReservation
+from .srv.athena import AthenaDataCatalog
+from .srv.athena import AthenaWorkgroup
 from .srv.awslambda import LambdaFunction
 from .srv.awslambda import LambdaLayer
 from .srv.batch import BatchComputeEnvironment
@@ -19,6 +22,7 @@ from .srv.batch import BatchJob
 from .srv.batch import BatchJobDefinition
 from .srv.batch import BatchJobQueue
 from .srv.batch import BatchSchedulingPolicy
+from .srv.cloud9 import Cloud9Environment
 from .srv.cloudformation import CloudFormationChangeSet
 from .srv.cloudformation import CloudFormationStack
 from .srv.cloudformation import CloudFormationStackSet

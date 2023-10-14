@@ -21,11 +21,19 @@ apigateway = [
     "arn:aws:apigateway:us-east-1::/apis/my_api/routes/my_route",
     "arn:aws:apigateway:us-east-1::/apis/my_api/integrations/my_integration",
 ]
+athena = [
+    "arn:aws:athena:us-east-1:111122223333:capacity-reservation/my_capacity_reservation",
+    "arn:aws:athena:us-east-1:111122223333:datacatalog/my_datacatalog",
+    "arn:aws:athena:us-east-1:111122223333:workgroup/my_workgroup",
+]
 batch = [
     "arn:aws:batch:us-east-1:111122223333:compute-environment/test",
     "arn:aws:batch:us-east-1:111122223333:job-queue/test",
     "arn:aws:batch:us-east-1:111122223333:job-definition/test:1",
     "arn:aws:batch:us-east-1:111122223333:job/b2957570-6bae-47b1-a2d8-af4f3030fc36",
+]
+cloud9 = [
+    "arn:aws:cloud9:us-east-1:111122223333:environment:my_environment",
 ]
 cloudformation = [
     "arn:aws:cloudformation:us-east-1:111122223333:stack/my-stack/1a2b3c",
@@ -235,7 +243,9 @@ arns = list(
     itertools.chain(
         a2i,
         apigateway,
+        athena,
         batch,
+        cloud9,
         cloudformation,
         cloudwatch_logs,
         codecommit,

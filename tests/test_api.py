@@ -21,6 +21,9 @@ def test():
     _ = api.res.ApiGatewayV2Model
     _ = api.res.ApiGatewayV2Route
     _ = api.res.ApiGatewayV2Stage
+    _ = api.res.AthenaCapacityReservation
+    _ = api.res.AthenaDataCatalog
+    _ = api.res.AthenaWorkgroup
     _ = api.res.LambdaFunction
     _ = api.res.LambdaLayer
     _ = api.res.BatchComputeEnvironment
@@ -28,6 +31,7 @@ def test():
     _ = api.res.BatchJobDefinition
     _ = api.res.BatchJobQueue
     _ = api.res.BatchSchedulingPolicy
+    _ = api.res.Cloud9Environment
     _ = api.res.CloudFormationChangeSet
     _ = api.res.CloudFormationStack
     _ = api.res.CloudFormationStackSet

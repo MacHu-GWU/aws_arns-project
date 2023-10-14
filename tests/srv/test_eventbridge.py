@@ -7,7 +7,7 @@ from aws_arns.srv.eventbridge import (
     EventBridgeConnection,
     EventBridgeEndpoint,
     EventBridgeEventBus,
-    EventBridgeeventSource,
+    EventBridgeEventSource,
     EventBridgeReplay,
     EventBridgeRuleOnDefaultEventBus,
     EventBridgeRuleOnCustomEventBus,

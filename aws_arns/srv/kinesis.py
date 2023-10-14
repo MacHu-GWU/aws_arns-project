@@ -44,13 +44,11 @@ class KinesisStream(Kinesis):
 
 
 @dataclasses.dataclass
-class KinesisStreamConsumer(_ResourceIdOnlyRegional):
+class KinesisStreamConsumer(Kinesis):
     """
-    Example: arn:aws:kinesis:us-east-1:111122223333:my_stream_type/stream_name/consumer/consumer_name:creation_timestamp
+    Example: arn:aws:kinesis:us-east-1:111122223333:my_stream_type/my_stream_name/consumer/my_consumer_name:my_consumer_creation_timestamp
     """
-
-    service: str = dataclasses.field(default="kinesis")
-    resource_type: str = dataclasses.field(default="stream")
+    resource_type: str = dataclasses.field(default="")
 
     @classmethod
     def new(
@@ -68,24 +66,25 @@ class KinesisStreamConsumer(_ResourceIdOnlyRegional):
         return cls(
             account_id=aws_account_id,
             region=aws_region,
-            resource_id=f"{stream_type}/{stream_name}/consumer/{consumer_name}:{consumer_creation_timestamp}",
+            resource_type=stream_type,
+            resource_id=f"{stream_name}/consumer/{consumer_name}:{consumer_creation_timestamp}",
         )
 
     @property
     def stream_type(self) -> str:
-        return self.resource_id.split("/")[0]
+        return self.resource_type
 
     @property
     def stream_name(self) -> str:
-        return self.resource_id.split("/")[1]
+        return self.resource_id.split("/")[0]
 
     @property
     def consumer_name(self) -> str:
-        return self.resource_id.split("/")[3].split(":")[0]
+        return self.resource_id.split("/")[2].split(":")[0]
 
     @property
     def consumer_creation_timestamp(self) -> str:
-        return self.resource_id.split("/")[3].split(":")[1]
+        return self.resource_id.split("/")[2].split(":")[1]
 
 
 @dataclasses.dataclass
@@ -128,7 +127,7 @@ class KinesisAnalytics(_SlashSeparatedRegional):
 
 
 @dataclasses.dataclass
-class KinesisAnalyticsApplication(KinesisFirehose):
+class KinesisAnalyticsApplication(KinesisAnalytics):
     """
     Example: arn:aws:kinesisanalytics:us-east-1:111122223333:application/my_application
     """
@@ -164,7 +163,7 @@ class KinesisVideo(_SlashSeparatedRegional):
 @dataclasses.dataclass
 class KinesisVideoChannel(KinesisVideo):
     """
-    Example: arn:aws:kinesisvideo:us-east-1:414570653400:channel/my_channel_name/creation_time
+    Example: arn:aws:kinesisvideo:us-east-1:111122223333:channel/my_channel_name/creation_time
     """
 
     resource_type: str = dataclasses.field(default="channel")
@@ -198,7 +197,7 @@ class KinesisVideoChannel(KinesisVideo):
 @dataclasses.dataclass
 class KinesisVideoStream(KinesisVideo):
     """
-    Example: arn:aws:kinesisvideo:us-east-1:414570653400:stream/my_stream_name/creation_time
+    Example: arn:aws:kinesisvideo:us-east-1:111122223333:stream/my_stream_name/creation_time
     """
 
     resource_type: str = dataclasses.field(default="stream")

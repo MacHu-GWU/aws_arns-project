@@ -27,7 +27,8 @@ class ParseArn:
     def __call__(self, arn: str):
         if self._mapper is None:
             self._load()
-        obj = Arn.from_arn(arn)
+        obj = Arn.from_arn(arn) # convert to generic arn
+        # convert to curated arn object
         key = f"{obj.service}.{obj.resource_type}"
         if key in self._mapper:
             return self._mapper[key].from_arn(arn)

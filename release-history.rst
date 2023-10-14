@@ -35,6 +35,12 @@ Backlog (TODO)
     - ``aws_arns.res.EventBridgeReplay``
     - ``aws_arns.res.EventBridgeRuleOnDefaultEventBus``
     - ``aws_arns.res.EventBridgeRuleOnCustomEventBus``
+    - ``aws_arns.res.KinesisAnalyticsApplication``
+    - ``aws_arns.res.KinesisFirehoseDeliveryStream``
+    - ``aws_arns.res.KinesisStream``
+    - ``aws_arns.res.KinesisStreamConsumer``
+    - ``aws_arns.res.KinesisVideoChannel``
+    - ``aws_arns.res.KinesisVideoStream``
 
 
 1.3.1 (2023-09-22)

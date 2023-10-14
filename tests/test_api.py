@@ -99,6 +99,12 @@ def test():
     _ = api.res.IamPolicy
     _ = api.res.IamRole
     _ = api.res.IamUser
+    _ = api.res.KinesisAnalyticsApplication
+    _ = api.res.KinesisFirehoseDeliveryStream
+    _ = api.res.KinesisStream
+    _ = api.res.KinesisStreamConsumer
+    _ = api.res.KinesisVideoChannel
+    _ = api.res.KinesisVideoStream
     _ = api.res.KmsAlias
     _ = api.res.KmsKey
     _ = api.res.CloudWatchLogGroup

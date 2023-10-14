@@ -90,6 +90,12 @@ from .srv.iam import IamInstanceProfile
 from .srv.iam import IamPolicy
 from .srv.iam import IamRole
 from .srv.iam import IamUser
+from .srv.kinesis import KinesisAnalyticsApplication
+from .srv.kinesis import KinesisFirehoseDeliveryStream
+from .srv.kinesis import KinesisStream
+from .srv.kinesis import KinesisStreamConsumer
+from .srv.kinesis import KinesisVideoChannel
+from .srv.kinesis import KinesisVideoStream
 from .srv.kms import KmsAlias
 from .srv.kms import KmsKey
 from .srv.logs import CloudWatchLogGroup

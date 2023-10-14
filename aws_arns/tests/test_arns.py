@@ -124,7 +124,7 @@ glue = [
 ]
 kinesis = [
     "arn:aws:kinesis:us-east-1:111122223333:stream/my_stream",
-    "arn:aws:kinesis:us-east-1:111122223333:my_stream_type/stream_name/consumer/consumer_name:creation_timestamp",
+    "arn:aws:kinesis:us-east-1:111122223333:my_stream_type/my_stream_name/consumer/my_consumer_name:my_consumer_creation_timestamp",
 ]
 kinesis_firehose = [
     "arn:aws:firehose:us-east-1:111122223333:deliverystream/my_delivery_stream",
@@ -133,8 +133,8 @@ kinesis_analytics = [
     "arn:aws:kinesisanalytics:us-east-1:111122223333:application/my_application",
 ]
 kinesis_video = [
-    "arn:aws:kinesisvideo:us-east-1:414570653400:channel/my_channel_name/creation_time",
-    "arn:aws:kinesisvideo:us-east-1:414570653400:stream/my_stream_name/creation_time",
+    "arn:aws:kinesisvideo:us-east-1:111122223333:channel/my_channel_name/creation_time",
+    "arn:aws:kinesisvideo:us-east-1:111122223333:stream/my_stream_name/creation_time",
 ]
 kms = [
     "arn:aws:kms:us-east-1:111122223333:key/1a2b3c",
@@ -281,10 +281,10 @@ arns = list(
         ecs,
         eventbridge,
         glue,
-        # kinesis,
-        # kinesis_firehose,
-        # kinesis_analytics,
-        # kinesis_video,
+        kinesis,
+        kinesis_firehose,
+        kinesis_analytics,
+        kinesis_video,
         kms,
         lambda_func,
         macie,

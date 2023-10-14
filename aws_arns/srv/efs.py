@@ -53,7 +53,11 @@ class EFSAccessPoint(_EFSCommon):
 @dataclasses.dataclass
 class EFSFileSystem(_EFSCommon):
     """
-    Example: arn:aws:elasticfilesystem:us-east-1:111122223333:file-system/my_file_system
+    Example: arn:aws:elasticfilesystem:us-east-1:111122223333:file-system/fs-1a2b3c4d
     """
 
     resource_type: str = dataclasses.field(default="file-system")
+
+    @property
+    def name(self) -> str:
+        raise ValueError("EFSFileSystem doesn't know the name from the ARN!")

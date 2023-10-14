@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 from aws_arns.srv.efs import (
     _EFSCommon,
@@ -13,10 +14,6 @@ def test():
             EFSAccessPoint,
             "arn:aws:elasticfilesystem:us-east-1:111122223333:access-point/my_access_point",
         ),
-        (
-            EFSFileSystem,
-            "arn:aws:elasticfilesystem:us-east-1:111122223333:file-system/my_file_system",
-        ),
     ]
     for class_, arn in class_and_arn_pairs:
         obj: _EFSCommon = class_.from_arn(arn)
@@ -30,6 +27,11 @@ def test():
             == obj
         )
         assert obj.name == obj.resource_id
+
+    arn = "arn:aws:elasticfilesystem:us-east-1:111122223333:file-system/fs-1a2b3c4d"
+    obj: EFSFileSystem = EFSFileSystem.from_arn(arn)
+    with pytest.raises(ValueError):
+        _ = obj.name
 
 
 if __name__ == "__main__":

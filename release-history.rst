@@ -15,6 +15,13 @@ Backlog (TODO)
 **Miscellaneous**
 
 
+1.4.2 (2023-10-14)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Bugfixes**
+
+- Rename ``aws_arns.res.EventBridgeeventSource`` to ``aws_arns.res.EventBridgeEventSource``.
+
+
 1.4.1 (2023-10-14)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**

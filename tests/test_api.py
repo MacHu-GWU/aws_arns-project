@@ -84,10 +84,10 @@ def test():
     _ = api.res.EventBridgeConnection
     _ = api.res.EventBridgeEndpoint
     _ = api.res.EventBridgeEventBus
+    _ = api.res.EventBridgeEventSource
     _ = api.res.EventBridgeReplay
     _ = api.res.EventBridgeRuleOnCustomEventBus
     _ = api.res.EventBridgeRuleOnDefaultEventBus
-    _ = api.res.EventBridgeeventSource
     _ = api.res.GlueCrawler
     _ = api.res.GlueDatabase
     _ = api.res.GlueJob

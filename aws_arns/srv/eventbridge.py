@@ -87,7 +87,7 @@ class EventBridgeEventBus(_EventBridgeCommon):
 
 
 @dataclasses.dataclass
-class EventBridgeeventSource(_EventBridgeCommon):
+class EventBridgeEventSource(_EventBridgeCommon):
     """
     Example: arn:aws:events:us-east-1:111122223333:event-source/my-event-source
     """

@@ -75,10 +75,10 @@ from .srv.eventbridge import EventBridgeArchive
 from .srv.eventbridge import EventBridgeConnection
 from .srv.eventbridge import EventBridgeEndpoint
 from .srv.eventbridge import EventBridgeEventBus
+from .srv.eventbridge import EventBridgeEventSource
 from .srv.eventbridge import EventBridgeReplay
 from .srv.eventbridge import EventBridgeRuleOnCustomEventBus
 from .srv.eventbridge import EventBridgeRuleOnDefaultEventBus
-from .srv.eventbridge import EventBridgeeventSource
 from .srv.glue import GlueCrawler
 from .srv.glue import GlueDatabase
 from .srv.glue import GlueJob

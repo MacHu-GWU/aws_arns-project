@@ -68,6 +68,17 @@ from .srv.ecs import EcsContainerInstance
 from .srv.ecs import EcsService
 from .srv.ecs import EcsTaskDefinition
 from .srv.ecs import EcsTaskRun
+from .srv.efs import EFSAccessPoint
+from .srv.efs import EFSFileSystem
+from .srv.eventbridge import EventBridgeApiDestination
+from .srv.eventbridge import EventBridgeArchive
+from .srv.eventbridge import EventBridgeConnection
+from .srv.eventbridge import EventBridgeEndpoint
+from .srv.eventbridge import EventBridgeEventBus
+from .srv.eventbridge import EventBridgeReplay
+from .srv.eventbridge import EventBridgeRuleOnCustomEventBus
+from .srv.eventbridge import EventBridgeRuleOnDefaultEventBus
+from .srv.eventbridge import EventBridgeeventSource
 from .srv.glue import GlueCrawler
 from .srv.glue import GlueDatabase
 from .srv.glue import GlueJob

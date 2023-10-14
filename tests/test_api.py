@@ -77,6 +77,17 @@ def test():
     _ = api.res.EcsService
     _ = api.res.EcsTaskDefinition
     _ = api.res.EcsTaskRun
+    _ = api.res.EFSAccessPoint
+    _ = api.res.EFSFileSystem
+    _ = api.res.EventBridgeApiDestination
+    _ = api.res.EventBridgeArchive
+    _ = api.res.EventBridgeConnection
+    _ = api.res.EventBridgeEndpoint
+    _ = api.res.EventBridgeEventBus
+    _ = api.res.EventBridgeReplay
+    _ = api.res.EventBridgeRuleOnCustomEventBus
+    _ = api.res.EventBridgeRuleOnDefaultEventBus
+    _ = api.res.EventBridgeeventSource
     _ = api.res.GlueCrawler
     _ = api.res.GlueDatabase
     _ = api.res.GlueJob

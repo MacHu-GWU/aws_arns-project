@@ -56,10 +56,12 @@ def import_all_service_module(
             except TypeError:
                 pass
 
-    resource_list = list(sorted(
-        resource_list,
-        key=lambda x: x.sort_key,
-    ))
+    resource_list = list(
+        sorted(
+            resource_list,
+            key=lambda x: x.sort_key,
+        )
+    )
     return resource_list
 
 

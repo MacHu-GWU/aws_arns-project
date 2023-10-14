@@ -97,6 +97,21 @@ ecs = [
     "arn:aws:ecs:us-east-1:111122223333:service/service_name",
     "arn:aws:ecs:us-east-1:111122223333:task/my_cluster/a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE"
 ]
+efs = [
+    "arn:aws:elasticfilesystem:us-east-1:111122223333:access-point/my_access_point",
+    "arn:aws:elasticfilesystem:us-east-1:111122223333:file-system/my_file_system",
+]
+eventbridge = [
+    "arn:aws:events:us-east-1:111122223333:api-destination/my_api_destination",
+    "arn:aws:events:us-east-1:111122223333:archive/my-archive",
+    "arn:aws:events:us-east-1:111122223333:connection/my-connection",
+    "arn:aws:events:us-east-1:111122223333:endpoint/my-endpoint",
+    "arn:aws:events:us-east-1:111122223333:event-bus/my-event-bus",
+    "arn:aws:events:us-east-1:111122223333:event-source/my-event-source",
+    "arn:aws:events:us-east-1:111122223333:replay/my-replay",
+    "arn:aws:events:us-east-1:111122223333:rule/my-default-event-bus-rule",
+    "arn:aws:events:us-east-1:111122223333:rule/my-event-bus/my-rule",
+]
 glue = [
     "arn:aws:glue:us-east-1:111122223333:catalog",
     "arn:aws:glue:us-east-1:111122223333:database/db1",
@@ -253,6 +268,7 @@ arns = list(
         ec2,
         ecr,
         ecs,
+        eventbridge,
         glue,
         kinesis,
         kms,

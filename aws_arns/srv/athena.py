@@ -13,16 +13,16 @@ from ..model import _SlashSeparatedRegional
 class Athena(_SlashSeparatedRegional):
     service: str = dataclasses.field(default="athena")
 
-    @property
-    def name(self) -> str:
-        return self.resource_id
-
 
 @dataclasses.dataclass
 class _AthenaCommon(Athena):
     """
     todo: docstring
     """
+
+    @property
+    def name(self) -> str:
+        return self.resource_id
 
     @classmethod
     def new(

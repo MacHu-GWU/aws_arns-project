@@ -15,6 +15,28 @@ Backlog (TODO)
 **Miscellaneous**
 
 
+1.4.1 (2023-10-14)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- Add the follow curated AWS Resource ARN to public API
+    - ``aws_arns.res.AthenaCapacityReservation``
+    - ``aws_arns.res.AthenaDataCatalog``
+    - ``aws_arns.res.AthenaWorkgroup``
+    - ``aws_arns.res.Cloud9Environment``
+    - ``aws_arns.res.EFSAccessPoint``
+    - ``aws_arns.res.EFSFileSystem``
+    - ``aws_arns.res.EventBridgeApiDestination``
+    - ``aws_arns.res.EventBridgeArchive``
+    - ``aws_arns.res.EventBridgeConnection``
+    - ``aws_arns.res.EventBridgeEndpoint``
+    - ``aws_arns.res.EventBridgeEventBus``
+    - ``aws_arns.res.EventBridgeeventSource``
+    - ``aws_arns.res.EventBridgeReplay``
+    - ``aws_arns.res.EventBridgeRuleOnDefaultEventBus``
+    - ``aws_arns.res.EventBridgeRuleOnCustomEventBus``
+
+
 1.3.1 (2023-09-22)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**

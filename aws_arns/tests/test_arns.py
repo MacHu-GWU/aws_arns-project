@@ -14,12 +14,14 @@ apigateway = [
     "arn:aws:apigateway:us-east-1::/restapis/my_rest_api/models/my_model",
     "arn:aws:apigateway:us-east-1::/restapis/my_api/routes/my_route",
     "arn:aws:apigateway:us-east-1::/restapis/my_api/integrations/my_integration",
+    "arn:aws:apigateway:us-east-1::/restapis/my_api",
     "arn:aws:apigateway:us-east-1::/apis/my_api/stages/my_stage/path/to/resource",
     "arn:aws:apigateway:us-east-1::/apis/my_api/deployments/my_deployment",
     "arn:aws:apigateway:us-east-1::/apis/my_api/authorizers/my_authorizer",
     "arn:aws:apigateway:us-east-1::/apis/my_api/models/my_model",
     "arn:aws:apigateway:us-east-1::/apis/my_api/routes/my_route",
     "arn:aws:apigateway:us-east-1::/apis/my_api/integrations/my_integration",
+    "arn:aws:apigateway:us-east-1::/apis/my_api",
 ]
 athena = [
     "arn:aws:athena:us-east-1:111122223333:capacity-reservation/my_capacity_reservation",

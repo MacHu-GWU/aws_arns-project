@@ -13,8 +13,10 @@ def test():
     _ = api.res.ApiGatewayV1Deployment
     _ = api.res.ApiGatewayV1Integration
     _ = api.res.ApiGatewayV1Model
+    _ = api.res.ApiGatewayV1RestApi
     _ = api.res.ApiGatewayV1Route
     _ = api.res.ApiGatewayV1Stage
+    _ = api.res.ApiGatewayV2Api
     _ = api.res.ApiGatewayV2Authorizer
     _ = api.res.ApiGatewayV2Deployment
     _ = api.res.ApiGatewayV2Integration

@@ -4,8 +4,10 @@ from .srv.apigateway import ApiGatewayV1Authorizer
 from .srv.apigateway import ApiGatewayV1Deployment
 from .srv.apigateway import ApiGatewayV1Integration
 from .srv.apigateway import ApiGatewayV1Model
+from .srv.apigateway import ApiGatewayV1RestApi
 from .srv.apigateway import ApiGatewayV1Route
 from .srv.apigateway import ApiGatewayV1Stage
+from .srv.apigateway import ApiGatewayV2Api
 from .srv.apigateway import ApiGatewayV2Authorizer
 from .srv.apigateway import ApiGatewayV2Deployment
 from .srv.apigateway import ApiGatewayV2Integration

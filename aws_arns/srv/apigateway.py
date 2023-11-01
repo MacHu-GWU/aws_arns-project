@@ -41,19 +41,28 @@ class _ApiCommon(ApiGateway):
     def __post_init__(self):
         super().__post_init__()
         if self.resource_id is None:
-            self.resource_id = (
-                f"/{_api_version_to_name_mapper[self.api_gateway_version]}"
-                f"/{self.api_id}/{self.api_res_type}{self.api_res_path}"
-            )
+            if self.api_res_type:
+                self.resource_id = (
+                    f"/{_api_version_to_name_mapper[self.api_gateway_version]}"
+                    f"/{self.api_id}/{self.api_res_type}{self.api_res_path}"
+                )
+            else:
+                self.resource_id = (
+                    f"/{_api_version_to_name_mapper[self.api_gateway_version]}"
+                    f"/{self.api_id}"
+                )
         else:
             parts = self.resource_id.split("/", 4)
             self.api_gateway_version = _api_name_to_version_mapper[parts[1]]
             self.api_id = parts[2]
-            self.api_res_type = parts[3]
-            if len(parts) == 5:
-                self.api_res_path = "/" + parts[4]
-            else:  # pragma: no cover
-                self.api_res_path = None
+            if len(parts) == 3:
+                pass
+            else:
+                self.api_res_type = parts[3]
+                if len(parts) == 5:
+                    self.api_res_path = "/" + parts[4]
+                else:  # pragma: no cover
+                    self.api_res_path = None
 
     @classmethod
     def new(
@@ -65,8 +74,6 @@ class _ApiCommon(ApiGateway):
         """
         Factory method.
         """
-        if api_res_path is None:  # pragma: no cover
-            api_res_path = ""
         return cls(
             region=aws_region,
             resource_id=None,
@@ -162,4 +169,19 @@ class ApiGatewayV2Route(_ApiGatewayRoute):
 
 @dataclasses.dataclass
 class ApiGatewayV2Integration(_ApiGatewayIntegration):
+    api_gateway_version: int = dataclasses.field(default=2)
+
+
+# ------------------------------------------------------------------------------
+@dataclasses.dataclass
+class ApiGatewayV1RestApi(_ApiCommon):
+    # resource_type: str = dataclasses.field(default="restapis")
+    # api_res_type: str = dataclasses.field(default="restapis")
+    api_gateway_version: int = dataclasses.field(default=1)
+
+
+@dataclasses.dataclass
+class ApiGatewayV2Api(_ApiCommon):
+    # resource_type: str = dataclasses.field(default="apis")
+    # api_res_type: str = dataclasses.field(default="restapis")
     api_gateway_version: int = dataclasses.field(default=2)

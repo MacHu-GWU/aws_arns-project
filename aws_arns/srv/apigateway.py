@@ -172,16 +172,11 @@ class ApiGatewayV2Integration(_ApiGatewayIntegration):
     api_gateway_version: int = dataclasses.field(default=2)
 
 
-# ------------------------------------------------------------------------------
 @dataclasses.dataclass
 class ApiGatewayV1RestApi(_ApiCommon):
-    # resource_type: str = dataclasses.field(default="restapis")
-    # api_res_type: str = dataclasses.field(default="restapis")
     api_gateway_version: int = dataclasses.field(default=1)
 
 
 @dataclasses.dataclass
 class ApiGatewayV2Api(_ApiCommon):
-    # resource_type: str = dataclasses.field(default="apis")
-    # api_res_type: str = dataclasses.field(default="restapis")
     api_gateway_version: int = dataclasses.field(default=2)

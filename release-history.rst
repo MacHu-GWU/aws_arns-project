@@ -15,6 +15,13 @@ Backlog (TODO)
 **Miscellaneous**
 
 
+1.4.3 (2023-10-31)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Minor Improvements**
+
+- Add the missing ``aws_arns.res.ApiGatewayV1RestApi`` amd ``aws_arns.res.ApiGatewayV2Api``.
+
+
 1.4.2 (2023-10-14)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Bugfixes**

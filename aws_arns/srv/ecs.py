@@ -134,7 +134,9 @@ class EcsContainerInstance(Ecs):
 @dataclasses.dataclass
 class EcsService(Ecs):
     """
-    Example: arn:aws:ecs:us-east-1:111122223333:service/service_name
+    Example: arn:aws:ecs:us-east-1:111122223333:service/${service_name}
+
+    ``${service_name} = ${cluster_name}/${service_short_name}``
     """
 
     resource_type: str = dataclasses.field(default="service")
@@ -146,6 +148,20 @@ class EcsService(Ecs):
         arn:aws:ecs:us-east-1:111122223333:service/service_name
         """
         return self.resource_id
+
+    @property
+    def cluster_name(self) -> str:  # pragma: no cover
+        """
+        The "cluster_name" part of arn:aws:ecs:us-east-1:111122223333:service/${cluster_name}/${service_short_name}
+        """
+        return self.service_name.split("/", 1)[0]
+
+    @property
+    def service_short_name(self) -> str:  # pragma: no cover
+        """
+        The "service_short_name" part of arn:aws:ecs:us-east-1:111122223333:service/${cluster_name}/${service_short_name}
+        """
+        return self.service_name.split("/", 1)[1]
 
     @classmethod
     def new(

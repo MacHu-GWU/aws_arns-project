@@ -98,3 +98,8 @@ Data Modeling
     from .srv.batch import BatchJobDefinition
     from .srv.batch import BatchJobQueue
     from .srv.batch import BatchSchedulingPolicy
+
+
+Complete List of AWS Resources that Support ARN
+------------------------------------------------------------------------------
+如果要获得完整的支持 ARN 的 Resource 的列表以及它们的格式, 最好的方法是在 `AWS IAM Policy 中创建一个新的 Policy <https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/policies/create?step=edit>`_, 然后选则一个 Service, 并选择 All action. 然后底下 resource 一栏就会出现所有支持 ARN 的 resource 的列表. 每个 resource 旁边有个 information 的符号, 点开就可以看到 ARN 的格式.

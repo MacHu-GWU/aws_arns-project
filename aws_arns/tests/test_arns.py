@@ -96,7 +96,7 @@ ecs = [
     "arn:aws:ecs:us-east-1:111122223333:cluster/my-cluster-1",
     "arn:aws:ecs:us-east-1:111122223333:task-definition/my-task:1",
     "arn:aws:ecs:us-east-1:111122223333:container-instance/my-cluster/container_instance_UUID",
-    "arn:aws:ecs:us-east-1:111122223333:service/service_name",
+    "arn:aws:ecs:us-east-1:111122223333:service/my-cluster/my-service",
     "arn:aws:ecs:us-east-1:111122223333:task/my_cluster/a1b2c3d4-5678-90ab-ccdef-11111EXAMPLE"
 ]
 efs = [

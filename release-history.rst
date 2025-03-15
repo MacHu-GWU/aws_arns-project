@@ -15,6 +15,40 @@ Backlog (TODO)
 **Miscellaneous**
 
 
+1.5.1 (2025-03-15)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- Add the follow curated AWS Resource ARN to public API
+    - ``aws_arns.res.BedrockAgent``
+    - ``aws_arns.res.BedrockApplicationInferenceProfile``
+    - ``aws_arns.res.BedrockAsyncInvoke``
+    - ``aws_arns.res.BedrockCustomModel``
+    - ``aws_arns.res.BedrockDataAutomationInvocationJob``
+    - ``aws_arns.res.BedrockDataAutomationProfile``
+    - ``aws_arns.res.BedrockDataAutomationProject``
+    - ``aws_arns.res.BedrockDefaultPromptRouter``
+    - ``aws_arns.res.BedrockEvaluationJob``
+    - ``aws_arns.res.BedrockFlow``
+    - ``aws_arns.res.BedrockFlowAlias``
+    - ``aws_arns.res.BedrockFoundationModel``
+    - ``aws_arns.res.BedrockGuardrail``
+    - ``aws_arns.res.BedrockInferenceProfile``
+    - ``aws_arns.res.BedrockKnowledgeBase``
+    - ``aws_arns.res.BedrockModelCopyJob``
+    - ``aws_arns.res.BedrockModelCustomizationJob``
+    - ``aws_arns.res.BedrockModelEvaluationJob``
+    - ``aws_arns.res.BedrockModelImportJob``
+    - ``aws_arns.res.BedrockModelInvocationJob``
+    - ``aws_arns.res.BedrockPrompt``
+    - ``aws_arns.res.BedrockPromptRouter``
+    - ``aws_arns.res.BedrockPromptVersion``
+    - ``aws_arns.res.BedrockProvisionedModel``
+    - ``aws_arns.res.BedrockSession``
+    - ``aws_arns.res.OpenSearchIngestionPipeline``
+    - ``aws_arns.res.OpenSearchIngestionPipelineBlueprint``
+
+
 1.4.3 (2023-10-31)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Minor Improvements**
